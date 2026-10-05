@@ -1,1 +1,1 @@
-{"collected": "5 October 2026", "repo": "", "chat_note": "When you're signed in to Claude, the engine also writes a short answer from those posts.", "ask_endpoint": ""}
+{"collected": "5 October 2026", "repo": "https://github.com/Darsaar/nextleap-photo-recall-engine", "chat_note": "The engine also writes a short AI answer from those posts.", "ask_endpoint": "/api/ask"}

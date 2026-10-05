@@ -85,3 +85,11 @@ python analyze.py && cd ../app && python build.py
   interviews exist to cover that gap, and the app says so on the findings page.
 - Counts describe this corpus, not all Google Photos users.
 - No experiment results are claimed, and no metric is shown that wasn't computed from the data in `data/`.
+
+## Deploy on Vercel
+
+The repo deploys as a static page plus one serverless function. `vercel.json` serves `app/dist/index.html`
+(no build step); `api/ask.js` writes the Ask tab's short AI answer with Gemini. Import the repo in Vercel,
+add `GEMINI_API_KEY` under Environment Variables, and deploy. Without the key the page still works; the Ask tab
+just shows ranked posts and counts without the AI summary. After changing data or copy, run `python3 app/build.py`
+and push.
