@@ -162,6 +162,18 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .flash .quote{background:#fef7e0;transition:background .3s}
 .arows .flow>div.lead dd{font-size:1.02rem;font-weight:500}
 .asec header h3 .badge{margin-left:8px;vertical-align:1px}
+.oppgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:4px 0 12px}
+.oppgrid>*{min-width:0}
+.mini{background:var(--bg);border-radius:10px;padding:12px 14px}
+.mini .eyebrow{margin-bottom:8px;color:var(--muted)}
+.mbar{display:grid;grid-template-columns:minmax(90px,140px) 1fr 34px;gap:8px;align-items:center;font-size:.88rem;margin:6px 0}
+.mbar .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.mbar .fill{height:100%;border-radius:5px}
+.mbar b{text-align:right;font-weight:500}
+.opp .more summary{display:block;list-style:revert;padding:12px 0 0;font-weight:500;color:var(--accent);cursor:pointer}
+.opp .more{border-top:1px solid var(--line);margin-top:12px}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;border-top:1px solid var(--line);padding-top:12px;font-size:.9rem}
+.plan .eyebrow{display:block;color:var(--accent);margin-bottom:2px}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
@@ -319,6 +331,19 @@ function findingsHTML(){
 }
 
 /* ---------- Opportunity map ---------- */
+// Readable detail for one problem: mini bars for photo types and workarounds, then the plan it feeds.
+function miniBars(list, color, f=nice){
+  const L=list.filter(([k])=>clean(k)).slice(0,4), max=Math.max(1,...L.map(x=>x[1]));
+  return L.length ? L.map(([k,v])=>`<div class="mbar"><span>${esc(f(k))}</span><div class="track"><div class="fill" style="width:${100*v/max}%;background:${color}"></div></div><b class="num">${v}</b></div>`).join("") : '<p class="muted small">Not stated</p>';
+}
+function oppBody(o){
+  const s=(STORY.synthesis?.stages||{})[o.stage]||{};
+  return `<div class="oppgrid">
+    <div class="mini"><div class="eyebrow">Photos it hits most</div>${miniBars(o.content_types, "var(--g-blue)")}</div>
+    <div class="mini"><div class="eyebrow">What people do instead</div>${miniBars(o.workarounds, "var(--g-yellow)")}</div>
+  </div>
+  ${s.need?`<div class="plan"><div><span class="eyebrow">Need</span>${esc(s.need)}</div><div><span class="eyebrow">Tests</span>${(s.hyp||[]).join(", ")||"–"}</div><div><span class="eyebrow">Product bet</span>${esc(s.bet)}</div><div><span class="eyebrow">Metric</span>${esc(s.metric)}</div></div>`:""}`;
+}
 function probStats(stage){
   const o=(ENGINE.opportunities||[]).find(x=>x.stage===stage), rows=EVID.filter(r=>(r.failure_stage||"").trim()===stage);
   const w=overIndexed(rows,15).filter(x=>x[2]>=1.15)[0];
@@ -345,8 +370,8 @@ function renderMap(){
   ${O.map((o,i)=>`<details class="opp"${i===0?" open":""}><summary><span class="rank">${i+1}</span><div><h3>${esc(o.label)}</h3>
     <div class="chips"><span class="chip">${o.mentions} posts</span><span class="chip">${Math.round(o.prevalence*100)}% of evidence</span><span class="chip">severity ${o.severity} of 1</span><span class="chip">${o.sources} sources</span><span class="chip">never found ${Math.round(nfRate(EVID.filter(r=>(r.failure_stage||"").trim()===o.stage))*100)}%</span><span class="chip">addressable ${o.addressable}</span></div></div>
     <span class="score num">${o.score}</span></summary>
-    <div class="body"><p class="muted">Most affected: ${o.content_types.map(([k,v])=>esc(nice(k))+" ("+v+")").join(", ")}. Workarounds: ${o.workarounds.map(([k,v])=>esc(nice(k))+" ("+v+")").join(", ")||"none stated"}.</p>
-    ${o.quotes.map(q=>quoteHTML(q)).join("")}</div></details>`).join("")}
+    <div class="body">${oppBody(o)}
+    <details class="more"><summary>Show the ${o.quotes.length} posts behind this</summary>${o.quotes.map(q=>quoteHTML(q)).join("")}</details></div></details>`).join("")}
   <h2>Photo type × where it broke</h2>
   <p class="muted">Retrieval stories only. Click a cell to see those posts in Evidence.</p>
   <div class="tablewrap"><table class="heat"><thead><tr><th></th>${stages.map(s=>`<th title="${esc(nice(s))}">${esc(s.replace(/_/g," "))}</th>`).join("")}</tr></thead><tbody>
