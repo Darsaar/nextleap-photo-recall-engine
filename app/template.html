@@ -174,6 +174,19 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .opp .more{border-top:1px solid var(--line);margin-top:12px}
 .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;border-top:1px solid var(--line);padding-top:12px;font-size:.9rem}
 .plan .eyebrow{display:block;color:var(--accent);margin-bottom:2px}
+.abub{align-self:flex-start;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:4px 18px 18px 18px;padding:14px 18px}
+.ai.chat{white-space:normal;font-size:1rem;line-height:1.6}
+.ai.chat p{margin:0 0 8px;max-width:72ch}
+.ai.chat ul{margin:4px 0 10px;padding-left:20px}
+.ai.chat li{margin:4px 0;max-width:70ch}
+.ai.chat p.insight{font-size:1.05rem}
+.ai.chat p.caveat{border-left:3px solid var(--g-yellow);padding-left:10px}
+.ai.chat p.todo{background:var(--accent-soft);border-radius:10px;padding:8px 12px;margin-top:10px}
+.ameta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.peek>summary{cursor:pointer;color:var(--accent);font-size:.85rem;font-weight:500;list-style:none}
+.peek>summary::before{content:"▸ "}.peek[open]>summary::before{content:"▾ "}
+.peek[open]{flex-basis:100%}
+.peekbody{margin-top:8px;max-height:460px;overflow:auto}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
@@ -561,11 +574,14 @@ function paintAI(el, text, k, max){
   const parts=[]; let m, last=null;
   while((m=re.exec(text))){ if(last) last.body=text.slice(last.end,m.index); last={lab:m[1],end:re.lastIndex}; parts.push(last); }
   if(last) last.body=text.slice(last.end);
-  if(parts.length<2){ el.className="ai"; el.innerHTML=cite(text); }
+  if(true){ el.className="ai chat"; const html=[]; let ul=[];
+    const flush=()=>{ if(ul.length){ html.push(`<ul>${ul.map(x=>`<li>${x}</li>`).join("")}</ul>`); ul=[]; } };
+    text.replace(/\*\*/g,"").split(/\n+/).map(s=>s.trim()).filter(Boolean).forEach(s=>{ if(/^[-•*]\s/.test(s)) ul.push(cite(s.replace(/^[-•*]\s*/,""))); else { flush(); const m2=s.match(/^([A-Z][A-Za-z'’ ]{2,28}):\s*(.*)$/); if(!m2){ html.push(`<p>${cite(s)}</p>`); } else { const cls=/^(opportunity|what to do)/i.test(m2[1])?"todo":/^the insight/i.test(m2[1])?"insight":/^(what doesn|counter|contradict|still unknown)/i.test(m2[1])?"caveat":""; html.push(`<p class="${cls}"><b>${esc(m2[1])}:</b> ${cite(m2[2])}</p>`); } } });
+    flush(); el.innerHTML=html.join(""); }
   else { el.className="arows"; el.innerHTML=`<dl class="flow">${parts.map(p=>{ const lines=p.body.trim().split(/\n+/).map(s=>s.trim()).filter(Boolean), bl=lines.filter(s=>/^[-•*]\s/.test(s));
     const html = bl.length ? lines.filter(s=>!/^[-•*]\s/.test(s)).map(cite).join(" ")+`<ul class="gist">${bl.map(b=>`<li>${cite(b.replace(/^[-•*]\s*/,""))}</li>`).join("")}</ul>` : cite(lines.join(" "));
     return `<div class="${/^Answer/i.test(p.lab)?"lead":""}"><dt>${esc(p.lab)}</dt><dd>${html}</dd></div>`; }).join("")}</dl>`; }
-  el.querySelectorAll("a.cite").forEach(a=>a.onclick=e=>{ e.preventDefault(); const d=$(`#src-${a.dataset.k}`), q=$(`#q-${a.dataset.k}-${a.dataset.n}`); if(d) d.open=true; if(q){ q.scrollIntoView({behavior:"smooth",block:"center"}); q.classList.add("flash"); setTimeout(()=>q.classList.remove("flash"),1600); } });
+  el.querySelectorAll("a.cite").forEach(a=>a.onclick=e=>{ e.preventDefault(); const d=$(`#src-${a.dataset.k}`), q=$(`#q-${a.dataset.k}-${a.dataset.n}`); if(d) d.open=true; [...document.querySelectorAll(".peek")].forEach(x=>{ if(x!==d && x.closest(".turn")===d?.closest(".turn")) x.open=false; }); if(q){ q.scrollIntoView({behavior:"smooth",block:"center"}); q.classList.add("flash"); setTimeout(()=>q.classList.remove("flash"),1600); } });
 }
 async function callAI(prompt){
   if(sampleNS){ const r = await sampleNS(prompt,{cache:false, modelTier:"quick"}); return r.text||""; }
@@ -597,8 +613,8 @@ function rankTable(rank, scope){
   </tbody></table></div>`;
 }
 const rankTxt = rank => rank.slice(0,5).map((p,i)=>`${i+1}. ${p.label}: impact ${p.score.toFixed(1)}, ${p.n} posts (${Math.round(p.share*100)}% of this set, ${p.lift.toFixed(1)} times its share among all posts), never found ${p.nf==null?"unknown":Math.round(p.nf*100)+"%"}, severity ${p.sev.toFixed(2)}, ${p.srcs} of ${NSRC} sources, what they do instead: ${p.wa.map(([k,v])=>nice(k)+" "+v).join(", ")||"not stated"}; need: ${p.syn.need||"-"}; hypothesis: ${(p.syn.hyp||[]).map(h=>h+" ("+((STORY.hypotheses||[]).find(x=>x.id===h)||{}).claim+")").join("; ")||"none"}; product bet: ${p.syn.bet||"-"}; target metric: ${p.syn.metric||"-"}`).join("\n");
-function sourcesBlock(list, k){
-  return `<details class="more" id="src-${k}"><summary>Source posts: the ${list.length} posts the AI read</summary>${list.map((r,i)=>`<div id="q-${k}-${i+1}">${quoteHTML({n:i+1,q:r.quote||(r.text||"").slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:(r.failure_stage||"").trim()})}</div>`).join("")}</details>`;
+function sourcesList(list, k){
+  return `${list.map((r,i)=>`<div id="q-${k}-${i+1}">${quoteHTML({n:i+1,q:r.quote||(r.text||"").slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:(r.failure_stage||"").trim()})}</div>`).join("")}`;
 }
 function followUps(scope, rank){
   const out=[];
@@ -613,9 +629,8 @@ function notUnderstood(q, wrap){
   const near = SMALLTALK.test(q) ? [] : retrieve(q, 40).filter(r=>r.failure_stage && !/none/.test(r.failure_stage));
   const pool = near.length >= 5 ? near : EVID;
   const top = rankProblems(pool).slice(0,3);
-  wrap.innerHTML += `<div class="answerbox"><section class="asec ai-sec"><header><span class="snum">!</span><div><h3>${SMALLTALK.test(q)||!toks(q).length?"Sorry, I don't understand that question":"Sorry, I couldn't find enough posts about that"}</h3><p>I answer questions about why people can't find photos in Google Photos: problems, photo types, user groups, comparisons and how this engine works.</p></div></header><div class="abody">
-    <p><b>${near.length>=5?"The closest problems I found for your words:":"The biggest problems across all posts:"}</b></p>
-    <ul class="gist">${top.map(p=>`<li>${esc(p.label)} <span class="muted">(${fmt(p.n)} posts, impact ${p.score.toFixed(1)})</span></li>`).join("")}</ul></div></section></div>`;
+  wrap.innerHTML += `<div class="abub"><div class="ai chat"><p>${SMALLTALK.test(q)||!toks(q).length?"Hi! I answer questions about why people can't find photos in Google Photos: problems, photo types, user groups, comparisons and how this engine works.":"Sorry, I couldn't find enough posts about that."} ${near.length>=5?"The closest problems I found for your words are:":"The biggest problems across all posts are:"}</p>
+    <ul>${top.map(p=>`<li>${esc(p.label)} <span class="muted">(${fmt(p.n)} posts)</span></li>`).join("")}</ul><p class="muted small">Try one of the suggested questions above, or ask about a photo type like screenshots, people or trips.</p></div></div>`;
 }
 async function ask(q){
   q = (q||"").trim(); if(!q) return;
@@ -637,8 +652,8 @@ Fields extracted: ${(STORY.fields||[]).map(f=>f[0]+" ("+f[1]+")").join("; ")}
 Quality check: ${STORY.quality||""}
 Limits: ${STORY.limits||""} ${STORY.boundary||""}
 Models: ${(ENGINE.models||[]).map(m=>m[0]+" "+m[1]).join(", ")}. Opportunity score = sqrt(posts) x (0.5 + severity) x (0.5 + share of sources) x how fixable by search.`;
-    prompt = `You explain how a research engine about Google Photos search works to a product manager. Use ONLY these facts.\n\n${facts}\n\n${hist?`Earlier in this chat:\n${hist}\n\n`:""}Question: ${q}\n\nReply with exactly these labelled lines, each label followed by a colon: Answer: (1–2 sentences). How it works: (2–4 lines starting "- "). Limits: (1–2 sentences). What to check next: (1 sentence). Plain everyday words, 120 to 200 words, no markdown.`;
-    secs.push(["How the engine works", "From the engine's own pipeline numbers and method notes.", `<div id="ai-${k}" class="ai muted">Thinking…</div>`, "ai-sec"]);
+    prompt = `You explain how a research engine about Google Photos search works to a product manager. Use ONLY these facts.\n\n${facts}\n\n${hist?`Earlier in this chat:\n${hist}\n\n`:""}Question: ${q}\n\nReply like a helpful colleague in a chat: 1 or 2 plain sentences that answer the question, then at most 3 short bullets starting "- " if they help, and one sentence on the main limit if relevant. 60 to 130 words, no headings, labels or markdown.`;
+    secs.push(["main", `<div id="ai-${k}" class="ai muted">Thinking…</div>`]);
   } else {
     labs = scope.kind==="compare" ? ALABS.compare : ALABS.default;
     const rows = scope.rows, rank = rankProblems(rows);
@@ -666,24 +681,18 @@ Models: ${(ENGINE.models||[]).map(m=>m[0]+" "+m[1]).join(", ")}. Opportunity sco
       rankBlock = `Problems ranked for A (${scope.A.name}):\n${rankTxt(rA)}\n\nProblems ranked for B (${scope.B.name}):\n${rankTxt(rB)}`; }
     if(scope.kind==="hyp"){ const H=(STORY.hypotheses||[]).find(x=>x.id===scope.hyp)||{}; setTxt += ` Hypothesis ${scope.hyp}: ${H.claim} Engine signal: ${H.signal} Planned validation: ${H.validate}`; }
     const overall = scope.kind==="all" ? `\nWhat people remember (${ENGINE.funnel.stories} stories): ${fmtC(corpusCounts("cues_remembered").slice(0,5),cue)}. Forgotten: ${fmtC(corpusCounts("cues_forgotten").slice(0,4),cue)}. ${ENGINE.richness.queries_quoted} stories quote their search; ${Math.round(ENGINE.richness.share_queries_1_2_words*100)}% are 1–2 words, e.g. ${EVID.filter(r=>r.query_typed).slice(0,8).map(r=>'"'+r.query_typed+'"').join(", ")}.` : "";
-    const fmtLabs = scope.kind==="compare"
-      ? `Answer: 1–2 sentences: which side has the bigger retrieval problem and which problem drives it, with numbers.
-Key differences: 2–3 lines starting "- ", each comparing A and B on one problem using impact, posts, "times its share" and never-found numbers.
-Why it happens: 2 lines starting "- " explaining the user's situation behind the gap, citing posts like [2][5] and quoting a few words.
-Counter-evidence: 1 sentence on posts where search worked or that weaken the comparison, with citations, or say there are none.
-What we don't know: 1 sentence, including what the survey or interviews should check.
-Opportunity: 1 sentence on the product bet this points to and why it beats the alternative.
-Hypothesis to test: the H number(s) from the data and how they would confirm it.
-Metric to move: the target metric from the data.`
-      : `Answer: 1–2 sentences naming the top problem for this question and why it ranks above the second one (compare their impact, posts, never-found or "times its share" numbers).
-Problems compared: 2–3 lines starting "- ", one per top problem: its numbers in words and what makes it different from the others (bigger, more severe, more specific to this set, more fixable).
-Why it happens: 2–3 lines starting "- " explaining what users remembered, what they tried and where it broke, citing posts like [2][5] and quoting a few words.
-Who it hits most: 1 sentence using only the group numbers given.
-Counter-evidence: 1 sentence on posts where search worked or that point the other way, with citations, or say there are none.
-What we don't know: 1 sentence, including what the survey or interviews should check.
-Opportunity: 1 sentence: the product bet for the top problem and the user need it serves.
-Hypothesis to test: the H number(s) given for the top problem and what result would confirm it.
-Metric to move: the target metric given for the top problem.`;
+    const fmtLabs = `You are synthesising, not reporting. A product manager wants to understand what is really going on for these users and what to do about it, the way a thoughtful researcher would explain it after reading every post. Numbers are only supporting evidence: use at most 3 in the whole reply, and only where they change the conclusion.
+
+Write short paragraphs, each starting with one of these lead-ins followed by a colon. Use the ones that help answer the question, in this order, and skip any that add nothing:
+The insight: 1 or 2 sentences that reframe the problem in human terms (what users are actually experiencing and why it matters), answering the question asked.${scope.kind==="compare"?" Say which side has the deeper problem and what makes the two different in kind, not just in size.":""}
+Why it happens: (cite at least 2 posts here) the mechanism, i.e. what people remember, what they try, and where and why it breaks, with post citations like [3] and a few quoted words that make it vivid.
+What they really need: the deeper need behind the request in the user's own voice, starting "I want to", specific to this question and drawn from the posts (the "need" lines in the data are generic defaults; go beyond them, e.g. the job the photo does in their life).
+Who feels it most: the user groups for whom this is worse and what is different about their situation, from the group data given.
+What doesn't fit: counter-evidence or contradictions, e.g. posts where search worked, users who blame something else, or signals pointing the other way, with citations. Say plainly if there is none.
+Still unknown: what this data can't tell us, and the one thing the survey or interviews should check.
+Opportunity: the product opportunity that serves the need you described (the "product bet" lines in the data are starting points, adapt them to this question), why it beats the obvious alternative, the hypothesis it tests by its H number (e.g. "tests H2") and the metric that would show it worked.
+
+Answer the question that was asked first: if it asks who, open with the groups; if it asks what to build, open with the opportunity; if it asks for contradictions, open with those. 150 to 230 words.`;
     prompt = `You are a senior user researcher helping a product manager decide which Google Photos retrieval problem to work on. Your job is to identify and compare problems and opportunity areas using evidence from real users, not to summarise reviews or sentiment. Use ONLY the numbers and numbered posts below. Every number you write must come from them.
 
 ${setTxt}
@@ -695,22 +704,25 @@ ${hist?`\nEarlier in this chat (use it to understand follow-up questions):\n${hi
 Question: ${q}
 ${focus}
 
-Reply with exactly these labelled lines, in this order, each label at the start of a line followed by a colon:
+How to reply:
 ${fmtLabs}
 
-Rules: answer the exact question asked in the Answer line first (if it asks who, lead with the groups and their numbers; if it asks what to build, lead with the opportunity; if it asks for counter-evidence, lead with that), then keep the rest of the structure. Write numbers as digits. Plain everyday words; banned words: "index", "index gap", "failure stage", "retrieval", "corpus", "surface", "leverage". Say "times as common as for everyone" instead of "lift". If the posts don't answer the question, say so under Answer. 220 to 320 words. No bold, headings or other markdown.
+Rules: cite posts by writing their number in square brackets right after the claim, like [3] or [3][12]; Why it happens and What doesn't fit must each have at least one. The numbers above are for your reasoning, not for repeating. Write numbers as digits. Banned words: "index", "index gap", "failure stage", "retrieval", "corpus", "surface", "leverage", "impact score". Say "times as common as for everyone" instead of "lift". If the posts don't answer the question, say so. No headings, bullets, bold or other markdown; only the lead-ins above.
 
 Posts:
 ${ctx}`;
     const glance = `Photo types: ${c.types.slice(0,3).map(([a,b])=>`${esc(nice(a))} (${b})`).join(", ")||"–"} · Remembered: ${c.remembered.slice(0,3).map(([a,b])=>`${esc(cue(a))} (${b})`).join(", ")||"–"} · Did instead: ${c.workarounds.slice(0,2).map(([a,b])=>`${esc(nice(a))} (${b})`).join(", ")||"–"}`;
-    secs.push([`Research answer · ${scope.name}`, `${fmt(rows.length)} posts from ${nSrc} sources. Numbers are computed from the tagged posts; the AI explains them. A number like [2] opens that post.`, `<div id="ai-${k}" class="ai muted">Reading ${readList.length} posts…</div>`, "ai-sec"]);
-    if(scope.kind==="compare") secs.push(["Problems ranked on each side", "Impact = √posts × (0.5 + severity) × (0.5 + source spread) × fixable by search. \"vs average\" above 1× means the problem is more common here than for everyone.", `<div class="grid2"><div><h3>${esc(scope.A.name)} <span class="muted small">${scope.A.rows.length} posts</span></h3>${rankTable(rankProblems(scope.A.rows),scope.A)}</div><div><h3>${esc(scope.B.name)} <span class="muted small">${scope.B.rows.length} posts</span></h3>${rankTable(rankProblems(scope.B.rows),scope.B)}</div></div>`, ""]);
-    else secs.push(["Problems ranked for this question", "Impact = √posts × (0.5 + severity) × (0.5 + source spread) × fixable by search. \"vs average\" above 1× means the problem is more common here than for everyone.", rankTable(rank, scope)+`<p class="note">${glance}</p>`, ""]);
-    secs.push(["Evidence", "Real posts, each linked to where it was written.", sourcesBlock(readList, k), ""]);
+    secs.push(["main", `<div id="ai-${k}" class="ai muted">Reading ${readList.length} posts about ${esc(scope.name)}…</div>`]);
+    const how = "Impact = √posts × (0.5 + severity) × (0.5 + source spread) × fixable by search. “vs average” above 1× means more common here than for everyone.";
+    secs.push(["How this was ranked", scope.kind==="compare"
+      ? `<div class="grid2"><div><h3>${esc(scope.A.name)} <span class="muted small">${scope.A.rows.length} posts</span></h3>${rankTable(rankProblems(scope.A.rows),scope.A)}</div><div><h3>${esc(scope.B.name)} <span class="muted small">${scope.B.rows.length} posts</span></h3>${rankTable(rankProblems(scope.B.rows),scope.B)}</div></div><p class="note">${how}</p>`
+      : `${rankTable(rank, scope)}<p class="note">${how}<br>${glance}</p>`]);
+    secs.push([`${readList.length} posts read`, sourcesList(readList, k)]);
     scope._rank = rank;
   }
-  wrap.innerHTML += `<div class="answerbox">${secs.map(([t,sub,body,cls],i)=>`<section class="asec ${cls}"><header><span class="snum">${i+1}</span><div><h3>${esc(t)} ${i===0?badge:""}</h3>${sub?`<p>${esc(sub)}</p>`:""}</div></header><div class="abody">${body}</div></section>`).join("")}</div>
-    <div class="next"><span class="muted small">Explore further</span>${followUps(scope, scope._rank||[]).map(x=>`<button type="button" class="chipq">${esc(x)}</button>`).join("")}</div>`;
+  wrap.innerHTML += `<div class="abub">${secs[0][1]}
+    <div class="ameta">${badge?badge+`<span class="muted small">${fmt(scope.rows.length)} posts</span>`:""}${secs.slice(1).map(([lab,body],i)=>`<details class="peek" id="${i===1?"src-"+k:"rk-"+k}"><summary>${esc(lab)}</summary><div class="peekbody">${body}</div></details>`).join("")}</div></div>
+    <div class="next"><span class="muted small">Explore further</span>${followUps(scope, scope._rank||[]).filter(x=>x.toLowerCase()!==q.toLowerCase()&&!CHAT.some(c=>c.q.toLowerCase()===x.toLowerCase())).map(x=>`<button type="button" class="chipq">${esc(x)}</button>`).join("")}</div>`;
   wrap.querySelectorAll(".next .chipq").forEach(b=>b.onclick=()=>ask(b.textContent));
   wrap.scrollIntoView({behavior:"smooth",block:"start"});
   const turn = {q, scope, answer:""}; CHAT.push(turn);
