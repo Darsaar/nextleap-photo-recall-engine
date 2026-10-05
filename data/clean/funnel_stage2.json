@@ -1,0 +1,61 @@
+{
+ "app_store": {
+  "raw": 189,
+  "clean": 171,
+  "other": 87,
+  "off_goal": 46,
+  "short_or_non_english": 18,
+  "candidate": 38
+ },
+ "hacker_news": {
+  "raw": 1211,
+  "clean": 1204,
+  "candidate": 987,
+  "off_goal": 117,
+  "other": 100,
+  "short_or_non_english": 3,
+  "dup": 4
+ },
+ "stack_exchange": {
+  "raw": 418,
+  "clean": 418,
+  "candidate": 416,
+  "off_goal": 2
+ },
+ "help_forum": {
+  "raw": 2106,
+  "clean": 2051,
+  "candidate": 1152,
+  "short_or_non_english": 50,
+  "dup": 5,
+  "other": 730,
+  "off_goal": 169
+ },
+ "play_store": {
+  "raw": 33436,
+  "short_or_non_english": 7115,
+  "clean": 18458,
+  "other": 11864,
+  "off_goal": 4801,
+  "candidate": 1793,
+  "dup": 7863
+ },
+ "reddit": {
+  "raw": 5430,
+  "clean": 5385,
+  "off_goal": 1246,
+  "candidate": 3458,
+  "other": 681,
+  "dup": 35,
+  "short_or_non_english": 10
+ },
+ "youtube": {
+  "raw": 11196,
+  "clean": 7891,
+  "other": 5741,
+  "off_goal": 1843,
+  "candidate": 307,
+  "short_or_non_english": 2632,
+  "dup": 673
+ }
+}

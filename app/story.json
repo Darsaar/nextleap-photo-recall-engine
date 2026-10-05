@@ -1,0 +1,168 @@
+{
+ "headline": "People remember several things about a lost photo. Search lets them use one.",
+ "dek": "We read 53,986 public posts about Google Photos and pulled out 1,091 stories of someone trying to find a specific photo. Where the outcome is known, 73% ended without the photo. The memory was rarely the problem. The search box takes one cue at a time, many photos were never indexed, and when search fails the only fallback is scrolling.",
+ "findings": [
+  {
+   "tag": "strongest signal",
+   "title": "The search is far thinner than the memory",
+   "body": "79% of the 235 searches people quoted were one or two words long, and the median was one word (\"Paul\", \"dog\", \"May 2025\"). Of 75 stories where someone remembered two or more things about the photo and quoted their search, 55 still typed two words or fewer. Rough time is the most remembered cue (22% of stories), yet only 19 quoted searches contain any time word."
+  },
+  {
+   "tag": "where it breaks",
+   "title": "Retrieval breaks after the query, not before it",
+   "body": "Only 154 posts are about not knowing what to type. Four later stages share the top of the ranking with near-equal scores (28 to 30): no way to combine or narrow cues (452 posts), the right photo buried in results or the timeline (347), photos that were never made searchable (538), and search misreading the words (477). There is no single bug. It is a chain, and each link loses people."
+  },
+  {
+   "tag": "behaviour",
+   "title": "When search fails, people scroll or give up",
+   "body": "Where a story says what happened next, 72% of people either scrolled the timeline (208) or gave up (207). Another 70 went to a different app: WhatsApp, the phone gallery, Drive. Scrolling is the real fallback, and it only works when the person remembers roughly when."
+  },
+  {
+   "tag": "segment",
+   "title": "Photos of people fail at indexing, not at memory",
+   "body": "604 posts are about finding a person or pet. In 257 of them the photo exists but is invisible to search: faces not grouped, names lost after a restore or a settings reset, or old backed-up photos never processed. 87% of index-gap stories end without the photo."
+  },
+  {
+   "tag": "loud vs relevant",
+   "title": "The loudest complaints are not the biggest opportunity",
+   "body": "47% of tagged posts (3,815) were about storage, backup, deletion or crashes, not retrieval. Inside retrieval, 520 posts say search got worse after a change, 134 of them naming Ask Photos, Gemini or AI. That is loud, but it ranks fifth because the fix is a rollback debate, not a new way to find photos."
+  }
+ ],
+ "boundary": "People who quietly give up and scroll rarely write about it, so this corpus over-represents frustrated, vocal and Android users with large libraries. Only 235 posts quote the exact search, and 38% of stories never say what the photo was: people describe the search, not the photo. Counts describe this public corpus, not all Google Photos users. The survey and interviews cover what public posts can't: how often this happens, what the photo was, and what people actually type.",
+ "hypotheses": [
+  {
+   "id": "H1",
+   "claim": "People hold two or more cues about a lost photo but type only one, because search can't combine them.",
+   "signal": "79% of quoted searches are 1–2 words; 55 of 75 multi-cue stories typed 2 words or fewer; 'can't combine or narrow' is the top opportunity (452 posts).",
+   "validate": "Survey: 'What did you remember?' (cues remembered) vs. the exact words typed; interview live task: count cues said aloud vs. cues typed."
+  },
+  {
+   "id": "H2",
+   "claim": "Rough time is the most remembered cue but the hardest to use, so people fall back to scrolling.",
+   "signal": "Rough time is remembered in 22% of stories but appears in 19 quoted searches; 'date' is the second most forgotten detail; scrolling is the top workaround (208).",
+   "validate": "Survey: 'roughly when' checkbox vs. 'date forgotten'; interviews: time the scroll and note whether a date search was tried."
+  },
+  {
+   "id": "H3",
+   "claim": "Photos of people are often unfindable because faces and names were never indexed, not because users forget.",
+   "signal": "257 of 604 people/pet posts are index gaps; 87% of index-gap stories end without the photo.",
+   "validate": "Survey: 'a person or pet' × 'Did you find it in the end?'; interviews: open People & pets and check how many of their key people are named."
+  },
+  {
+   "id": "H4",
+   "claim": "Information photos (screenshots, documents, bills, medicines) fail more often than memory photos and matter more when they fail.",
+   "signal": "122 stories about screenshots, documents, receipts, medical or text photos, 65% not found; 'words in the image' is remembered in 114 stories and typed in 73.",
+   "validate": "Survey: 'saving information' / 'documents' use × 'gave up / never found it'; interviews: retrieval task on a screenshot vs. a trip photo."
+  },
+  {
+   "id": "H5",
+   "claim": "For older photos people remember the context (what was happening, which app it came from) and search can't use any of it.",
+   "signal": "171 stories rely on event, life context, source app or why-taken cues; none is a searchable field today; 'can't put it into words' is 154 posts.",
+   "validate": "Survey: 'what was happening in my life' / 'which app it came from'; interviews: ask them to describe the photo to a friend before searching."
+  },
+  {
+   "id": "H6",
+   "claim": "Recent search changes (Ask Photos, AI search) cost trust among heavy users who relied on precise name and date search.",
+   "signal": "520 'search got worse' posts, 134 naming Ask Photos, Gemini or AI; repeated requests to bring back name search and date ordering.",
+   "validate": "Survey: 'Ask Photos' ticked as a way they search × 'Did you find it in the end?'; interviews: compare classic search vs. Ask Photos on the same task."
+  }
+ ],
+ "cues_headline": "What people remember is not what they can search for",
+ "cues_dek": "Rough time, a person and an object are what people hold on to. Album, exact date and file name are what they have lost. The searches they type use very little of it.",
+ "questions": [
+  "What kinds of old photos do users struggle to retrieve?",
+  "What information do people actually remember about a photo?",
+  "What information have they forgotten?",
+  "How do users phrase a search when their memory is incomplete?",
+  "What do people do when search fails?",
+  "Why can't people find screenshots and documents?",
+  "What goes wrong when searching for a person by name?",
+  "What do people say about Ask Photos?"
+ ],
+ "method": [
+  [
+   "Collect",
+   "Seven public sources: Google Play reviews (33,436), YouTube comments via the YouTube Data API (11,196, from videos about Google Photos search, tips and Ask Photos), Reddit via an archive API (5,430), the Google Photos Help Community (2,106 threads from the Searching, Face groups and Organization categories plus keyword filters), Hacker News and Stack Exchange (1,629) and App Store reviews (189)."
+  ],
+  [
+   "Clean",
+   "Remove duplicates, very short and non-English posts: 53,986 → 35,578."
+  ],
+  [
+   "Prefilter",
+   "Keep posts that mention finding, searching, scrolling or remembering a photo, plus every Help Community thread in the Searching category: 8,151 candidates."
+  ],
+  [
+   "Extract",
+   "An LLM (Gemini) reads each candidate and fills 13 structured fields, in batches of 10 at temperature 0. 8,141 posts were tagged; 10 kept failing on the free-tier rate limit and were left out."
+  ],
+  [
+   "Separate",
+   "Each post is labelled a retrieval story, search feedback, off-goal or noise. Only stories and feedback (3,695 posts) feed the findings."
+  ],
+  [
+   "Score",
+   "Each failure stage becomes an opportunity area scored on frequency, severity, source spread and whether a retrieval change could fix it."
+  ],
+  [
+   "Check",
+   "80 tags re-read against the full post to measure agreement (below)."
+  ],
+  [
+   "Answer",
+   "The Ask tab ranks the most relevant tagged posts by keyword match, shows counts from their tags, and cites every quote back to its source."
+  ]
+ ],
+ "fields": [
+  [
+   "relevance",
+   "Separates real retrieval stories from search opinions, off-goal posts and noise, so loud storage complaints don't count as findings."
+  ],
+  [
+   "content_type",
+   "What kind of photo: trip, person, screenshot, document, receipt, medical, and more."
+  ],
+  [
+   "cues_remembered",
+   "What the person still knew: rough time, place, person, object, words in the image, the event, life context, source app, why they took it."
+  ],
+  [
+   "cues_forgotten",
+   "What was gone: date, album, file name, what to type, who sent it."
+  ],
+  [
+   "query_typed",
+   "The exact words typed, verbatim. Compared with cues_remembered to show what never makes it into the search box."
+  ],
+  [
+   "failure_stage",
+   "Where retrieval broke. Maps onto the metric tree: express → understand → index → rank → refine → recognise."
+  ],
+  [
+   "workaround",
+   "What they did instead: scroll, map, People tab, another app, ask someone, give up."
+  ],
+  [
+   "outcome",
+   "Found, found with effort, not found."
+  ],
+  [
+   "severity",
+   "1–3; 3 when the photo is urgent or irreplaceable (medical, ID, a relative who died)."
+  ],
+  [
+   "user_need",
+   "One plain sentence of what the person wanted the product to do."
+  ],
+  [
+   "quote",
+   "The most telling sentence, verbatim, shown as evidence."
+  ],
+  [
+   "segment_signal",
+   "Large library, heavy screenshots, document store, parent, traveller, platform."
+  ]
+ ],
+ "quality": "80 tagged posts (50 from the Help Community, 30 from the other sources) were re-read against their full text by a second model (Claude), not by a person. It agreed with Gemini on relevance for 69 of 80 (86%) and on where the search broke for 75 of 80 (94%). The two error patterns: face-grouping failures sometimes tagged off-goal, which undercounts the indexing problem, and short praise or general Hacker News chatter sometimes tagged as search feedback. Neither creates false retrieval stories at any scale.",
+ "limits": "Public posts are self-selected and skew to frustrated, technical and Android users. Help Community and Reddit posts are long and rich; Play Store reviews are short. YouTube comments are numerous but short (median 25 words), so only 307 passed the prefilter and 51 are retrieval stories. Severity and failure stage are LLM judgements, checked on a sample. Scores rank areas within this corpus; they are not market sizes."
+}

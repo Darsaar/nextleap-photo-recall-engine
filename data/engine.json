@@ -1,0 +1,4109 @@
+{
+ "funnel": {
+  "raw": 53986,
+  "clean": 35578,
+  "candidates": 8151,
+  "tagged": 8141,
+  "stories": 1091,
+  "feedback": 2604,
+  "off_goal": 3815,
+  "noise": 617
+ },
+ "richness": {
+  "stories_with_2plus_cues": 225,
+  "share_2plus_cues": 0.206,
+  "avg_cues_remembered": 0.98,
+  "queries_quoted": 235,
+  "query_median_words": 1,
+  "queries_1_2_words": 186,
+  "share_queries_1_2_words": 0.791
+ },
+ "by_source_stage": {
+  "app_store": {
+   "none": 18,
+   "index_gap": 3,
+   "cannot_refine": 2,
+   "not_in_library": 1,
+   "buried": 1
+  },
+  "hacker_news": {
+   "none": 274,
+   "misunderstood": 29,
+   "not_in_library": 5,
+   "buried": 13,
+   "index_gap": 9,
+   "feature_regression": 7,
+   "cannot_express": 4,
+   "cannot_refine": 9,
+   " none": 1
+  },
+  "help_forum": {
+   "feature_regression": 136,
+   "index_gap": 177,
+   "misunderstood": 107,
+   "buried": 15,
+   "not_in_library": 12,
+   "cannot_refine": 60,
+   "cannot_express": 54,
+   "none": 80
+  },
+  "play_store": {
+   "none": 398,
+   "index_gap": 109,
+   "not_in_library": 25,
+   "buried": 204,
+   "misunderstood": 126,
+   "feature_regression": 147,
+   "cannot_refine": 129,
+   "cannot_express": 32
+  },
+  "reddit": {
+   "misunderstood": 188,
+   "not_in_library": 43,
+   "none": 262,
+   "cannot_refine": 203,
+   "buried": 89,
+   "index_gap": 207,
+   "feature_regression": 216,
+   "cannot_express": 40
+  },
+  "stack_exchange": {
+   "not_in_library": 3,
+   "none": 25,
+   "index_gap": 14,
+   "misunderstood": 11,
+   "buried": 4,
+   "cannot_refine": 24,
+   "cannot_express": 6,
+   "feature_regression": 7
+  },
+  "youtube": {
+   "buried": 21,
+   "none": 57,
+   "not_in_library": 3,
+   "misunderstood": 16,
+   "index_gap": 19,
+   "cannot_express": 18,
+   "feature_regression": 7,
+   "cannot_refine": 25
+  }
+ },
+ "sources": {
+  "app_store": {
+   "raw": 189,
+   "clean": 171,
+   "candidates": 38,
+   "tagged": 38,
+   "stories": 9,
+   "feedback": 16,
+   "density": 0.237,
+   "median_words": 275
+  },
+  "hacker_news": {
+   "raw": 1211,
+   "clean": 1204,
+   "candidates": 987,
+   "tagged": 977,
+   "stories": 74,
+   "feedback": 277,
+   "density": 0.076,
+   "median_words": 163
+  },
+  "help_forum": {
+   "raw": 2106,
+   "clean": 2051,
+   "candidates": 1152,
+   "tagged": 1152,
+   "stories": 202,
+   "feedback": 439,
+   "density": 0.175,
+   "median_words": 42
+  },
+  "play_store": {
+   "raw": 33436,
+   "clean": 18458,
+   "candidates": 1793,
+   "tagged": 1793,
+   "stories": 341,
+   "feedback": 829,
+   "density": 0.19,
+   "median_words": 60
+  },
+  "reddit": {
+   "raw": 5430,
+   "clean": 5385,
+   "candidates": 3458,
+   "tagged": 3458,
+   "stories": 389,
+   "feedback": 859,
+   "density": 0.112,
+   "median_words": 85
+  },
+  "stack_exchange": {
+   "raw": 418,
+   "clean": 418,
+   "candidates": 416,
+   "tagged": 416,
+   "stories": 25,
+   "feedback": 69,
+   "density": 0.06,
+   "median_words": 119
+  },
+  "youtube": {
+   "raw": 11196,
+   "clean": 7891,
+   "candidates": 307,
+   "tagged": 307,
+   "stories": 51,
+   "feedback": 115,
+   "density": 0.166,
+   "median_words": 25
+  }
+ },
+ "remembered": [
+  [
+   "rough_time",
+   238
+  ],
+  [
+   "person",
+   183
+  ],
+  [
+   "object",
+   160
+  ],
+  [
+   "text_in_image",
+   114
+  ],
+  [
+   "source_app",
+   97
+  ],
+  [
+   "visual_look",
+   65
+  ],
+  [
+   "place",
+   64
+  ],
+  [
+   "event_context",
+   59
+  ],
+  [
+   "exact_date",
+   31
+  ],
+  [
+   "device",
+   19
+  ],
+  [
+   "life_context",
+   12
+  ],
+  [
+   "album_folder",
+   8
+  ],
+  [
+   "why_taken",
+   7
+  ],
+  [
+   "filename",
+   4
+  ],
+  [
+   "pet",
+   3
+  ],
+  [
+   " none",
+   2
+  ],
+  [
+   "video",
+   2
+  ],
+  [
+   "visual_lock",
+   1
+  ],
+  [
+   -1,
+   1
+  ],
+  [
+   "child_family",
+   1
+  ]
+ ],
+ "forgotten": [
+  [
+   "album_folder",
+   143
+  ],
+  [
+   "date",
+   113
+  ],
+  [
+   "filename",
+   88
+  ],
+  [
+   "place",
+   44
+  ],
+  [
+   "what_to_type",
+   38
+  ],
+  [
+   "which_account_device",
+   18
+  ],
+  [
+   "exact_date",
+   16
+  ],
+  [
+   "who_sent",
+   6
+  ],
+  [
+   "rough_time",
+   5
+  ],
+  [
+   " none_stated",
+   1
+  ],
+  [
+   "object",
+   1
+  ],
+  [
+   "device",
+   1
+  ],
+  [
+   "source_app",
+   1
+  ]
+ ],
+ "typed_cues": [
+  [
+   "object",
+   84
+  ],
+  [
+   "text_in_image",
+   73
+  ],
+  [
+   "rough_time",
+   46
+  ],
+  [
+   "person",
+   42
+  ],
+  [
+   "place",
+   23
+  ],
+  [
+   "visual_look",
+   13
+  ],
+  [
+   "event_context",
+   12
+  ],
+  [
+   "source_app",
+   12
+  ],
+  [
+   "exact_date",
+   9
+  ],
+  [
+   "device",
+   4
+  ],
+  [
+   "life_context",
+   4
+  ],
+  [
+   "none",
+   3
+  ],
+  [
+   "why_taken",
+   2
+  ],
+  [
+   "filename",
+   2
+  ],
+  [
+   "visual_lock",
+   1
+  ],
+  [
+   "video",
+   1
+  ],
+  [
+   "pet",
+   1
+  ]
+ ],
+ "content_types": [
+  [
+   "other",
+   417
+  ],
+  [
+   "person",
+   142
+  ],
+  [
+   "video",
+   78
+  ],
+  [
+   "trip_place",
+   74
+  ],
+  [
+   "screenshot_info",
+   53
+  ],
+  [
+   "event_occasion",
+   38
+  ],
+  [
+   "pet",
+   27
+  ],
+  [
+   "document_id",
+   25
+  ],
+  [
+   "child_family",
+   23
+  ],
+  [
+   "text_in_image",
+   20
+  ],
+  [
+   "product_shopping",
+   17
+  ],
+  [
+   "old_scanned",
+   16
+  ],
+  [
+   "object",
+   6
+  ],
+  [
+   "receipt_bill",
+   5
+  ],
+  [
+   "food",
+   3
+  ],
+  [
+   "medical",
+   3
+  ],
+  [
+   "animal",
+   1
+  ],
+  [
+   "visual_look",
+   1
+  ]
+ ],
+ "stages": [
+  [
+   "index_gap",
+   538
+  ],
+  [
+   "feature_regression",
+   520
+  ],
+  [
+   "misunderstood",
+   477
+  ],
+  [
+   "cannot_refine",
+   452
+  ],
+  [
+   "buried",
+   347
+  ],
+  [
+   "cannot_express",
+   154
+  ],
+  [
+   "not_in_library",
+   92
+  ],
+  [
+   " none",
+   1
+  ]
+ ],
+ "workarounds": [
+  [
+   "scroll_timeline",
+   208
+  ],
+  [
+   "gave_up",
+   207
+  ],
+  [
+   "other_app",
+   70
+  ],
+  [
+   "albums_folders",
+   36
+  ],
+  [
+   "people_tab",
+   15
+  ],
+  [
+   "ask_someone",
+   13
+  ],
+  [
+   "date_jump",
+   12
+  ],
+  [
+   "map_or_places",
+   11
+  ],
+  [
+   "third_party_tool",
+   5
+  ]
+ ],
+ "outcomes": [
+  [
+   "not_found",
+   761
+  ],
+  [
+   "found_with_effort",
+   159
+  ],
+  [
+   "found",
+   128
+  ]
+ ],
+ "segments": [
+  [
+   "android",
+   432
+  ],
+  [
+   "large_library",
+   315
+  ],
+  [
+   "ios",
+   82
+  ],
+  [
+   "web",
+   81
+  ],
+  [
+   "heavy_screenshots",
+   49
+  ],
+  [
+   "parent",
+   42
+  ],
+  [
+   "traveller",
+   37
+  ],
+  [
+   "professional",
+   26
+  ],
+  [
+   "uses_as_document_store",
+   15
+  ],
+  [
+   "older_user",
+   15
+  ],
+  [
+   "child_family",
+   2
+  ],
+  [
+   "mobile",
+   2
+  ],
+  [
+   "pet",
+   1
+  ]
+ ],
+ "matrix": {
+  "other": {
+   "feature_regression": 12,
+   "misunderstood": 95,
+   "buried": 121,
+   "cannot_refine": 31,
+   "index_gap": 49,
+   "not_in_library": 29,
+   "cannot_express": 29,
+   "none": 51
+  },
+  "person": {
+   "index_gap": 73,
+   "misunderstood": 23,
+   "feature_regression": 7,
+   "cannot_express": 12,
+   "none": 7,
+   "not_in_library": 6,
+   "cannot_refine": 10,
+   "buried": 4
+  },
+  "unknown": {
+   "misunderstood": 34,
+   "index_gap": 21,
+   "buried": 26,
+   "feature_regression": 8,
+   "not_in_library": 22,
+   "cannot_refine": 4,
+   "none": 17,
+   "cannot_express": 10
+  },
+  "pet": {
+   "misunderstood": 12,
+   "index_gap": 7,
+   "none": 2,
+   "not_in_library": 2,
+   "cannot_express": 1,
+   "cannot_refine": 1,
+   "buried": 2
+  },
+  "event_occasion": {
+   "misunderstood": 13,
+   "cannot_express": 2,
+   "cannot_refine": 5,
+   "not_in_library": 1,
+   "buried": 16,
+   "feature_regression": 1
+  },
+  "text_in_image": {
+   "index_gap": 3,
+   "misunderstood": 9,
+   "cannot_express": 3,
+   "feature_regression": 2,
+   "none": 2,
+   "buried": 1
+  },
+  "trip_place": {
+   "misunderstood": 11,
+   "cannot_refine": 10,
+   "index_gap": 10,
+   "cannot_express": 2,
+   "not_in_library": 6,
+   "buried": 11,
+   "none": 20,
+   "feature_regression": 4
+  },
+  "video": {
+   "misunderstood": 26,
+   "index_gap": 13,
+   "buried": 14,
+   "cannot_express": 5,
+   "cannot_refine": 6,
+   "not_in_library": 6,
+   "none": 6,
+   "feature_regression": 2
+  },
+  "child_family": {
+   "not_in_library": 9,
+   "index_gap": 5,
+   "cannot_refine": 2,
+   "buried": 2,
+   "misunderstood": 1,
+   "cannot_express": 1,
+   "none": 3
+  },
+  "product_shopping": {
+   "misunderstood": 4,
+   "index_gap": 5,
+   "cannot_express": 3,
+   "cannot_refine": 1,
+   "none": 2,
+   "buried": 2
+  },
+  "screenshot_info": {
+   "cannot_express": 5,
+   "feature_regression": 2,
+   "not_in_library": 6,
+   "buried": 17,
+   "index_gap": 9,
+   "misunderstood": 10,
+   "none": 3,
+   "cannot_refine": 1
+  },
+  "receipt_bill": {
+   "not_in_library": 1,
+   "index_gap": 1,
+   "cannot_refine": 1,
+   "buried": 1,
+   "misunderstood": 1
+  },
+  "old_scanned": {
+   "buried": 7,
+   "index_gap": 1,
+   "misunderstood": 1,
+   "none": 3,
+   "cannot_express": 2,
+   "feature_regression": 1,
+   "not_in_library": 1
+  },
+  "document_id": {
+   "cannot_express": 1,
+   "misunderstood": 9,
+   "index_gap": 4,
+   "not_in_library": 2,
+   "feature_regression": 2,
+   "none": 6,
+   "buried": 1
+  },
+  "food": {
+   "cannot_express": 1,
+   "misunderstood": 1,
+   "index_gap": 1
+  },
+  "object": {
+   "misunderstood": 3,
+   "feature_regression": 3
+  },
+  "medical": {
+   "cannot_express": 1,
+   "misunderstood": 1,
+   "none": 1
+  },
+  "animal": {
+   "misunderstood": 1
+  },
+  "visual_look": {
+   "misunderstood": 1
+  }
+ },
+ "opportunities": [
+  {
+   "stage": "cannot_refine",
+   "label": "Can't combine or narrow cues",
+   "mentions": 452,
+   "prevalence": 0.122,
+   "severity": 0.45,
+   "sources": 7,
+   "not_found_rate": 0.48,
+   "addressable": 1.0,
+   "score": 30.41,
+   "content_types": [
+    [
+     "other",
+     236
+    ],
+    [
+     "person",
+     48
+    ],
+    [
+     "trip_place",
+     26
+    ],
+    [
+     "video",
+     18
+    ],
+    [
+     "event_occasion",
+     15
+    ]
+   ],
+   "workarounds": [
+    [
+     "scroll_timeline",
+     73
+    ],
+    [
+     "gave_up",
+     50
+    ],
+    [
+     "albums_folders",
+     16
+    ],
+    [
+     "other_app",
+     16
+    ],
+    [
+     "third_party_tool",
+     12
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "Searched up his Photos nametag, pulled up photos, was gonna be a really heartfelt, bittersweet moment-- and we promptly got flashbanged with pictures of his corpse",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/18acxob/how_to_untag_photos_of_somebody/",
+     "date": "2023-12-04",
+     "type": "person",
+     "stage": "cannot_refine",
+     "need": "The user wanted a way to exclude specific disturbing photos of a deceased person from appearing when searching their name tag."
+    },
+    {
+     "q": "I have been Google-ing for many hours and used \"site:news.ycombinator.com\" along w/ date-range and several keywords, but was unsuccessful in finding that post.",
+     "source": "hacker_news",
+     "url": "https://news.ycombinator.com/item?id=3523350",
+     "date": "2012-01-28",
+     "type": "other",
+     "stage": "cannot_refine",
+     "need": "Find a specific past Hacker News thread about a photo start-up building its own servers."
+    },
+    {
+     "q": "An idea would be to search for any phone model for example \"iphone 6\" or \"huawei\" but that's still some extra steps",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/17d6ajk/how_to_delete_saved_photos_made_by_other_people/",
+     "date": "2023-10-21",
+     "type": "other",
+     "stage": "cannot_refine",
+     "need": "The user wanted an easy bulk deletion tool for photos automatically saved from shared albums."
+    },
+    {
+     "q": "looking for a way to query something like \"photos of kindergarten without X or Y\" and then mass delete the result.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1d4qbox/search_for_messages_from_kindergarten_without_my/",
+     "date": "2024-05-31",
+     "type": "child_family",
+     "stage": "cannot_refine",
+     "need": "The user wants to filter search results to exclude specific people to perform mass deletion."
+    },
+    {
+     "q": "UPDATE: Found out you can Search \"Recently Added\" to find pics recently uploaded regardless of the date of the photo.",
+     "source": "play_store",
+     "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=19dd2c46-44bc-4b4b-b81c-d1235c2fe375",
+     "date": "2022-09-16",
+     "type": "other",
+     "stage": "cannot_refine",
+     "need": "The user wants better album sorting options and the ability to delete photos directly from albums."
+    },
+    {
+     "q": "Is there a way to jump straight to that exact day in Google Photos from the photo details screen?",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1ojiwh8/question_about_google_photos_search_date/",
+     "date": "2025-10-29",
+     "type": "trip_place",
+     "stage": "cannot_refine",
+     "need": "Jump directly to the exact date in the main photo timeline from a photo's details screen."
+    },
+    {
+     "q": "It is hard to refine a search of an specific person and specific format.",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/347859851?hl=en",
+     "date": "",
+     "type": "child_family",
+     "stage": "cannot_refine",
+     "need": "The user wanted to combine multiple search filters like a specific person, another person, and format (videos)."
+    },
+    {
+     "q": "Search Jane and John doesn't work for me.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/17zsis6/search_jane_and_john_doesnt_work_for_me/",
+     "date": "2023-11-20",
+     "type": "person",
+     "stage": "cannot_refine",
+     "need": "The user wanted to search for multiple specific people together in photos using a combined query."
+    }
+   ]
+  },
+  {
+   "stage": "buried",
+   "label": "Right photo buried in results / timeline",
+   "mentions": 347,
+   "prevalence": 0.094,
+   "severity": 0.58,
+   "sources": 7,
+   "not_found_rate": 0.59,
+   "addressable": 1.0,
+   "score": 30.21,
+   "content_types": [
+    [
+     "other",
+     194
+    ],
+    [
+     "screenshot_info",
+     24
+    ],
+    [
+     "event_occasion",
+     17
+    ],
+    [
+     "trip_place",
+     16
+    ],
+    [
+     "video",
+     15
+    ]
+   ],
+   "workarounds": [
+    [
+     "scroll_timeline",
+     145
+    ],
+    [
+     "gave_up",
+     39
+    ],
+    [
+     "albums_folders",
+     28
+    ],
+    [
+     "other_app",
+     15
+    ],
+    [
+     "people_tab",
+     5
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "If I search for a date for example 01/03/2022 I will find certain pictures. But if I scroll down to that date I find nothing",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/453354845?hl=en",
+     "date": "",
+     "type": "unknown",
+     "stage": "buried",
+     "need": "User wanted manual scrolling to reliably display photos that appear in search results for a specific date."
+    },
+    {
+     "q": "However, when I search for something specific like \"abstract photo\", the AI brings up photos in my library that I have never seen before",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1h6878b/photos_missing_but_appear_in_search/",
+     "date": "2024-12-04",
+     "type": "unknown",
+     "stage": "buried",
+     "need": "The user wanted to easily browse and access photos that are hidden deep in the library and only appear during random searches."
+    },
+    {
+     "q": "Anytime you dare press the button to move something out of your locked folder. It just enters the black hole abyss of your general photo reel.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1c6na58/_/oxzqidr/",
+     "date": "2026-07-16",
+     "type": "other",
+     "stage": "buried",
+     "need": "The user wants to be able to search inside locked folders or easily find items moved out of them."
+    },
+    {
+     "q": "can type in for example miss me I looking for a pic of this old passage I have sometimes it pulls many sometimes just a few",
+     "source": "play_store",
+     "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=57c6ed5f-c8b4-44f0-ae97-77fc5b3cfdf8",
+     "date": "2026-05-28",
+     "type": "text_in_image",
+     "stage": "buried",
+     "need": "The user wants to find specific photos containing specific text phrases."
+    },
+    {
+     "q": "I would like to see my pictures of Newfoundland but I cannot remember when I was there. Oh, too bad, just scan them all until you find them?",
+     "source": "youtube",
+     "url": "https://www.youtube.com/watch?v=ppleyVVC1_I&lc=Ugyx1t6L_LBQgsexa_x4AaABAg",
+     "date": "2021-01-16",
+     "type": "trip_place",
+     "stage": "buried",
+     "need": "The user wants to find photos of a specific place without knowing the date."
+    },
+    {
+     "q": "So does anyone know where/how i can find those pictures? Really at a loss here so i would appreciate any help!!",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1low3np/where_to_find_pictures_that_are_not_photos_on_new/",
+     "date": "2025-07-01",
+     "type": "screenshot_info",
+     "stage": "buried",
+     "need": "I want to easily find downloaded pictures and screenshots in a dedicated space or album on my new device."
+    },
+    {
+     "q": "if you have burst photos it’s SUPER annoying because when I wanted to delete the photos in mass I had to find those like a needle in a haystack",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/dptxj7/_/oby9lgf/",
+     "date": "2026-03-23",
+     "type": "other",
+     "stage": "buried",
+     "need": "The user wants to easily identify and delete burst photos in bulk."
+    },
+    {
+     "q": "The hard part is I can't see those images just by searching it and I have to dive in the 14k photos that are on my Google Drive just to find them.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/153na84/any_help_on_how_to_arrange_albums/",
+     "date": "2023-07-19",
+     "type": "trip_place",
+     "stage": "buried",
+     "need": "Easily find and rearrange backed up photos back into their local device albums after storage cleanup."
+    }
+   ]
+  },
+  {
+   "stage": "index_gap",
+   "label": "Photo isn't searchable (faces, text, place not indexed)",
+   "mentions": 538,
+   "prevalence": 0.146,
+   "severity": 0.57,
+   "sources": 7,
+   "not_found_rate": 0.73,
+   "addressable": 0.8,
+   "score": 29.89,
+   "content_types": [
+    [
+     "person",
+     227
+    ],
+    [
+     "other",
+     110
+    ],
+    [
+     "pet",
+     24
+    ],
+    [
+     "trip_place",
+     21
+    ],
+    [
+     "video",
+     19
+    ]
+   ],
+   "workarounds": [
+    [
+     "gave_up",
+     46
+    ],
+    [
+     "scroll_timeline",
+     41
+    ],
+    [
+     "other_app",
+     34
+    ],
+    [
+     "albums_folders",
+     13
+    ],
+    [
+     "people_tab",
+     11
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "In Google photos Gallery year 2014's photos are not appearing, but when I search in search bar, then it's show all the 2014 years photo.",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/458461063?hl=en",
+     "date": "",
+     "type": "other",
+     "stage": "index_gap",
+     "need": "The user wants all their photos to be visible in the main gallery view, not just via search."
+    },
+    {
+     "q": "is there a point to adding descriptions to a photo if it looks like it does nothing to make a specific photo found when searching?",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1go86ki/is_there_a_point_to_adding_a_description_to_a/",
+     "date": "2024-11-10",
+     "type": "trip_place",
+     "stage": "index_gap",
+     "need": "The user wanted searching for custom photo descriptions they added to return the exact photo."
+    },
+    {
+     "q": "I can find all of the photos in it when I type her name, but can't locate the group and can't add to the group.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1qwad43/one_face_group_vanished/",
+     "date": "2026-02-05",
+     "type": "person",
+     "stage": "index_gap",
+     "need": "The user wants to restore a missing face group for a family member."
+    },
+    {
+     "q": "I'll just go and search thier name and find the images or it would auto add to my albums but no new images are being organized",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/470963132?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "index_gap",
+     "need": "The user wants face grouping to resume so they can search by person name."
+    },
+    {
+     "q": "Specifically, I needed to find past photos of my penis to reference, but when I tried searching with terms like “penis”, nothing came up.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1g4xwyh/issues_with_locating_photos/",
+     "date": "2024-10-16",
+     "type": "other",
+     "stage": "index_gap",
+     "need": "The user wants to search for specific body parts in their photos for medical reference."
+    },
+    {
+     "q": "I was recently looking for a method to find photos which don't have location data, as whatsapp seems to remove the original location and date information.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1lsyrsd/pro_tip_filter_photos_which_have_been_uploaded/",
+     "date": "2025-07-06",
+     "type": "unknown",
+     "stage": "index_gap",
+     "need": "The user wanted to find photos that originated from WhatsApp and lacked proper location and date data."
+    },
+    {
+     "q": "Descriptions added to photos do not show in search results. This morning I added some descriptions to photos to better assist with finding them when searching.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1w5exw4/descriptions_added_to_photos_do_not_show_in/",
+     "date": "2026-09-02",
+     "type": "other",
+     "stage": "index_gap",
+     "need": "The user wanted descriptions added to photos to be immediately searchable and retrievable."
+    },
+    {
+     "q": "How is it possible for it to only find 4 photos of \"cats\" when I have literally hundreds of cat photos on my phone?",
+     "source": "hacker_news",
+     "url": "https://news.ycombinator.com/item?id=44031190",
+     "date": "2025-05-19",
+     "type": "pet",
+     "stage": "index_gap",
+     "need": "The user wanted Google Photos to accurately find and return all photos matching a simple object search term like 'cats' when hundreds exist in the library."
+    }
+   ]
+  },
+  {
+   "stage": "misunderstood",
+   "label": "Search misreads the query",
+   "mentions": 477,
+   "prevalence": 0.129,
+   "severity": 0.57,
+   "sources": 6,
+   "not_found_rate": 0.79,
+   "addressable": 0.9,
+   "score": 28.51,
+   "content_types": [
+    [
+     "other",
+     161
+    ],
+    [
+     "person",
+     47
+    ],
+    [
+     "video",
+     31
+    ],
+    [
+     "trip_place",
+     16
+    ],
+    [
+     "screenshot_info",
+     15
+    ]
+   ],
+   "workarounds": [
+    [
+     "gave_up",
+     88
+    ],
+    [
+     "scroll_timeline",
+     45
+    ],
+    [
+     "other_app",
+     33
+    ],
+    [
+     "albums_folders",
+     7
+    ],
+    [
+     "date_jump",
+     6
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "search bar only gives photos from the camera folder, how to get all the photos across all folders whatsapp, downloads, camera etc. for yr 2025?",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1q05kgg/recap_search/",
+     "date": "2025-12-31",
+     "type": "event_occasion",
+     "stage": "misunderstood",
+     "need": "I want the search bar to find photos across all folders like WhatsApp and downloads, not just the camera folder."
+    },
+    {
+     "q": "If search for dog, then it will tell me there are no photos found (I have 2 dogs with a million photos of them).",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/343818210?hl=en",
+     "date": "",
+     "type": "pet",
+     "stage": "misunderstood",
+     "need": "I want search to successfully find photos of my dogs when I type basic keywords."
+    },
+    {
+     "q": "when i ask ai who am i it responds with your are praise but actually i am vraj it identifies me as someone else",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/470816363?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "misunderstood",
+     "need": "The user wanted the AI to correctly identify them by name instead of confusing them with someone else."
+    },
+    {
+     "q": "now I type in that same customer name and it gives me hundreds of photos that have no association with the subject I am looking for",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/333659792?hl=en",
+     "date": "",
+     "type": "other",
+     "stage": "misunderstood",
+     "need": "The user wants to reliably search photo descriptions or tags for a specific customer name without getting irrelevant results."
+    },
+    {
+     "q": "my keyword search only shows video results. I can't find the photos I want from a search (man with green hair) all the results are videos.",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/330978458?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "misunderstood",
+     "need": "The user wants keyword searches to return photos instead of only videos."
+    },
+    {
+     "q": "In some cases if I search for a filename that appears in gdrive in photos it comes up but for some of the others it doesn't!",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/18w5bwa/gdrive_says_your_photos_are_safe_on_google_photos/",
+     "date": "2024-01-01",
+     "type": "other",
+     "stage": "misunderstood",
+     "need": "Verify if files in a legacy Google Drive folder are backed up in Google Photos and stop excessive bandwidth usage."
+    },
+    {
+     "q": "whenever I searched on Google Photos the category name showed all the files that were saved there that contain a certain name in the file name.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1j6iou6/google_photos_search_no_longer_works_like_before/",
+     "date": "2025-03-08",
+     "type": "document_id",
+     "stage": "misunderstood",
+     "need": "I want search to find files using category names included in their filenames."
+    },
+    {
+     "q": "Want to download only RAW files from Photos in order to free some cloud space (I ran out of space already), so I searched for \"DNG\".",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/19c2yxx/how_to_download_raw_only_not_managing/",
+     "date": "2024-01-21",
+     "type": "other",
+     "stage": "misunderstood",
+     "need": "The user wanted to successfully filter, select, and download only RAW files from the web version to free cloud space."
+    }
+   ]
+  },
+  {
+   "stage": "feature_regression",
+   "label": "Search changed or got worse",
+   "mentions": 520,
+   "prevalence": 0.141,
+   "severity": 0.52,
+   "sources": 6,
+   "not_found_rate": 0.43,
+   "addressable": 0.6,
+   "score": 18.96,
+   "content_types": [
+    [
+     "other",
+     137
+    ],
+    [
+     "person",
+     56
+    ],
+    [
+     "trip_place",
+     26
+    ],
+    [
+     "text_in_image",
+     11
+    ],
+    [
+     "video",
+     11
+    ]
+   ],
+   "workarounds": [
+    [
+     "gave_up",
+     62
+    ],
+    [
+     "scroll_timeline",
+     24
+    ],
+    [
+     "other_app",
+     21
+    ],
+    [
+     "third_party_tool",
+     8
+    ],
+    [
+     "map_or_places",
+     4
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "Used to be able to type in the number plate of my car to find photos of it. Now this is no longer the case.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1fye407/ocr_search_no_longer_working_well/",
+     "date": "2024-10-07",
+     "type": "text_in_image",
+     "stage": "feature_regression",
+     "need": "The user wanted to find photos of their car by searching its number plate using OCR."
+    },
+    {
+     "q": "Now I have no option to do that. It doesn’t know anyone and says “take more photos”…. Like what? I have 30,000 photos….",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/342547011?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "feature_regression",
+     "need": "I want to search for specific named people in my large photo collection like I used to."
+    },
+    {
+     "q": "The search agent just returns a useless pile of images that \"vaguely may have some possible reference to 'March' and '2011' \"",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1rznf85/aionly_seach_kills_usability/",
+     "date": "2026-03-21",
+     "type": "unknown",
+     "stage": "feature_regression",
+     "need": "User wanted to find photos by a specific time frame using traditional search rather than AI."
+    },
+    {
+     "q": "Since today the app design has changed and I can't seem to change to most recent. All I wanted was to find the newest pic of my motorbike",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1lekt49/no_way_to_change_searched_photos_to_display_by/",
+     "date": "2025-06-18",
+     "type": "object",
+     "stage": "feature_regression",
+     "need": "The user wanted to sort search results by most recent to quickly find the newest photo of an object."
+    },
+    {
+     "q": "Google photos has removed a fully working fundamental feature and replaced it with something that doesn't work and nobody wanted",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1u4wnf2/_/orlg4sq/",
+     "date": "2026-06-14",
+     "type": "person",
+     "stage": "feature_regression",
+     "need": "The user wants to see a comprehensive list of photos matching a specific person and location query."
+    },
+    {
+     "q": "On Google Photos app I used to search for photos of my white campervan by using search term",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/329382524?hl=en",
+     "date": "",
+     "type": "object",
+     "stage": "feature_regression",
+     "need": "The user wanted to use smart search terms to find a specific vehicle."
+    },
+    {
+     "q": "Now I search any of the above and it shows be thousands of photos with absolutely no relevance.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1fvq7hr/why_did_they_ruin_google_photos_search/",
+     "date": "2024-10-04",
+     "type": "document_id",
+     "stage": "feature_regression",
+     "need": "The user wanted specific document and card photos to be retrieved accurately when typing keywords like Passport or Global Entry Card."
+    },
+    {
+     "q": "What used to cost 3 alphabetical letters to get my result now requires a fully structured inquiry",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1qqtkmw/the_enshittification_of_google_photos_due_to_ai/",
+     "date": "2026-01-30",
+     "type": "other",
+     "stage": "feature_regression",
+     "need": "The user wanted to retrieve specific personal photos using simple keyword search terms without AI moderation interference."
+    }
+   ]
+  },
+  {
+   "stage": "cannot_express",
+   "label": "Can't put the memory into words",
+   "mentions": 154,
+   "prevalence": 0.042,
+   "severity": 0.47,
+   "sources": 6,
+   "not_found_rate": 0.58,
+   "addressable": 1.0,
+   "score": 16.29,
+   "content_types": [
+    [
+     "other",
+     57
+    ],
+    [
+     "person",
+     20
+    ],
+    [
+     "video",
+     7
+    ],
+    [
+     "screenshot_info",
+     6
+    ],
+    [
+     "product_shopping",
+     6
+    ]
+   ],
+   "workarounds": [
+    [
+     "gave_up",
+     27
+    ],
+    [
+     "ask_someone",
+     3
+    ],
+    [
+     "albums_folders",
+     3
+    ],
+    [
+     "other_app",
+     2
+    ],
+    [
+     "scroll_timeline",
+     2
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "I am trying to find a way to search for all the photo with an AI edit, but none of the query I've try result AI edited photo",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1i13cui/ai_generated_edit_search/",
+     "date": "2025-01-14",
+     "type": "other",
+     "stage": "cannot_express",
+     "need": "The user wants to filter or search for photos that have been modified by AI tools."
+    },
+    {
+     "q": "I'm trying to find photos of me alone, and it seems impossible on Photos.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1r4dbyu/how_to_search_for_images_of_a_person_alone/",
+     "date": "2026-02-14",
+     "type": "person",
+     "stage": "cannot_express",
+     "need": "The user wants to search for photos containing only a single specific person without others in the frame."
+    },
+    {
+     "q": "Can anyone help me find the link to this album? It's called \"Absolutely Wallpapers\"",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/17ug91x/can_anyone_help_me_find_the_link_to_this_album/",
+     "date": "2023-11-13",
+     "type": "other",
+     "stage": "cannot_express",
+     "need": "The user wanted to find the link to a specific shared album featured in a YouTube video."
+    },
+    {
+     "q": "Mere photo bhej do purane mere photo hai photo photo",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/371356922?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "cannot_express",
+     "need": "The user wants to retrieve old photos of a specific person."
+    },
+    {
+     "q": "This photo doesn't exist anywhere in my camera roll and I can't figure out where it came from. Is there a way to find it?",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1apcr83/my_google_photos_thumbnail_isnt_me/",
+     "date": "2024-02-12",
+     "type": "person",
+     "stage": "cannot_express",
+     "need": "The user wants to locate the source of an unknown photo appearing in their facial recognition grouping."
+    },
+    {
+     "q": "When I see a photo I like in one of the slideshows generated automatically by Google, how can I find it in order to share it?",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/460847035?hl=en",
+     "date": "",
+     "type": "event_occasion",
+     "stage": "cannot_express",
+     "need": "The user wanted to find and share a specific photo seen within an automatically generated slideshow."
+    },
+    {
+     "q": "please help me find my selfie old photo,3 person inside a car,me and another 2 women at my lefftside and behind at driving area",
+     "source": "help_forum",
+     "url": "https://support.google.com/photos/thread/332037097?hl=en",
+     "date": "",
+     "type": "person",
+     "stage": "cannot_express",
+     "need": "The user wanted help finding an old selfie of themselves with two other women inside a car."
+    },
+    {
+     "q": "All I need is the same thing with my Google Drive and with a video. Does anyone know how? (Idealy on the app by samsung galaxy)",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1j2jcgg/how_do_i_find_a_specific_video_by_searching_a/",
+     "date": "2025-03-03",
+     "type": "video",
+     "stage": "cannot_express",
+     "need": "The user wanted to use visual similarity search on videos across multiple Google Drives, similar to Google Images reverse search."
+    }
+   ]
+  },
+  {
+   "stage": "not_in_library",
+   "label": "Photo actually missing",
+   "mentions": 92,
+   "prevalence": 0.025,
+   "severity": 0.83,
+   "sources": 7,
+   "not_found_rate": 1.0,
+   "addressable": 0.2,
+   "score": 3.82,
+   "content_types": [
+    [
+     "other",
+     29
+    ],
+    [
+     "child_family",
+     9
+    ],
+    [
+     "person",
+     7
+    ],
+    [
+     "screenshot_info",
+     6
+    ],
+    [
+     "trip_place",
+     6
+    ]
+   ],
+   "workarounds": [
+    [
+     "gave_up",
+     31
+    ],
+    [
+     "scroll_timeline",
+     9
+    ],
+    [
+     "other_app",
+     5
+    ],
+    [
+     "albums_folders",
+     4
+    ],
+    [
+     "ask_someone",
+     1
+    ]
+   ],
+   "quotes": [
+    {
+     "q": "Need help finding a photo of my cousins uncle Carl Wayne Lawrence.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1tqusef/need_help_finding_a_photo_of_my_cousins_uncle/",
+     "date": "2026-05-29",
+     "type": "person",
+     "stage": "not_in_library",
+     "need": "The user wants to find a historical photo of a specific deceased relative."
+    },
+    {
+     "q": "I can see in my Google photos app that scroll bar shows the year 2013, but then only shows photos as far back as 2019.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1l977mm/google_automatically_deleted_old_photos/",
+     "date": "2025-06-11",
+     "type": "other",
+     "stage": "not_in_library",
+     "need": "The user wants to locate missing photos from 2013-2018 that are no longer appearing in their timeline."
+    },
+    {
+     "q": "I want to restore an old backup of my google photos to get the rest of my photos back, but I can't find it in settings.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1c8fb6z/how_do_i_restore_an_old_backup/",
+     "date": "2024-04-20",
+     "type": "other",
+     "stage": "not_in_library",
+     "need": "The user wants to restore their entire photo library after switching phones."
+    },
+    {
+     "q": "How do I restot my screenshot on my Google pixel after factory reset it seems like I tried everything and I can't find any other way",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1g3tzsd/how_do_i_restot_my_screenshot_on_my_google_pixel/",
+     "date": "2024-10-14",
+     "type": "screenshot_info",
+     "stage": "not_in_library",
+     "need": "The user wanted to restore their lost screenshots after a factory reset."
+    },
+    {
+     "q": "After about an hour of digging through every folde and picture by date by type by description and letting AI do it, they're not in there either.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1wb5dnd/dont_mind_us/",
+     "date": "2026-09-08",
+     "type": "screenshot_info",
+     "stage": "not_in_library",
+     "need": "Find previously saved screenshots of app installation instructions inside a specific album or via search."
+    },
+    {
+     "q": "When I tried to go back to see the rest of the photos in the memory, it was like it no longer existed.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1bkbasi/memory_disappeared/",
+     "date": "2024-03-21",
+     "type": "unknown",
+     "stage": "not_in_library",
+     "need": "I want to be able to find and view a memory that disappeared after clicking view day from a notification."
+    },
+    {
+     "q": "I'm trying to look for a photo of maps that was in my Google photos and suddenly I only have photos up to November of last year....",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/1bo8fyw/so_ummm_suddenly_all_my_photos_from_this_year_are/",
+     "date": "2024-03-26",
+     "type": "screenshot_info",
+     "stage": "not_in_library",
+     "need": "The user wanted to find a specific screenshot of maps taken earlier in the year that suddenly disappeared."
+    },
+    {
+     "q": "Last march my phone got stolen on a trip to Birmingham... I can't find any of my old photos or vidoes even after logging into Google photos.",
+     "source": "reddit",
+     "url": "https://www.reddit.com/r/googlephotos/comments/17ymz4s/unable_to_recover_old_photos/",
+     "date": "2023-11-19",
+     "type": "unknown",
+     "stage": "not_in_library",
+     "need": "Recover old photos and videos after regaining access to a Google account following a phone theft."
+    }
+   ]
+  }
+ ],
+ "queries": [
+  {
+   "query": "yellow sticky note",
+   "remembered": [
+    "text_in_image",
+    "visual_lock"
+   ],
+   "stage": "feature_regression",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/373711674?hl=en"
+  },
+  {
+   "query": "locomotive",
+   "remembered": [
+    "person",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/360985963?hl=en"
+  },
+  {
+   "query": "dog",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/343818210?hl=en"
+  },
+  {
+   "query": "May 2025",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/429341224?hl=en"
+  },
+  {
+   "query": "A71",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "text_in_image",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/444986278?hl=en"
+  },
+  {
+   "query": "hawaii",
+   "remembered": [
+    "place"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/405529957?hl=en"
+  },
+  {
+   "query": "september 15",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/373273937?hl=en"
+  },
+  {
+   "query": "who am i",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/470816363?hl=en"
+  },
+  {
+   "query": "dress",
+   "remembered": [
+    "object",
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/360527655?hl=en"
+  },
+  {
+   "query": "Jess",
+   "remembered": [
+    "person"
+   ],
+   "stage": "feature_regression",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/342547011?hl=en"
+  },
+  {
+   "query": "Melbourne",
+   "remembered": [
+    "place",
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/328327441?hl=en"
+  },
+  {
+   "query": "Mum",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "unknown",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/389363228?hl=en"
+  },
+  {
+   "query": "August 2023",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "buried",
+   "type": "unknown",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/331506785?hl=en"
+  },
+  {
+   "query": "customer name",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/333659792?hl=en"
+  },
+  {
+   "query": "Paul",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/362554864?hl=en"
+  },
+  {
+   "query": "RAW",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/376935996?hl=en"
+  },
+  {
+   "query": "Dad",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/419200677?hl=en"
+  },
+  {
+   "query": "their name",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/470963132?hl=en"
+  },
+  {
+   "query": "august 8 2024",
+   "remembered": [
+    "exact_date"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/338206244?hl=en"
+  },
+  {
+   "query": "2026",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/450885637?hl=en"
+  },
+  {
+   "query": "September 2025",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/466300111?hl=en"
+  },
+  {
+   "query": "2014",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/458461063?hl=en"
+  },
+  {
+   "query": "Dad",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/363299785?hl=en"
+  },
+  {
+   "query": "Purina",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/349669159?hl=en"
+  },
+  {
+   "query": "the letter",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/441134523?hl=en"
+  },
+  {
+   "query": "car",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/424448328?hl=en"
+  },
+  {
+   "query": "shampoo",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "product_shopping",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/353697774?hl=en"
+  },
+  {
+   "query": "names of these people",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/450007937?hl=en"
+  },
+  {
+   "query": "IMG20190123151939",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/357285045?hl=en"
+  },
+  {
+   "query": "his name",
+   "remembered": [
+    "person",
+    "video"
+   ],
+   "stage": "cannot_refine",
+   "type": "child_family",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/347859851?hl=en"
+  },
+  {
+   "query": "man with green hair",
+   "remembered": [
+    "person",
+    "visual_look"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/330978458?hl=en"
+  },
+  {
+   "query": "the device name",
+   "remembered": [
+    "device"
+   ],
+   "stage": "index_gap",
+   "type": "unknown",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/364310431?hl=en"
+  },
+  {
+   "query": "cats and weddings",
+   "remembered": [
+    "object",
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/345133284?hl=en"
+  },
+  {
+   "query": "wedding dress",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/367598399?hl=en"
+  },
+  {
+   "query": "socialism",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/447584580?hl=en"
+  },
+  {
+   "query": "jigsaw puzzle",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "product_shopping",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/335271911?hl=en"
+  },
+  {
+   "query": "lock",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/470486220?hl=en"
+  },
+  {
+   "query": "01/03/2022",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "buried",
+   "type": "unknown",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/453354845?hl=en"
+  },
+  {
+   "query": "Suzie",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/397267146?hl=en"
+  },
+  {
+   "query": "4/18",
+   "remembered": [
+    "exact_date"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/426282397?hl=en"
+  },
+  {
+   "query": "signatures",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/408736738?hl=en"
+  },
+  {
+   "query": "color of vehicle",
+   "remembered": [
+    "visual_look",
+    "why_taken"
+   ],
+   "stage": "misunderstood",
+   "type": "object",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/377162354?hl=en"
+  },
+  {
+   "query": "white campervan",
+   "remembered": [
+    "object",
+    "visual_look"
+   ],
+   "stage": "feature_regression",
+   "type": "object",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/329382524?hl=en"
+  },
+  {
+   "query": "ladies",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/329907757?hl=en"
+  },
+  {
+   "query": "Arjun rathore",
+   "remembered": [
+    "person"
+   ],
+   "stage": "cannot_express",
+   "type": "person",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/371356922?hl=en"
+  },
+  {
+   "query": "robot",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/381228515?hl=en"
+  },
+  {
+   "query": "Kavalli",
+   "remembered": [
+    "rough_time",
+    "place"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/462982426?hl=en"
+  },
+  {
+   "query": "food",
+   "remembered": [
+    "place",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1aungq9/setting_it_up_having_a_couple_tiny_issues/"
+  },
+  {
+   "query": "https://photos.google.com/search/_tra_",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/186jbiu/just_migrated_from_an_s10_to_an_s23_and_created/"
+  },
+  {
+   "query": "custom description labels",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1mfgfgo/search_stopped_functioning_properly_any/"
+  },
+  {
+   "query": "Fat",
+   "remembered": [
+    "object",
+    "visual_look"
+   ],
+   "stage": "feature_regression",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1qqtkmw/the_enshittification_of_google_photos_due_to_ai/"
+  },
+  {
+   "query": "BFTV",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ctwrhi/search_by_words_in_video_names_doesnt_return/"
+  },
+  {
+   "query": "filename",
+   "remembered": [
+    "filename"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/18w5bwa/gdrive_says_your_photos_are_safe_on_google_photos/"
+  },
+  {
+   "query": "videos",
+   "remembered": [
+    "none"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1n8nb96/google_photos_moving_or_deleting_my_videos_after/"
+  },
+  {
+   "query": "Calico Cat",
+   "remembered": [
+    "rough_time",
+    "object",
+    "text_in_image",
+    "visual_look"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1jbiao1/search_function_no_longer_optimal/"
+  },
+  {
+   "query": "TWIN NAMES: Month 22",
+   "remembered": [
+    "event_context",
+    "rough_time"
+   ],
+   "stage": "index_gap",
+   "type": "child_family",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1eftehk/albums_shared_with_me_sometimes_showing_sometimes/"
+  },
+  {
+   "query": "recently edited AND recently added",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1gop8n7/vanishing_photos/"
+  },
+  {
+   "query": "Jon Bon Jovi",
+   "remembered": [
+    "person",
+    "event_context"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fdcifv/do_you_have_to_wait_or_can_i_force_google_photos/"
+  },
+  {
+   "query": "google photos",
+   "remembered": [
+    "person",
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ew7e09/got_email_from_my_mom_through_google_photos_that/"
+  },
+  {
+   "query": "DSC_10122.JPG",
+   "remembered": [
+    "exact_date",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1l7xv01/photo_shows_in_recently_added_but_not_in_timeline/"
+  },
+  {
+   "query": "cat",
+   "remembered": [
+    "object",
+    "source_app"
+   ],
+   "stage": "buried",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1low3np/where_to_find_pictures_that_are_not_photos_on_new/"
+  },
+  {
+   "query": "city A",
+   "remembered": [
+    "place"
+   ],
+   "stage": "index_gap",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/15vf23z/places_in_explore_page/"
+  },
+  {
+   "query": "his Photos nametag",
+   "remembered": [
+    "person"
+   ],
+   "stage": "cannot_refine",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/18acxob/how_to_untag_photos_of_somebody/"
+  },
+  {
+   "query": "penis",
+   "remembered": [
+    "object"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1g4xwyh/issues_with_locating_photos/"
+  },
+  {
+   "query": "Videos",
+   "remembered": [
+    "exact_date",
+    "filename"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/16gx2b3/google_photos_account_has_missing_videos/"
+  },
+  {
+   "query": "Shared by a Google user",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/188kee8/any_way_to_search_for_all_photos_shared_by_a/"
+  },
+  {
+   "query": "before:2025-10-01 after:2025-08-20",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1qa5nnk/date_search_and_result_details/"
+  },
+  {
+   "query": "IMG_2023",
+   "remembered": [
+    "rough_time",
+    "object"
+   ],
+   "stage": "buried",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/153na84/any_help_on_how_to_arrange_albums/"
+  },
+  {
+   "query": "recently added",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/12bd3fs/undo_save_photos/"
+  },
+  {
+   "query": "burst",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/192qoa6/how_to_search_for_burst_photos_from_an_iphone/"
+  },
+  {
+   "query": "folder name",
+   "remembered": [
+    "none"
+   ],
+   "stage": "buried",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1f76lf2/how_to_view_all_folders_albums_from_samsung/"
+  },
+  {
+   "query": "city name",
+   "remembered": [
+    "place",
+    "exact_date"
+   ],
+   "stage": "cannot_refine",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ojiwh8/question_about_google_photos_search_date/"
+  },
+  {
+   "query": "Wedding",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fxld4n/google_photos_search_not_working/"
+  },
+  {
+   "query": "abstract photo",
+   "remembered": [
+    "visual_look"
+   ],
+   "stage": "buried",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1h6878b/photos_missing_but_appear_in_search/"
+  },
+  {
+   "query": "exact file name of the photo",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1nslvef/what_the_smegging_hell_has_happened_to_search/"
+  },
+  {
+   "query": "Carl Wayne Lawrence",
+   "remembered": [
+    "person"
+   ],
+   "stage": "not_in_library",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1tqusef/need_help_finding_a_photo_of_my_cousins_uncle/"
+  },
+  {
+   "query": "part of that album name",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "buried",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1in3z5m/_/oio93li/"
+  },
+  {
+   "query": "file names",
+   "remembered": [
+    "object",
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/103orpj/only_the_first_300_photos_of_a_410photo_album_are/"
+  },
+  {
+   "query": "category name",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1j6iou6/google_photos_search_no_longer_works_like_before/"
+  },
+  {
+   "query": "Me and Abigail",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1kvxj34/searching_for_multiple_people_in_one_photo_not/"
+  },
+  {
+   "query": "DNG",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/19c2yxx/how_to_download_raw_only_not_managing/"
+  },
+  {
+   "query": "redeye",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "feature_regression",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1u2729t/what_did_google_do_to_photos_overnight/"
+  },
+  {
+   "query": "screenshots",
+   "remembered": [
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1kl4ld4/searching_for_all_screenshots_png/"
+  },
+  {
+   "query": "dog",
+   "remembered": [
+    "object",
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1wkh4be/search_function_only_shows_very_few_photos/"
+  },
+  {
+   "query": "skin",
+   "remembered": [
+    "visual_look",
+    "object"
+   ],
+   "stage": "buried",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1c6na58/_/oxzqidr/"
+  },
+  {
+   "query": "TikTok",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1jqvglj/anyway_to_bulk_delete_all_downloaded_tik_tok/"
+  },
+  {
+   "query": "dad's name",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1kkc65j/problem_with_group_facing_any_way_to_fix_this_in/"
+  },
+  {
+   "query": "8mm Video Camera",
+   "remembered": [
+    "source_app"
+   ],
+   "stage": "index_gap",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/12s4srv/is_it_possible_to_filter_photosvideos_by_camera/"
+  },
+  {
+   "query": "Screenshot_XXXX",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fdd17a/broken_search/"
+  },
+  {
+   "query": "photos of kindergarten without X or Y",
+   "remembered": [
+    "event_context",
+    "person"
+   ],
+   "stage": "cannot_refine",
+   "type": "child_family",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1d4qbox/search_for_messages_from_kindergarten_without_my/"
+  },
+  {
+   "query": "a description",
+   "remembered": [
+    "rough_time",
+    "exact_date"
+   ],
+   "stage": "buried",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/10ehnxc/switched_from_android_to_iphone_google_photos_not/"
+  },
+  {
+   "query": "recipes",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "food",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1p0jn2v/keyword_search_not_working/"
+  },
+  {
+   "query": "Pinterest",
+   "remembered": [
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1sp5sdh/is_there_a_way_to_make_the_search_more_accurate/"
+  },
+  {
+   "query": "nude",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1adbpt5/nswf_search_options_in_my_photos_worked_and_then/"
+  },
+  {
+   "query": "a picture of myself and my wife sitting in front of some tulips about 5 years ago",
+   "remembered": [
+    "rough_time",
+    "place",
+    "person",
+    "object"
+   ],
+   "stage": "none",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1eqbi8x/google_photos_what_people_dont_understand_in_my/"
+  },
+  {
+   "query": "Tiktok",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1r9eork/remove_tiktok_videos_efficiently/"
+  },
+  {
+   "query": "EXACT MATCH in the description",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/18im9y4/i_cannot_search_by_the_descriptions_i_added/"
+  },
+  {
+   "query": "WA",
+   "remembered": [
+    "text_in_image",
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/13d2hgl/can_no_longer_search_wa_to_find_whatsapp_media/"
+  },
+  {
+   "query": "RAW",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1aeovxs/is_there_any_way_to_show_all_my_raw_images_on/"
+  },
+  {
+   "query": "a word I knew was there",
+   "remembered": [
+    "text_in_image",
+    "rough_time",
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1bgypnl/search_text_in_picture_ocr_not_always_working/"
+  },
+  {
+   "query": "Jane and John",
+   "remembered": [
+    "person"
+   ],
+   "stage": "cannot_refine",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/17zsis6/search_jane_and_john_doesnt_work_for_me/"
+  },
+  {
+   "query": "vertical videos, videos, short videos",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1lu3m4n/how_can_i_delete_all_of_my_tiktok_uploaded_videos/"
+  },
+  {
+   "query": "screenname",
+   "remembered": [
+    "text_in_image",
+    "source_app"
+   ],
+   "stage": "index_gap",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1iaob2b/is_google_photos_search_function_limiting_my/"
+  },
+  {
+   "query": "iphone 6",
+   "remembered": [
+    "device"
+   ],
+   "stage": "cannot_refine",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/17d6ajk/how_to_delete_saved_photos_made_by_other_people/"
+  },
+  {
+   "query": "0",
+   "remembered": [
+    "text_in_image",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1cxxlpc/cannot_search_0_in_google_photos/"
+  },
+  {
+   "query": "pet",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/19bg3z8/issue_with_people_and_pets/"
+  },
+  {
+   "query": "device name",
+   "remembered": [
+    "device"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1dtjfyx/is_device_data_not_available_for_videos_also_is/"
+  },
+  {
+   "query": "edited",
+   "remembered": [
+    "why_taken"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/11mc9tf/any_way_to_easily_find_edited_photos/"
+  },
+  {
+   "query": "alone",
+   "remembered": [
+    "person"
+   ],
+   "stage": "cannot_express",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1r4dbyu/how_to_search_for_images_of_a_person_alone/"
+  },
+  {
+   "query": "Passkey",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "screenshot_info",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1rf9qfa/if_you_search_passkey_it_will_section_your_pics/"
+  },
+  {
+   "query": "nikond3300",
+   "remembered": [
+    "device"
+   ],
+   "stage": "feature_regression",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1gwzear/i_cant_find_photos_took_by_my_camera/"
+  },
+  {
+   "query": "scar",
+   "remembered": [
+    "object",
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "medical",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ebaewm/google_photos_search_feature/"
+  },
+  {
+   "query": "porn",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1gkaxoi/i_recently_learned_you_can_search_for_words/"
+  },
+  {
+   "query": "nsfw",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1wi9thz/cant_access_photos/"
+  },
+  {
+   "query": "videos",
+   "remembered": [
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1f78em9/videos_showing_in_recently_added_but_not_in/"
+  },
+  {
+   "query": "March and 2011",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "feature_regression",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1rznf85/aionly_seach_kills_usability/"
+  },
+  {
+   "query": "all photos of [name] in [location]",
+   "remembered": [
+    "person",
+    "place"
+   ],
+   "stage": "feature_regression",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1u4wnf2/_/orlg4sq/"
+  },
+  {
+   "query": "[filename]",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/10hqpbu/searching_file_name_not_working/"
+  },
+  {
+   "query": "police",
+   "remembered": [
+    "text_in_image",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1o4p08y/cant_find_police/"
+  },
+  {
+   "query": "matches fixtures",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1dvcguc/why_tf_photos_doesnt_index_the_captions/"
+  },
+  {
+   "query": "gif",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1q6aoj7/just_move_from_honor_to_google_pixel/"
+  },
+  {
+   "query": "England",
+   "remembered": [
+    "rough_time",
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/17xzq0g/in_search_bar_i_search_my_albums_but_some_of_them/"
+  },
+  {
+   "query": "duplicate",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1psspfn/duplicate_photo/"
+  },
+  {
+   "query": "flesh",
+   "remembered": [
+    "rough_time",
+    "place",
+    "person",
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "child_family",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1rrknab/going_through_14_years_of_photos_looking_for/"
+  },
+  {
+   "query": "IMG-",
+   "remembered": [
+    "source_app"
+   ],
+   "stage": "index_gap",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1lsyrsd/pro_tip_filter_photos_which_have_been_uploaded/"
+  },
+  {
+   "query": "beach photos",
+   "remembered": [
+    "object",
+    "visual_look"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1rrknab/_/oarlfj7/"
+  },
+  {
+   "query": "blood",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1frjqcf/search_on_android_broken/"
+  },
+  {
+   "query": "Bob and Sue",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1w5io9j/unable_to_search_for_multiple_people/"
+  },
+  {
+   "query": "wednesday",
+   "remembered": [
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1jlem7q/can_i_show_all_the_photos_taken_on_a_specific_day/"
+  },
+  {
+   "query": "Competition at North side",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1go86ki/is_there_a_point_to_adding_a_description_to_a/"
+  },
+  {
+   "query": "pet's name",
+   "remembered": [
+    "object",
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1k4t98q/searching_google_photos_on_android_not_finding_my/"
+  },
+  {
+   "query": "motorbike",
+   "remembered": [
+    "object",
+    "rough_time"
+   ],
+   "stage": "feature_regression",
+   "type": "object",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1lekt49/no_way_to_change_searched_photos_to_display_by/"
+  },
+  {
+   "query": "recently uploaded",
+   "remembered": [
+    "source_app"
+   ],
+   "stage": "buried",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/123w1r6/google_drive_made_duplicates/"
+  },
+  {
+   "query": "filetype:tiff",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/15x7wax/urgent_google_photos_deleted_all_my_art_projects/"
+  },
+  {
+   "query": "Disney",
+   "remembered": [
+    "object",
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1husl85/partner_sharing_search/"
+  },
+  {
+   "query": "year",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "buried",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/dptxj7/_/oby9lgf/"
+  },
+  {
+   "query": "monkey at the beach",
+   "remembered": [
+    "object",
+    "event_context"
+   ],
+   "stage": "feature_regression",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1syjrhs/i_hate_the_ai_in_my_search/"
+  },
+  {
+   "query": "Clay-colored Sparrow",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "object",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/10hqpbu/_/of6ku8h/"
+  },
+  {
+   "query": "September 2012",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1m4iecs/search_not_working_when_adding_photos_to_album_on/"
+  },
+  {
+   "query": "2 years ago",
+   "remembered": [
+    "rough_time",
+    "exact_date"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/17jpeii/search_not_working_for_dates/"
+  },
+  {
+   "query": "fleece",
+   "remembered": [
+    "object",
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "object",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1b4z9t5/help_me_find_pics_of_my_favorite_fleece/"
+  },
+  {
+   "query": "number plate of my car",
+   "remembered": [
+    "text_in_image",
+    "object"
+   ],
+   "stage": "feature_regression",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fye407/ocr_search_no_longer_working_well/"
+  },
+  {
+   "query": "Argonath",
+   "remembered": [
+    "text_in_image",
+    "place"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ktxxn4/the_ai_search_feature_just_won_some_points_with/"
+  },
+  {
+   "query": "tennessee",
+   "remembered": [
+    "place"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/126bb6z/google_photos_not_searching_all_photos/"
+  },
+  {
+   "query": "Llama",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1b4pyhj/when_i_search_my_photos_for_llama_in_google/"
+  },
+  {
+   "query": "Passport",
+   "remembered": [
+    "text_in_image",
+    "object"
+   ],
+   "stage": "feature_regression",
+   "type": "document_id",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fvq7hr/why_did_they_ruin_google_photos_search/"
+  },
+  {
+   "query": "28172",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1hcj6wm/when_is_photos_search_getting_fixed/"
+  },
+  {
+   "query": "dog",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1peoxfe/what_happened_to_google_photos_search/"
+  },
+  {
+   "query": "Legoland",
+   "remembered": [
+    "text_in_image",
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/18ukjs2/google_photos_ocr/"
+  },
+  {
+   "query": "AI edit",
+   "remembered": [
+    "object"
+   ],
+   "stage": "cannot_express",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1i13cui/ai_generated_edit_search/"
+  },
+  {
+   "query": "this term",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1w5exw4/descriptions_added_to_photos_do_not_show_in/"
+  },
+  {
+   "query": "me",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1kv9wqr/wrong_person_set_as_me/"
+  },
+  {
+   "query": "Show me my pictures of dogs",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1hxk3ja/search_no_longer_works/"
+  },
+  {
+   "query": "Rabbit",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fzjo8e/why_does_google_photos_suck_so_bad_at_image/"
+  },
+  {
+   "query": "Xtube",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1c8d4ff/searching_certain_words_doesnt_return_results/"
+  },
+  {
+   "query": "2025",
+   "remembered": [
+    "rough_time",
+    "source_app"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1q05kgg/recap_search/"
+  },
+  {
+   "query": "monkeys",
+   "remembered": [
+    "object"
+   ],
+   "stage": "feature_regression",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fa4fg1/_/oj2uedl/"
+  },
+  {
+   "query": "dog, man, and dog etc",
+   "remembered": [
+    "object",
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1faafft/i_feel_like_google_photo_search_has_gotten_worse/"
+  },
+  {
+   "query": "Absolutely Wallpapers",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "cannot_express",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/17ug91x/can_anyone_help_me_find_the_link_to_this_album/"
+  },
+  {
+   "query": "caged animal",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "animal",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1fwf97l/google_photos_search_taking_the_cake/"
+  },
+  {
+   "query": "Bath",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "text_in_image",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1ukyso5/_/ov1e6pz/"
+  },
+  {
+   "query": "untitled",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/10gi6oh/i_cant_search_for_my_digital_drawings/"
+  },
+  {
+   "query": "takeout*.zip",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1vvfwf4/_/p5bg6fg/"
+  },
+  {
+   "query": "timelapse",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1icgv6t/search_for_time_lapses/"
+  },
+  {
+   "query": "edited",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1uinuct/is_there_a_search_term_for_finding_photos_i_have/"
+  },
+  {
+   "query": "black truck",
+   "remembered": [
+    "object",
+    "visual_look"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1g57d65/i_can_search_for_blue_truck_and_red_truck_but_not/"
+  },
+  {
+   "query": "Google Drive",
+   "remembered": [
+    "none"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "stack_exchange",
+   "url": "https://webapps.stackexchange.com/questions/82532/how-to-move-photos-from-google-drive-to-google-photos"
+  },
+  {
+   "query": "20190430_092841(0).jpg",
+   "remembered": [
+    "text_in_image",
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "unknown",
+   "source": "stack_exchange",
+   "url": "https://webapps.stackexchange.com/questions/129207/is-it-possible-to-exact-search-google-photos-by-filename"
+  },
+  {
+   "query": "photo of my daughter with a panda and a yellow raincoat",
+   "remembered": [
+    "person",
+    "object",
+    "visual_look"
+   ],
+   "stage": "none",
+   "type": "child_family",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=26486178"
+  },
+  {
+   "query": "cogman10",
+   "remembered": [
+    "text_in_image",
+    "person"
+   ],
+   "stage": "none",
+   "type": "document_id",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=42606283"
+  },
+  {
+   "query": "knife",
+   "remembered": [
+    "rough_time",
+    "object"
+   ],
+   "stage": "none",
+   "type": "product_shopping",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=22447167"
+  },
+  {
+   "query": "tatoo",
+   "remembered": [
+    "object",
+    "rough_time"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=9920472"
+  },
+  {
+   "query": "dog in pool",
+   "remembered": [
+    "rough_time",
+    "place",
+    "person",
+    "object",
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=43896569"
+  },
+  {
+   "query": "place name",
+   "remembered": [
+    "place",
+    "rough_time"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=13705775"
+  },
+  {
+   "query": "north carolina beach maggie",
+   "remembered": [
+    "person",
+    "place",
+    "event_context"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=28349113"
+  },
+  {
+   "query": "burnt out car",
+   "remembered": [
+    "object"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=6499632"
+  },
+  {
+   "query": "photo frames",
+   "remembered": [
+    "object",
+    "life_context"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=35182189"
+  },
+  {
+   "query": "site:news.ycombinator.com",
+   "remembered": [
+    "rough_time",
+    "text_in_image"
+   ],
+   "stage": "cannot_refine",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=3523350"
+  },
+  {
+   "query": "truetone stratoscope",
+   "remembered": [
+    "rough_time",
+    "person",
+    "visual_look"
+   ],
+   "stage": "none",
+   "type": "old_scanned",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=9672749"
+  },
+  {
+   "query": "silence is violence",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=26081007"
+  },
+  {
+   "query": "medlar",
+   "remembered": [
+    "rough_time",
+    "place",
+    "object",
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=26615863"
+  },
+  {
+   "query": "car",
+   "remembered": [
+    "rough_time",
+    "object"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=39519090"
+  },
+  {
+   "query": "car",
+   "remembered": [
+    "place",
+    "rough_time",
+    "object"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=30451752"
+  },
+  {
+   "query": "grave",
+   "remembered": [
+    "rough_time",
+    "place",
+    "object"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=42422421"
+  },
+  {
+   "query": "license",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "document_id",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=40341455"
+  },
+  {
+   "query": "wifi",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "text_in_image",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=27589073"
+  },
+  {
+   "query": "[my dog name] beach",
+   "remembered": [
+    "pet",
+    "place",
+    "object",
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "product_shopping",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=41947777"
+  },
+  {
+   "query": "cats",
+   "remembered": [
+    "object",
+    "place",
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "pet",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=44031190"
+  },
+  {
+   "query": "odometer",
+   "remembered": [
+    "text_in_image",
+    "object"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=39463580"
+  },
+  {
+   "query": "health insurance card",
+   "remembered": [
+    "object",
+    "text_in_image"
+   ],
+   "stage": "none",
+   "type": "document_id",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=33460669"
+  },
+  {
+   "query": "toe nail",
+   "remembered": [
+    "text_in_image",
+    "object",
+    "life_context"
+   ],
+   "stage": "none",
+   "type": "medical",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=30451922"
+  },
+  {
+   "query": "jazz",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=2690475"
+  },
+  {
+   "query": "clock tower",
+   "remembered": [
+    "object"
+   ],
+   "stage": "none",
+   "type": "other",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=38309764"
+  },
+  {
+   "query": "dog",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "pet",
+   "source": "hacker_news",
+   "url": "https://news.ycombinator.com/item?id=9655262"
+  },
+  {
+   "query": "ocean, beach or waves",
+   "remembered": [
+    "visual_look"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "app_store",
+   "url": "https://apps.apple.com/us/app/id962194608?see-all=reviews"
+  },
+  {
+   "query": "cousin John",
+   "remembered": [
+    "person",
+    "rough_time"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "app_store",
+   "url": "https://apps.apple.com/us/app/id962194608?see-all=reviews"
+  },
+  {
+   "query": "bookcase",
+   "remembered": [
+    "object",
+    "life_context"
+   ],
+   "stage": "none",
+   "type": "product_shopping",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=8735281e-8c8e-4b29-ac69-63ba95089121"
+  },
+  {
+   "query": "license plate",
+   "remembered": [
+    "object"
+   ],
+   "stage": "none",
+   "type": "document_id",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=a3921639-f861-45bb-9dec-93bd0393100a"
+  },
+  {
+   "query": "birthday cake",
+   "remembered": [
+    "rough_time",
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=60b9e928-9dc0-4e6c-a18e-4b8607acd227"
+  },
+  {
+   "query": "water rail",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=c8c256d0-9440-4bd1-ae64-e1cbbb3104a4"
+  },
+  {
+   "query": "ID",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=8cdfe0de-8497-4b6c-ade1-b35f20b5f4b8"
+  },
+  {
+   "query": "NASCAR",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=d2d9d459-74ab-48d3-9d9a-5ec50fd71625"
+  },
+  {
+   "query": "people",
+   "remembered": [
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "person",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=71518edd-90a0-479a-9428-b46717499bd0"
+  },
+  {
+   "query": "date",
+   "remembered": [
+    "exact_date"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=b8d188a3-30ca-4e62-b739-c687074f29b2"
+  },
+  {
+   "query": "address",
+   "remembered": [
+    "place"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=28c50691-cf6a-4c42-8b5f-c68980d8a264"
+  },
+  {
+   "query": "Recently Added",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "cannot_refine",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=19dd2c46-44bc-4b4b-b81c-d1235c2fe375"
+  },
+  {
+   "query": "Car Engine",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=72dcb862-c595-4edf-a0a9-0ba0b9d4519e"
+  },
+  {
+   "query": "sunrise, sunset, animals, cats",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=b73c565e-5dfc-47f3-9345-7cb8ec390974"
+  },
+  {
+   "query": "file name",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=6ee47a5d-4ada-498b-9521-8590f958a4f7"
+  },
+  {
+   "query": "Dog in a hat",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=bd1afa26-2281-4093-a462-b9b6f1f4f0b5"
+  },
+  {
+   "query": "bugs",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=7807285d-245c-44d3-81df-150809bba2df"
+  },
+  {
+   "query": "Camera",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=cbca9a9e-deeb-42f3-9b43-6882690b802f"
+  },
+  {
+   "query": "date",
+   "remembered": [
+    "exact_date"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=b6bc32e8-41e5-4d98-8ee9-eb46d0ba0890"
+  },
+  {
+   "query": "miss me",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "buried",
+   "type": "text_in_image",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=57c6ed5f-c8b4-44f0-ae97-77fc5b3cfdf8"
+  },
+  {
+   "query": "dogs",
+   "remembered": [
+    "object"
+   ],
+   "stage": "index_gap",
+   "type": "pet",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=069518e9-1250-41a0-bc6b-5a550e521b4a"
+  },
+  {
+   "query": "What was the name of that restaurant we visited in Udaipur last winter?",
+   "remembered": [
+    "place",
+    "rough_time"
+   ],
+   "stage": "none",
+   "type": "trip_place",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=3ebdede5-c77f-40c5-bad9-c40dd75e2c70"
+  },
+  {
+   "query": "Halloween 2024",
+   "remembered": [
+    "event_context",
+    "person"
+   ],
+   "stage": "misunderstood",
+   "type": "event_occasion",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=3e607cf4-f8e7-4d84-b36c-49d373b12c60"
+  },
+  {
+   "query": "show me photos with different hairstyles I have had over the years",
+   "remembered": [
+    "life_context"
+   ],
+   "stage": "none",
+   "type": "person",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=891e82d9-6d4e-41f0-b1e8-aa7d1a118030"
+  },
+  {
+   "query": "dog food",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "receipt_bill",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=74079f57-09fa-4205-be30-4d6b97129206"
+  },
+  {
+   "query": "SubGenius",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "index_gap",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=dcf53749-f7f0-408a-b984-b9683fc16213"
+  },
+  {
+   "query": "someone in white",
+   "remembered": [
+    "visual_look"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=3c709f6e-13b0-4c5f-bf3f-5a3b86d1e2d0"
+  },
+  {
+   "query": "cars",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=cbdf6aef-f475-4034-935a-e0090350bf9b"
+  },
+  {
+   "query": "silver-blue eyes",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "screenshot_info",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=7e19a179-6c73-4bb5-83f2-1452318940a6"
+  },
+  {
+   "query": "February",
+   "remembered": [
+    "rough_time"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=c13ba9ae-6a65-471d-a76c-f118a9ac8b3e"
+  },
+  {
+   "query": "monkeys",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=18874898-f113-40b0-ba12-4e7b58e3b942"
+  },
+  {
+   "query": "name of person",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.photos&reviewId=62c67eee-bad9-4a88-908f-599807bdfceb"
+  },
+  {
+   "query": "LOI",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "document_id",
+   "source": "help_forum",
+   "url": "https://support.google.com/photos/thread/361277859?hl=en"
+  },
+  {
+   "query": "daughter's name",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1qwad43/one_face_group_vanished/"
+  },
+  {
+   "query": "VID-",
+   "remembered": [
+    "source_app",
+    "text_in_image"
+   ],
+   "stage": "cannot_refine",
+   "type": "video",
+   "source": "reddit",
+   "url": "https://www.reddit.com/r/googlephotos/comments/1s72smc/whatsapp_video_on_googlephotos_how_to_delete/"
+  },
+  {
+   "query": "specific place",
+   "remembered": [
+    "place"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=H_i5069Bll4&lc=Ugw3Is8MO3yXtIXlpJt4AaABAg"
+  },
+  {
+   "query": "Turkish",
+   "remembered": [
+    "text_in_image"
+   ],
+   "stage": "misunderstood",
+   "type": "text_in_image",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=dTFTSkCs-jk&lc=UggrbXZw6dAFZ3gCoAEC"
+  },
+  {
+   "query": "license plate number",
+   "remembered": [
+    "object"
+   ],
+   "stage": "none",
+   "type": "document_id",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=D3KWOoS7cbQ&lc=UgyY1xxwsyeaGTHdMah4AaABAg"
+  },
+  {
+   "query": "partner's name",
+   "remembered": [
+    "person"
+   ],
+   "stage": "index_gap",
+   "type": "person",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=AUEBDwV4o5g&lc=UgxXXC2hr_gILVAwy014AaABAg"
+  },
+  {
+   "query": "Newfoundland",
+   "remembered": [
+    "place"
+   ],
+   "stage": "buried",
+   "type": "trip_place",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=ppleyVVC1_I&lc=Ugyx1t6L_LBQgsexa_x4AaABAg"
+  },
+  {
+   "query": "ocean",
+   "remembered": [
+    "object"
+   ],
+   "stage": "misunderstood",
+   "type": "other",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=bRjXiHpVYD8&lc=UgzwecJirrtpAZVDvx14AaABAg"
+  }
+ ],
+ "stage_labels": {
+  "cannot_express": "Can't put the memory into words",
+  "misunderstood": "Search misreads the query",
+  "buried": "Right photo buried in results / timeline",
+  "cannot_refine": "Can't combine or narrow cues",
+  "index_gap": "Photo isn't searchable (faces, text, place not indexed)",
+  "feature_regression": "Search changed or got worse",
+  "not_in_library": "Photo actually missing"
+ },
+ "models": [
+  [
+   "gemini-3.5-flash-lite",
+   4520
+  ],
+  [
+   "gemini-3.1-flash-lite",
+   3301
+  ],
+  [
+   "gemini-flash-lite-latest",
+   320
+  ]
+ ]
+}

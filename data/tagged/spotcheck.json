@@ -1,0 +1,86 @@
+{
+ "method": "Two random samples re-read against each post's full text by a second model (Claude, in the build session), not by a person: 50 help-forum posts (seed 7) and 30 posts from Reddit, Play Store, App Store, Hacker News and Stack Exchange (seed 11).",
+ "n": 80,
+ "relevance_correct_strict": 69,
+ "failure_stage_correct_strict": 75,
+ "disagreements": [
+  {
+   "id": "help_forum:1c5bd870084c",
+   "field": "relevance",
+   "llm": "search_feedback",
+   "check": "noise",
+   "note": "Google Lens safe-search, not photo retrieval"
+  },
+  {
+   "id": "help_forum:bd9d9f7c954a",
+   "field": "relevance",
+   "llm": "off_goal",
+   "check": "search_feedback",
+   "note": "old photos missing from face groups is an indexing gap"
+  },
+  {
+   "id": "help_forum:74d1cbfa94dc",
+   "field": "relevance",
+   "llm": "off_goal",
+   "check": "search_feedback",
+   "note": "face grouping broken (index_gap stage was right)"
+  },
+  {
+   "id": "help_forum:27fa4a73b28c",
+   "field": "relevance",
+   "llm": "off_goal",
+   "check": "search_feedback",
+   "note": "faces not being identified = index gap"
+  },
+  {
+   "id": "help_forum:669be3445dbc",
+   "field": "failure_stage",
+   "llm": "cannot_refine",
+   "check": "none",
+   "note": "deleting search history is not a retrieval failure"
+  },
+  {
+   "id": "help_forum:a6e00fb33475",
+   "field": "failure_stage",
+   "llm": "cannot_refine",
+   "check": "none",
+   "note": "filtering videos to free storage, not retrieval"
+  },
+  {
+   "id": "help_forum:59620a4330b4",
+   "field": "content_type",
+   "llm": "document_id",
+   "check": "other",
+   "note": "construction punch-list photos"
+  },
+  {
+   "id": "help_forum:52b7bb4ad97d",
+   "field": "relevance",
+   "llm": "retrieval_story",
+   "check": "search_feedback",
+   "note": "generic 'search returns nothing', no specific photo"
+  },
+  {
+   "id": "help_forum:34f5c2588472",
+   "field": "failure_stage",
+   "llm": "feature_regression",
+   "check": "none",
+   "note": "lock-screen setting, off goal"
+  }
+ ],
+ "pattern": "Two error patterns. (1) Face-grouping failures are sometimes tagged off-goal, which undercounts the index-gap area. (2) Short praise and general Hacker News chatter is sometimes tagged search_feedback, which slightly inflates feedback counts but rarely creates false retrieval stories.",
+ "samples": [
+  {
+   "name": "help forum",
+   "n": 50,
+   "relevance_correct": 45,
+   "failure_stage_correct": 47
+  },
+  {
+   "name": "other sources",
+   "n": 30,
+   "relevance_correct": 24,
+   "failure_stage_correct": 28
+  }
+ ]
+}
