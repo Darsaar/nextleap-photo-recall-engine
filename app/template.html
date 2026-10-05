@@ -190,7 +190,7 @@ function renderMap(){
   $("#t-map").querySelectorAll("td.c").forEach(td=>td.onclick=()=>{ $("#f-type").value=td.dataset.t; $("#f-stage").value=td.dataset.s; $("#f-rel").value="retrieval_story"; drawEvidence(); show("evidence"); });
 }
 function quoteHTML(q){
-  return `<div class="quote"><q>${esc(q.q)}</q><div class="meta">${SRC[q.source]||q.source} · ${esc(q.date||"")} · ${esc(nice(q.type))} · ${esc(nice(q.stage))} · <a href="${esc(q.url)}" target="_blank" rel="noopener">source</a></div></div>`;
+  return `<div class="quote">${q.n?`<b class="num">[${q.n}]</b> `:""}<q>${esc(q.q)}</q><div class="meta">${SRC[q.source]||q.source} · ${esc(q.date||"")} · ${esc(nice(q.type))} · ${esc(nice(q.stage))} · <a href="${esc(q.url)}" target="_blank" rel="noopener">source</a></div></div>`;
 }
 
 /* ---------- Memory cues ---------- */
@@ -294,9 +294,9 @@ async function ask(q){
   if(intent && intent[1]==="query_typed"){ const R=ENGINE.richness; head = `<div class="eyebrow">${esc(intent[2])}</div><p>${fmt(R.queries_quoted)} stories quote their search. Median length: ${R.query_median_words} word. ${Math.round(R.share_queries_1_2_words*100)}% are one or two words.</p><p>${EVID.filter(r=>r.query_typed).slice(0,24).map(r=>`<code>${esc(r.query_typed)}</code>`).join(" · ")}</p>`; }
   out.innerHTML = `<div class="panel">${head}<div class="eyebrow" style="margin-top:${head?"14px":"0"}">Most relevant posts · ${hits.length}</div><div id="ai" class="ai muted"></div>
    ${intent?"":line("Photo types",c.types)+line("Where it broke",c.stages)+line("Remembered",c.remembered,cue)+line("Forgotten",c.forgotten,cue)+line("Workarounds",c.workarounds)}
-   ${hits.slice(0,8).map(r=>quoteHTML({q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
+   ${hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
   const ai=$("#ai");
-  const ctx = hits.map((r,i)=>`[${i+1}] (${r.source}, ${r.content_type}, broke at ${r.failure_stage}) ${r.quote||""} | ${r.text.slice(0,500)}`).join("\n");
+  const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${r.source}, ${r.content_type}, broke at ${r.failure_stage}) ${r.quote||""} | ${r.text.slice(0,500)}`).join("\n");
   const prompt = `You are a product researcher. Answer the question using ONLY the numbered posts below from public Google Photos feedback. Cite posts like [3]. Say plainly when the posts don't answer it. 120 words max, plain English.\n\nQuestion: ${q}\n\nPosts:\n${ctx}`;
   if(sampleNS){
     askCtl?.abort(); askCtl=new AbortController(); ai.textContent="Thinking…";
