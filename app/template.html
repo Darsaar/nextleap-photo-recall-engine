@@ -315,7 +315,7 @@ Write it like this:
 
 Rules: plain everyday words, no jargon ("index", "index gap", "failure stage", "retrieval", "corpus", "surface" are banned). Only claim "most" or "how often" from the overall numbers, and only when the question is about all users: the overall numbers cover every post, so never present them as counts for a narrower topic (e.g. do not call the overall "not found" count a number for screenshots). For a narrow topic, describe what the posts show instead of quoting overall numbers. If the posts don't answer the question, say so. 120 to 170 words. No bold, headings or other markdown.
 
-${stats?`Numbers for this question: ${stats}\n`:""}Overall numbers: ${overall}
+${stats?`Numbers for this question: ${stats}\nOverall numbers: ${overall}`:"No overall numbers apply to this question; use only the posts."}
 
 Question: ${q}
 
