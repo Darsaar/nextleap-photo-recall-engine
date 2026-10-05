@@ -8,7 +8,7 @@
 :root{
   /* Google Photos-inspired: neutral greys, one blue accent, the four brand hues used sparingly as markers */
   --bg:#f8f9fa; --panel:#ffffff; --ink:#202124; --muted:#5f6368; --line:#e3e6ea;
-  --accent:#1a73e8; --accent-soft:#e8f0fe;
+  --accent:#1a73e8; --accent-soft:#e8f0fe; --on-accent:#ffffff; --hi:#188038; --med:#b06000; --flash:#fef7e0;
   --g-blue:#4285f4; --g-red:#ea4335; --g-yellow:#fbbc04; --g-green:#34a853;
   --c1:#4285f4; --c2:#f9ab00; --c3:#34a853; --c4:#ea4335; --c5:#8ab4f8; --c6:#d93025; --c7:#9aa0a6;
   --good:#1a73e8; --bad:#e37400;   /* blue vs orange for better/worse: colour-blind safe */
@@ -18,9 +18,10 @@
   --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#131416; --panel:#1e1f22; --ink:#e8eaed; --muted:#9aa0a6; --line:#33363b; --accent:#8ab4f8; --accent-soft:#25324a; --heat0:#232a36; --heat1:#8ab4f8; --good:#8ab4f8; --bad:#fdae61; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#131416; --panel:#1e1f22; --ink:#e8eaed; --muted:#9aa0a6; --line:#33363b; --accent:#8ab4f8; --accent-soft:#25324a; --heat0:#232a36; --heat1:#8ab4f8; --good:#8ab4f8; --bad:#fdae61; color-scheme:dark}
+  --bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
 header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px}
@@ -81,7 +82,7 @@ a{color:var(--accent)}
 .filters input{flex:1 1 220px}
 .card{border-bottom:1px solid var(--line);padding:12px 0}
 .card .tags{font:.74rem var(--mono);color:var(--muted);margin-top:6px}
-.btn{font:500 .9rem var(--body);background:var(--accent);color:#fff;border:0;border-radius:999px;padding:9px 18px;cursor:pointer}
+.btn{font:500 .9rem var(--body);background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:9px 18px;cursor:pointer}
 .btn.ghost{background:none;color:var(--accent);border:1px solid var(--line)}
 .ask{display:flex;gap:8px;flex-wrap:wrap}
 .ask input{flex:1 1 280px}
@@ -98,7 +99,7 @@ a{color:var(--accent)}
 .asec header{display:flex;gap:12px;align-items:flex-start;background:var(--heat0);padding:12px 16px;border-bottom:1px solid var(--line)}
 .asec header h3{margin:0;font:600 1rem/1.3 var(--body)}
 .asec header p{margin:2px 0 0;font-size:.8rem;color:var(--muted);max-width:none}
-.snum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--panel);display:grid;place-items:center;font:700 .85rem var(--body)}
+.snum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 .85rem var(--body)}
 .abody{padding:14px 16px}
 .ai-sec .abody{font-size:1rem}
 .abody>p:last-child{margin-bottom:0}
@@ -128,7 +129,7 @@ pre.code{white-space:pre-wrap;font:.78rem/1.5 var(--mono);background:var(--heat0
 .flow dt{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding-top:2px}
 .flow dd{margin:0}
 .badge{display:inline-block;font:600 .74rem var(--body);border-radius:999px;padding:2px 9px;border:1px solid currentColor}
-.badge.High{color:#188038} .badge.Medium{color:#b06000} .badge.Low{color:var(--bad)}
+.badge.High{color:var(--hi)} .badge.Medium{color:var(--med)} .badge.Low{color:var(--bad)}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .small{font-size:.8rem}
 .segrow td{cursor:pointer}
@@ -147,7 +148,7 @@ nav.tabs button[aria-selected="true"]{background:var(--accent-soft)!important;co
 .cmpt td.win{background:var(--accent-soft);font-weight:500}
 #chat{display:flex;flex-direction:column;gap:22px;margin-top:8px}
 .turn{display:flex;flex-direction:column;gap:10px;scroll-margin-top:12px}
-.ubub{align-self:flex-end;max-width:78%;background:var(--accent);color:#fff;padding:10px 16px;border-radius:18px 18px 4px 18px;font-weight:500}
+.ubub{align-self:flex-end;max-width:78%;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:18px 18px 4px 18px;font-weight:500}
 .starter{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
 .sgroup{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .sgroup:nth-child(5n+1){border-top:3px solid var(--g-blue)}.sgroup:nth-child(5n+2){border-top:3px solid var(--g-red)}.sgroup:nth-child(5n+3){border-top:3px solid var(--g-yellow)}.sgroup:nth-child(5n+4){border-top:3px solid var(--g-green)}.sgroup:nth-child(5n+5){border-top:3px solid var(--c7)}
@@ -159,7 +160,7 @@ nav.tabs button[aria-selected="true"]{background:var(--accent-soft)!important;co
 .chatbar input{border-radius:999px!important;padding:10px 16px!important}
 table.rank tr.top td{background:var(--accent-soft)}
 a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font:600 .74rem var(--body);text-align:center;text-decoration:none;vertical-align:1px}
-.flash .quote{background:#fef7e0;transition:background .3s}
+.flash .quote{background:var(--flash);transition:background .3s}
 .arows .flow>div.lead dd{font-size:1.02rem;font-weight:500}
 .asec header h3 .badge{margin-left:8px;vertical-align:1px}
 .oppgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:4px 0 12px}
@@ -187,6 +188,12 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .peek>summary::before{content:"▸ "}.peek[open]>summary::before{content:"▾ "}
 .peek[open]{flex-basis:100%}
 .peekbody{margin-top:8px;max-height:460px;overflow:auto}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .kpi,:root:not([data-theme="light"]) .scard,:root:not([data-theme="light"]) .abub,:root:not([data-theme="light"]) .sgroup,:root:not([data-theme="light"]) .opp,:root:not([data-theme="light"]) .panel{box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 2px 8px rgba(0,0,0,.35)}}
+:root[data-theme="dark"] .kpi,:root[data-theme="dark"] .scard,:root[data-theme="dark"] .abub,:root[data-theme="dark"] .sgroup,:root[data-theme="dark"] .opp,:root[data-theme="dark"] .panel{box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 2px 8px rgba(0,0,0,.35)}
+.chathead.compact h1{font-size:1.3rem;margin:4px 0;max-width:none}
+.chathead.compact .lede{display:none}
+#chat-ideas{margin:6px 0 4px}
+#chat-ideas .starter{margin:8px 0 0}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
@@ -600,10 +607,11 @@ function renderAsk(){
   <h1>Ask ${fmt(EVID.length)} real posts which retrieval problem matters most</h1>
   <p class="lede">Every answer ranks the problems inside the posts your question is about, compares them with the average user, and ends in an opportunity, a hypothesis and a metric. Counts are computed from the tagged data; the AI explains them and cites the posts. Ask follow-ups: it remembers the conversation.</p></div></div>
   <div id="chat"></div>
+  <details class="peek" id="chat-ideas" hidden><summary>Example questions</summary><div class="starter" id="ideas-body"></div></details>
   <div id="chat-empty" class="starter">${CHIPS.map(([g,qs])=>`<div class="sgroup"><div class="eyebrow">${g}</div>${qs.map(x=>`<button type="button" class="chipq">${esc(x)}</button>`).join("")}</div>`).join("")}</div>
   <form class="ask chatbar" id="ask-form"><input id="ask-q" type="text" autocomplete="off" placeholder="Ask about problems, photo types, user groups, comparisons or the engine…" aria-label="Your question"><button class="btn" type="submit">Ask</button><button class="btn ghost" type="button" id="chat-new" hidden>New chat</button></form>`;
   $("#ask-form").addEventListener("submit", e=>{ e.preventDefault(); const v=$("#ask-q").value; $("#ask-q").value=""; ask(v); });
-  $("#chat-new").onclick=()=>{ CHAT=[]; $("#chat").innerHTML=""; $("#chat-empty").hidden=false; $("#chat-new").hidden=true; };
+  $("#chat-new").onclick=()=>{ CHAT=[]; $("#chat").innerHTML=""; $("#chat-empty").hidden=false; $("#chat-ideas").hidden=true; $("#chat-new").hidden=true; $("#t-ask .chathead").classList.remove("compact"); };
   $("#t-ask").querySelectorAll(".chipq").forEach(b=>b.onclick=()=>ask(b.textContent));
 }
 function rankTable(rank, scope){
@@ -634,7 +642,8 @@ function notUnderstood(q, wrap){
 }
 async function ask(q){
   q = (q||"").trim(); if(!q) return;
-  $("#chat-empty").hidden = true; $("#chat-new").hidden = false;
+  if(!$("#chat-empty").hidden){ $("#ideas-body").innerHTML = $("#chat-empty").innerHTML; $("#ideas-body").querySelectorAll(".chipq").forEach(b=>b.onclick=()=>{ $("#chat-ideas").open=false; ask(b.textContent); }); }
+  $("#chat-empty").hidden = true; $("#chat-ideas").hidden = false; $("#chat-ideas").open = false; $("#chat-new").hidden = false; $("#t-ask .chathead").classList.add("compact");
   const k = CHAT.length + 1 + Math.floor(Math.random()*1e6);
   const wrap = document.createElement("div"); wrap.className="turn"; wrap.innerHTML = `<div class="ubub">${esc(q)}</div>`; $("#chat").appendChild(wrap);
   const scope = SMALLTALK.test(q) ? null : resolve(q);
@@ -683,7 +692,7 @@ Models: ${(ENGINE.models||[]).map(m=>m[0]+" "+m[1]).join(", ")}. Opportunity sco
     const overall = scope.kind==="all" ? `\nWhat people remember (${ENGINE.funnel.stories} stories): ${fmtC(corpusCounts("cues_remembered").slice(0,5),cue)}. Forgotten: ${fmtC(corpusCounts("cues_forgotten").slice(0,4),cue)}. ${ENGINE.richness.queries_quoted} stories quote their search; ${Math.round(ENGINE.richness.share_queries_1_2_words*100)}% are 1–2 words, e.g. ${EVID.filter(r=>r.query_typed).slice(0,8).map(r=>'"'+r.query_typed+'"').join(", ")}.` : "";
     const fmtLabs = `You are synthesising, not reporting. A product manager wants to understand what is really going on for these users and what to do about it, the way a thoughtful researcher would explain it after reading every post. Numbers are only supporting evidence: use at most 3 in the whole reply, and only where they change the conclusion.
 
-Write short paragraphs, each starting with one of these lead-ins followed by a colon. Use the ones that help answer the question, in this order, and skip any that add nothing:
+Write short paragraphs, each starting with one of these lead-ins followed by a colon. Always include The insight, What doesn't fit, Still unknown and Opportunity. Include the others when they help answer the question. Keep this order:
 The insight: 1 or 2 sentences that reframe the problem in human terms (what users are actually experiencing and why it matters), answering the question asked.${scope.kind==="compare"?" Say which side has the deeper problem and what makes the two different in kind, not just in size.":""}
 Why it happens: (cite at least 2 posts here) the mechanism, i.e. what people remember, what they try, and where and why it breaks, with post citations like [3] and a few quoted words that make it vivid.
 What they really need: the deeper need behind the request in the user's own voice, starting "I want to", specific to this question and drawn from the posts (the "need" lines in the data are generic defaults; go beyond them, e.g. the job the photo does in their life).
