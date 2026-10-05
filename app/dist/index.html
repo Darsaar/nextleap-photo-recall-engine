@@ -209,7 +209,7 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .ai.chat .acard.opp .acard-lab{color:var(--accent)}
 .abub{width:100%}
 /* Answer: no outer box; insight as a plain line; tinted cards with an icon chip */
-.abub{background:none;border:0;padding:4px 0 0;box-shadow:none!important}
+.abub{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 20px 12px}
 .ainsight{font:400 1.12rem/1.6 var(--body);margin:0 0 14px;max-width:none}
 .ainsight b{color:var(--accent);font-weight:600}
 .ai.chat .acard{--tint:var(--line);background:color-mix(in oklab,var(--tint) 9%,var(--panel));border:1px solid color-mix(in oklab,var(--tint) 30%,var(--line));border-radius:14px;padding:14px 16px}
@@ -218,7 +218,7 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .acard-lab{display:flex;align-items:center;gap:8px;color:var(--ink)!important;font-weight:600;letter-spacing:.04em}
 .acard-lab .ico{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in oklab,var(--tint) 22%,transparent);font-size:.85rem}
 .ai.chat .acard.opp{border:1px solid color-mix(in oklab,var(--accent) 45%,var(--line));border-left:1px solid color-mix(in oklab,var(--accent) 45%,var(--line));background:color-mix(in oklab,var(--accent) 10%,var(--panel))}
-.ameta{border-top:0;padding-top:2px}
+.ameta{border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
@@ -730,7 +730,7 @@ Models: ${(ENGINE.models||[]).map(m=>m[0]+" "+m[1]).join(", ")}. Opportunity sco
     const fmtLabs = `You are synthesising, not reporting. A product manager wants to understand what is really going on for these users and what to do about it, the way a thoughtful researcher would explain it after reading every post. Numbers are only supporting evidence: use at most 3 in the whole reply, and only where they change the conclusion.
 
 Write short paragraphs, each starting with one of these lead-ins followed by a colon. Always include The insight, What doesn't fit, Still unknown and Opportunity. Include the others when they help answer the question. Keep this order:
-The insight: 1 or 2 sentences that reframe the problem in human terms (what users are actually experiencing and why it matters), answering the question asked.${scope.kind==="compare"?" Say which side has the deeper problem and what makes the two different in kind, not just in size.":""}
+The insight: 3 or 4 sentences that answer the question asked and reframe the problem in human terms: what users are actually going through, the pattern behind it (what they hold in memory versus what search lets them use), why it matters to them, and how this compares with the other problems in the ranking.${scope.kind==="compare"?" Say which side has the deeper problem and what makes the two different in kind, not just in size.":""}
 Why it happens: (cite at least 2 posts here) the mechanism, i.e. what people remember, what they try, and where and why it breaks, with post citations like [3] and a few quoted words that make it vivid.
 What they really need: the deeper need behind the request in the user's own voice, starting "I want to", specific to this question and drawn from the posts (the "need" lines in the data are generic defaults; go beyond them, e.g. the job the photo does in their life).
 Who feels it most: the user groups for whom this is worse and what is different about their situation, from the group data given.
@@ -738,7 +738,7 @@ What doesn't fit: counter-evidence or contradictions, e.g. posts where search wo
 Still unknown: what this data can't tell us, and the one thing the survey or interviews should check.
 Opportunity: the product opportunity that serves the need you described (the "product bet" lines in the data are starting points, adapt them to this question), why it beats the obvious alternative, the hypothesis it tests by its H number (e.g. "tests H2") and the metric that would show it worked.
 
-Answer the question that was asked first: if it asks who, open with the groups; if it asks what to build, open with the opportunity; if it asks for contradictions, open with those. 150 to 230 words.`;
+Answer the question that was asked first: if it asks who, open with the groups; if it asks what to build, open with the opportunity; if it asks for contradictions, open with those. 200 to 290 words.`;
     prompt = `You are a senior user researcher helping a product manager decide which Google Photos retrieval problem to work on. Your job is to identify and compare problems and opportunity areas using evidence from real users, not to summarise reviews or sentiment. Use ONLY the numbers and numbered posts below. Every number you write must come from them.
 
 ${setTxt}
