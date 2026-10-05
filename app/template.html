@@ -304,15 +304,18 @@ async function ask(q){
   const ai=$("#ai");
   const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
   const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}) ${r.quote||""} | ${(r.text||"").slice(0,500)}`).join("\n");
-  const prompt = `You help a product manager understand why people can't find photos in Google Photos. Answer the question using ONLY the numbered user posts below.
+  const top = (f,k=5)=>corpusCounts(f).slice(0,k).map(([k2,v])=>`${(f.startsWith("cues")?cue:nice)(k2)} ${v}`).join(", ");
+  const overall = `Where search breaks (all ${EVID.length} posts): ${top("failure_stage",6)}. What people remember (${ENGINE.funnel.stories} stories): ${top("cues_remembered")}. What they do when search fails: ${top("workaround",4)}. Outcomes: ${top("outcome",3)}.`;
+  const prompt = `You are a senior user researcher briefing a product manager on why people can't find photos in Google Photos. Use ONLY the numbered user posts and the overall numbers below.
 
-How to write:
-- Start with one short sentence that directly answers the question.
-- Then give 2 or 3 bullet points starting with "- ". Each bullet is one simple sentence about what users actually experience, followed by the post number in brackets, like [2].
-- Use everyday words a non-technical reader understands. Never use internal labels like "index gap", "failure stage", "retrieval" or "corpus".
-- If numbers are given below, use them for any "most" or "how often" claim, written as plain counts (e.g. "538 posts").
-- If the posts don't answer the question, say so in one sentence.
-- Under 90 words. No bold, no headings, no markdown other than the bullets.${stats?`\n\nOverall numbers across all ${intent[1]==="failure_stage"?EVID.length+" posts about finding photos":ENGINE.funnel.stories+" stories of someone looking for a photo"}: ${stats}`:""}
+Write it like this:
+1. One opening sentence that answers the question directly, with the most relevant number.
+2. Then 3 bullet points starting with "- ". Each bullet names a pattern you see across the posts, explains WHY it happens for the user (what they remembered, what they tried, where it broke), and cites the posts like [2][5]. Quote a few words from a post when it makes the point vivid.
+3. End with one line starting "What this means:" giving the product implication.
+
+Rules: plain everyday words, no jargon ("index gap", "failure stage", "retrieval", "corpus" are banned). Only claim "most" or "how often" from the overall numbers. If the posts don't answer the question, say so. 120 to 170 words. No bold, headings or other markdown.
+
+${stats?`Numbers for this question: ${stats}\n`:""}Overall numbers: ${overall}
 
 Question: ${q}
 
