@@ -8,7 +8,7 @@
 :root{
   /* Google Photos-inspired: neutral greys, one blue accent, the four brand hues used sparingly as markers */
   --bg:#f8f9fa; --panel:#ffffff; --ink:#202124; --muted:#5f6368; --line:#e3e6ea;
-  --accent:#1a73e8; --accent-soft:#e8f0fe; --on-accent:#ffffff; --hi:#188038; --med:#b06000; --flash:#fef7e0;
+  --accent:#1a73e8; --accent-soft:#e8f0fe; --on-accent:#ffffff; --insight-bg:#e8f0fe; --hi:#188038; --med:#b06000; --flash:#fef7e0;
   --g-blue:#4285f4; --g-red:#ea4335; --g-yellow:#fbbc04; --g-green:#34a853;
   --c1:#4285f4; --c2:#f9ab00; --c3:#34a853; --c4:#ea4335; --c5:#8ab4f8; --c6:#d93025; --c7:#9aa0a6;
   --good:#1a73e8; --bad:#e37400;   /* blue vs orange for better/worse: colour-blind safe */
@@ -18,8 +18,8 @@
   --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; color-scheme:dark}
+  --bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; --insight-bg:#28292a; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131314; --panel:#1e1f20; --ink:#e3e3e3; --muted:#a8adb3; --line:#3c4043; --accent:#a8c7fa; --accent-soft:#1f3354; --on-accent:#062e6f; --heat0:#28292a; --heat1:#a8c7fa; --good:#a8c7fa; --bad:#fcad70; --g-blue:#7cacf8; --g-red:#f28b82; --g-yellow:#fdd663; --g-green:#81c995; --c1:#7cacf8; --c2:#fdd663; --c3:#81c995; --c4:#f28b82; --c7:#9aa0a6; --hi:#81c995; --med:#fdd663; --flash:#3a3420; --insight-bg:#28292a; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);margin:0}
@@ -194,6 +194,31 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .chathead.compact .lede{display:none}
 #chat-ideas{margin:6px 0 4px}
 #chat-ideas .starter{margin:8px 0 0}
+.ai.chat .acard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px}
+.ai.chat .acard p{margin:0 0 6px;font-size:.95rem;line-height:1.55;max-width:none}
+.ai.chat .acard p:last-child{margin-bottom:0}
+.acard-lab{font:600 .72rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ai.chat .acard.insight{background:none;border:0;padding:2px 2px 6px;margin-bottom:12px}
+.ai.chat .acard.insight p{font:500 1.15rem/1.55 var(--body);color:var(--ink)}
+.ai.chat .acard.insight .acard-lab{color:var(--accent)}
+.agrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:10px}
+.agrid>.acard{margin:0!important;min-width:0}
+.acard.why{border-top:3px solid var(--g-blue)!important}.acard.need{border-top:3px solid var(--g-green)!important}.acard.who{border-top:3px solid var(--g-yellow)!important}.acard.doesnt{border-top:3px solid var(--g-red)!important}.acard.unknown{border-top:3px solid var(--c7)!important}
+.acard.need p{font-style:italic}
+.ai.chat .acard.opp{background:var(--panel);border:1px solid var(--accent);border-left:4px solid var(--accent)}
+.ai.chat .acard.opp .acard-lab{color:var(--accent)}
+.abub{width:100%}
+/* Answer: no outer box; insight as a plain line; tinted cards with an icon chip */
+.abub{background:none;border:0;padding:4px 0 0;box-shadow:none!important}
+.ainsight{font:400 1.12rem/1.6 var(--body);margin:0 0 14px;max-width:none}
+.ainsight b{color:var(--accent);font-weight:600}
+.ai.chat .acard{--tint:var(--line);background:color-mix(in oklab,var(--tint) 9%,var(--panel));border:1px solid color-mix(in oklab,var(--tint) 30%,var(--line));border-radius:14px;padding:14px 16px}
+.acard.why{--tint:var(--g-blue)}.acard.need{--tint:var(--g-green)}.acard.who{--tint:var(--g-yellow)}.acard.doesnt{--tint:var(--g-red)}.acard.unknown{--tint:var(--c7)}.acard.opp{--tint:var(--accent)}
+.acard.why,.acard.need,.acard.who,.acard.doesnt,.acard.unknown{border-top-width:1px!important;border-top-color:color-mix(in oklab,var(--tint) 30%,var(--line))!important}
+.acard-lab{display:flex;align-items:center;gap:8px;color:var(--ink)!important;font-weight:600;letter-spacing:.04em}
+.acard-lab .ico{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in oklab,var(--tint) 22%,transparent);font-size:.85rem}
+.ai.chat .acard.opp{border:1px solid color-mix(in oklab,var(--accent) 45%,var(--line));border-left:1px solid color-mix(in oklab,var(--accent) 45%,var(--line));background:color-mix(in oklab,var(--accent) 10%,var(--panel))}
+.ameta{border-top:0;padding-top:2px}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
@@ -581,10 +606,22 @@ function paintAI(el, text, k, max){
   const parts=[]; let m, last=null;
   while((m=re.exec(text))){ if(last) last.body=text.slice(last.end,m.index); last={lab:m[1],end:re.lastIndex}; parts.push(last); }
   if(last) last.body=text.slice(last.end);
-  if(true){ el.className="ai chat"; const html=[]; let ul=[];
-    const flush=()=>{ if(ul.length){ html.push(`<ul>${ul.map(x=>`<li>${x}</li>`).join("")}</ul>`); ul=[]; } };
-    text.replace(/\*\*/g,"").split(/\n+/).map(s=>s.trim()).filter(Boolean).forEach(s=>{ if(/^[-•*]\s/.test(s)) ul.push(cite(s.replace(/^[-•*]\s*/,""))); else { flush(); const m2=s.match(/^([A-Z][A-Za-z'’ ]{2,28}):\s*(.*)$/); if(!m2){ html.push(`<p>${cite(s)}</p>`); } else { const cls=/^(opportunity|what to do)/i.test(m2[1])?"todo":/^the insight/i.test(m2[1])?"insight":/^(what doesn|counter|contradict|still unknown)/i.test(m2[1])?"caveat":""; html.push(`<p class="${cls}"><b>${esc(m2[1])}:</b> ${cite(m2[2])}</p>`); } } });
-    flush(); el.innerHTML=html.join(""); }
+  if(true){
+    // Split "Lead-in: text" paragraphs into labelled sections, then lay them out as cards.
+    const secs=[]; let cur=null;
+    text.replace(/\*\*/g,"").split(/\n+/).map(s=>s.trim()).filter(Boolean).forEach(s=>{ const m2=s.match(/^([A-Z][A-Za-z'’ ]{2,28}):\s*(.*)$/); if(m2){ cur={lab:m2[1],body:[m2[2]]}; secs.push(cur); } else if(cur) cur.body.push(s); else { cur={lab:"",body:[s]}; secs.push(cur); } });
+    const bodyHTML = arr => { const out=[]; let ul=[]; const fl=()=>{ if(ul.length){ out.push(`<ul>${ul.map(x=>`<li>${x}</li>`).join("")}</ul>`); ul=[]; } };
+      arr.forEach(s=>{ if(/^[-•*]\s/.test(s)) ul.push(cite(s.replace(/^[-•*]\s*/,""))); else { fl(); if(s) out.push(`<p>${cite(s)}</p>`); } }); fl(); return out.join(""); };
+    const KIND = l => /^the insight/i.test(l)?"insight":/^why/i.test(l)?"why":/need/i.test(l)?"need":/^who/i.test(l)?"who":/doesn|counter|contradict/i.test(l)?"doesnt":/unknown|don'?t know/i.test(l)?"unknown":/^(opportunity|what to do)/i.test(l)?"opp":"";
+    const ICON = {insight:"💡",why:"🔍",need:"🎯",who:"👥",doesnt:"⚖️",unknown:"❓",opp:"🚀"};
+    el.className="ai chat";
+    if(secs.filter(s=>s.lab).length<2){ el.innerHTML=bodyHTML(text.split(/\n+/).map(s=>s.trim())); }
+    else {
+      const card = s => { const k=KIND(s.lab); if(k==="insight"||!s.lab) return `<div class="ainsight">${s.lab?`<b>${esc(s.lab)}:</b> `:""}${bodyHTML(s.body).replace(/^<p>/,"").replace(/<\/p>$/,"")}</div>`; return `<div class="acard ${k}"><div class="acard-lab">${ICON[k]?`<span class="ico" aria-hidden="true">${ICON[k]}</span>`:""}${esc(s.lab||"Answer")}</div>${bodyHTML(s.body)}</div>`; };
+      const head = secs.filter(s=>KIND(s.lab)==="insight"||!s.lab), opp = secs.filter(s=>KIND(s.lab)==="opp"), mid = secs.filter(s=>!head.includes(s)&&!opp.includes(s));
+      el.innerHTML = head.map(card).join("") + (mid.length?`<div class="agrid">${mid.map(card).join("")}</div>`:"") + opp.map(card).join("");
+    }
+  }
   else { el.className="arows"; el.innerHTML=`<dl class="flow">${parts.map(p=>{ const lines=p.body.trim().split(/\n+/).map(s=>s.trim()).filter(Boolean), bl=lines.filter(s=>/^[-•*]\s/.test(s));
     const html = bl.length ? lines.filter(s=>!/^[-•*]\s/.test(s)).map(cite).join(" ")+`<ul class="gist">${bl.map(b=>`<li>${cite(b.replace(/^[-•*]\s*/,""))}</li>`).join("")}</ul>` : cite(lines.join(" "));
     return `<div class="${/^Answer/i.test(p.lab)?"lead":""}"><dt>${esc(p.lab)}</dt><dd>${html}</dd></div>`; }).join("")}</dl>`; }
