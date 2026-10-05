@@ -2,5 +2,10 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": "app/dist",
-  "framework": null
+  "framework": null,
+  "functions": {
+    "api/ask.js": {
+      "maxDuration": 60
+    }
+  }
 }

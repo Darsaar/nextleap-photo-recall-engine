@@ -87,6 +87,8 @@ a{color:var(--accent)}
 .answer{margin-top:14px}
 .answer .ai{white-space:pre-wrap;font-size:1rem;line-height:1.6}
 .answerbox{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.more{margin-top:12px}
+.more summary{cursor:pointer;color:var(--accent);font-weight:500;padding:8px 0}
 .asec+.asec{border-top:6px solid var(--bg)}
 .asec header{display:flex;gap:12px;align-items:flex-start;background:var(--heat0);padding:12px 16px;border-bottom:1px solid var(--line)}
 .asec header h3{margin:0;font:600 1rem/1.3 var(--body)}
@@ -321,32 +323,44 @@ async function ask(q){
   hits = hits.slice(0,14);
   const pool = matched && matched.length ? matched : hits;
   const c = countsFor(pool);
+  // What the AI reads: for topic questions, every matching post (most relevant first, capped at 150); otherwise the 8 shown.
+  let readList = hits.slice(0,8);
+  if(matched && matched.length){
+    const rk = new Map(retrieve(q, EVID.length).map((r,i)=>[r,i])); const first = new Set(readList);
+    readList = readList.concat(matched.filter(r=>!first.has(r)).sort((a,b)=>(rk.get(a)??1e9)-(rk.get(b)??1e9))).slice(0,150);
+  }
+  const readsAll = readList.length > 8;
   const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}</b><br>${arr.slice(0,3).map(([k,v])=>esc(f(k))+" ("+v+" post"+(v>1?"s":"")+")").join(", ")}</p>`:"";
   let head = "";
   if(intent && intent[1]!=="query_typed"){ const n=intent[1]==="failure_stage"?EVID.length:ENGINE.funnel.stories; head = `<div class="eyebrow">${esc(intent[2])} · ${fmt(n)} ${intent[1]==="failure_stage"?"posts":"stories"}</div>${bars(corpusCounts(intent[1]), n, "var(--c1)", intent[3])}`; }
   if(intent && intent[1]==="query_typed"){ const R=ENGINE.richness; head = `<div class="eyebrow">${esc(intent[2])}</div><p>${fmt(R.queries_quoted)} stories quote their search. Median length: ${R.query_median_words} word. ${Math.round(R.share_queries_1_2_words*100)}% are one or two words.</p><p>${EVID.filter(r=>r.query_typed).slice(0,24).map(r=>`<code>${esc(r.query_typed)}</code>`).join(" · ")}</p>`; }
   const hasAI = !!(sampleNS || META.ask_endpoint);
   const secs = [];
-  if(hasAI) secs.push(["AI summary", "Written by AI from the numbered source posts. A number like [2] points to that post.", `<div id="ai" class="ai muted"></div>`, "ai-sec"]);
+  if(hasAI) secs.push(["AI summary", readsAll ? `Written by AI after reading ${fmt(readList.length)} matching posts${pool.length>readList.length?` (the ${readList.length} most relevant of ${fmt(pool.length)})`:""}. A number like [2] points to a source post below.` : "Written by AI from the numbered source posts. A number like [2] points to that post.", `<div id="ai" class="ai muted"></div>`, "ai-sec"]);
   if(head) secs.push(["Across all posts", "", head, ""]);
   if(!intent) secs.push([`At a glance · ${fmt(pool.length)} of ${fmt(EVID.length)} posts match your question`, "Counted across every post that mentions your topic, so these change with every question. The source posts below are the 8 most relevant.", line("What photo were they looking for?",c.types)+line("Where did search let them down?",c.stages)+line("What did they still remember?",c.remembered,cue)+line("What had they forgotten?",c.forgotten,cue)+line("What did they do instead?",c.workarounds), ""]);
-  secs.push(["Source posts", "Real quotes from users, each linked to where it was posted.", hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join(""), ""]);
+  secs.push(["Source posts", "Real quotes from users, each linked to where it was posted.", readList.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")+(readsAll?`<details class="more"><summary>Show all ${readList.length} posts the AI read</summary>${readList.slice(8).map((r,i)=>quoteHTML({n:i+9,q:r.quote||(r.text||"").slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</details>`:""), ""]);
   out.innerHTML = `<div class="answerbox">${secs.map(([t,sub,body,cls],k)=>`<section class="asec ${cls}"><header><span class="snum">${k+1}</span><div><h3>${esc(t)}</h3>${sub?`<p>${esc(sub)}</p>`:""}</div></header><div class="abody">${body}</div></section>`).join("")}</div>`;
   const ai=$("#ai") || document.createElement("div");
   const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
-  const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}) ${r.quote||""} | ${(r.text||"").slice(0,500)}`).join("\n");
+  const ctx = readList.map((r,i)=> i<8
+    ? `[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}; outcome: ${nice(r.outcome||"not stated")}) ${r.quote||""} | ${(r.text||"").slice(0,400)}`
+    : `[${i+1}] (${nice(r.failure_stage)}; ${nice(r.outcome||"not stated")}) wanted: ${r.user_need||""} | "${r.quote||""}"`).join("\n");
+  const oc = {}; pool.forEach(r=>{ if(r.outcome && !/none|unknown/.test(r.outcome)) oc[r.outcome]=(oc[r.outcome]||0)+1; });
+  const fmtC = (arr,f=nice)=>arr.map(([k,v])=>`${f(k)} ${v}`).join(", ");
+  const topicNums = readsAll ? `All ${pool.length} posts that match this question break down as: where search let them down: ${fmtC(c.stages)}; photo type: ${fmtC(c.types)}; what they remembered: ${fmtC(c.remembered,cue)}; what they did instead: ${fmtC(c.workarounds)}; outcome: ${fmtC(Object.entries(oc).sort((a,b)=>b[1]-a[1]))}.` : "";
   const top = (f,k=5)=>corpusCounts(f).slice(0,k).map(([k2,v])=>`${(f.startsWith("cues")?cue:nice)(k2)} ${v}`).join(", ");
   const overall = `Where search breaks (all ${EVID.length} posts): ${top("failure_stage",6)}. What people remember (${ENGINE.funnel.stories} stories): ${top("cues_remembered")}. What they do when search fails: ${top("workaround",4)}. Outcomes: ${top("outcome",3)}.`;
-  const prompt = `You are a senior user researcher briefing a product manager on why people can't find photos in Google Photos. Use ONLY the numbered user posts and the overall numbers below.
+  const prompt = `You are a senior user researcher briefing a product manager on why people can't find photos in Google Photos. Use ONLY the numbered user posts and the numbers below.${readsAll?` You are given ${readList.length} posts that match the question: posts 1 to 8 with more of their text, the rest as a one-line summary plus a quote. Read all of them and describe what is common across them, not just the first few.`:""}
 
 Write it like this:
-1. One opening sentence that answers the question directly, with the most relevant number.
-2. Then 3 bullet points starting with "- ". Each bullet names a pattern you see across the posts, explains WHY it happens for the user (what they remembered, what they tried, where it broke), and cites the posts like [2][5]. Quote a few words from a post when it makes the point vivid.
+1. One opening sentence that answers the question directly by naming the main problem (not the "not found" count), with the most relevant number.
+2. Then 3 bullet points starting with "- ". Each bullet names a pattern you see across the posts (say how many posts share it when you know), explains WHY it happens for the user (what they remembered, what they tried, where it broke), and cites the posts like [2][5]. Quote a few words from a post when it makes the point vivid.
 3. End with one line starting "What this means:" giving the product implication.
 
 Rules: plain everyday words, no jargon ("index", "index gap", "failure stage", "retrieval", "corpus", "surface" are banned). Only claim "most" or "how often" from the overall numbers, and only when the question is about all users: the overall numbers cover every post, so never present them as counts for a narrower topic (e.g. do not call the overall "not found" count a number for screenshots). For a narrow topic, describe what the posts show instead of quoting overall numbers. If the posts don't answer the question, say so. 120 to 170 words. No bold, headings or other markdown.
 
-${stats?`Numbers for this question: ${stats}\nOverall numbers: ${overall}`:"No overall numbers apply to this question; use only the posts."}
+${stats?`Numbers for this question: ${stats}\nOverall numbers: ${overall}`:topicNums?`${topicNums} Use these for any "most" or "how many" claim, e.g. "32 of the ${pool.length} posts".`:"No overall numbers apply to this question; use only the posts."}
 
 Question: ${q}
 
