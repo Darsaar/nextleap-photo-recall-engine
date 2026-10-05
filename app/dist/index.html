@@ -88,6 +88,8 @@ a{color:var(--accent)}
 .answer .ai{white-space:pre-wrap;font-size:1rem;line-height:1.6}
 .answerbox{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
 .more{margin-top:12px}
+.gist{margin:6px 0 12px;padding-left:20px}
+.gist li{margin:4px 0}
 .more summary{cursor:pointer;color:var(--accent);font-weight:500;padding:8px 0}
 .asec+.asec{border-top:6px solid var(--bg)}
 .asec header{display:flex;gap:12px;align-items:flex-start;background:var(--heat0);padding:12px 16px;border-bottom:1px solid var(--line)}
@@ -267,20 +269,27 @@ const STOP = new Set("the a an of to in on for and or is are was were do does di
 const toks = s => (s.toLowerCase().match(/[a-z0-9']+/g)||[]).filter(w=>!STOP.has(w)&&w.length>2);
 const DF = {}; const DOCS = EVID.map(r=>{ const t=toks(r.text+" "+(r.user_need||"")+" "+(r.query_typed||"")+" "+(r.content_type||"")+" "+(r.failure_stage||"")); new Set(t).forEach(w=>DF[w]=(DF[w]||0)+1); return t; });
 function retrieve(q,k=12){
-  const qt=toks(q), N=DOCS.length, avg=DOCS.reduce((a,d)=>a+d.length,0)/Math.max(1,N);
+  const qt=[...new Set(toks(q).flatMap(w=>{ const g=syn(stem(w)); return g.length>1 ? [w, ...g, ...g.map(x=>x+"s")] : [w]; }))].filter(w=>DF[w]), N=DOCS.length, avg=DOCS.reduce((a,d)=>a+d.length,0)/Math.max(1,N);
   return DOCS.map((d,i)=>{ let s=0; const tf={}; d.forEach(w=>tf[w]=(tf[w]||0)+1);
     qt.forEach(w=>{ if(!tf[w])return; const idf=Math.log(1+(N-DF[w]+.5)/(DF[w]+.5)); s+=idf*tf[w]*2.2/(tf[w]+1.2*(.25+.75*d.length/avg)); });
     if(EVID[i].relevance==="retrieval_story") s*=1.5; return [s,i]; }).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k).map(x=>EVID[x[1]]);
 }
 // Topic matching: which posts are actually about the question's subject (all of its topic words, or any if too few match).
-const stem = w => w.replace(/ies$/,"y").replace(/([^s])s$/,"$1");
-const GEN = new Set("say about goe go wrong search searching searched find finding found most problem issue happen thing get got use using used way want need try trying tried face their they them there some any all just like".split(" "));
+const stem = w => w.replace(/'s$/,"").replace(/ies$/,"y").replace(/([^s])s$/,"$1");
+// Everyday synonyms so "mom's photos" also finds "mother", "bill" also finds "receipt", and so on.
+const SYN_GROUPS = ["mom mother mum mommy mummy mama maa","dad father papa daddy","bill receipt invoice","medicine medication prescription medical tablet pill doctor",
+  "kid child children son daughter baby toddler","document doc certificate passport aadhaar aadhar licence license","selfie selfy","vacation trip holiday travel",
+  "video clip","dog puppy","cat kitten","wedding marriage","grandma grandmother granny nani dadi","grandpa grandfather nana dada","friend friends","wife husband spouse partner"];
+const SYN = {}; SYN_GROUPS.forEach(g=>{ const ws=g.split(" ").map(stem); ws.forEach(w=>SYN[w]=ws); });
+const syn = w => SYN[w] || [w];
+const GEN = new Set("pic picture image img say about goe go wrong search searching searched find finding found most problem issue happen thing get got use using used way want need try trying tried face their they them there some any all just like".split(" "));
 const SDOCS = DOCS.map(d=>new Set(d.map(stem)));
 function matchSet(q){
   const qt=[...new Set(toks(q).map(stem))].filter(w=>!GEN.has(w));
   if(!qt.length) return null;
-  const all=EVID.filter((r,i)=>qt.every(w=>SDOCS[i].has(w)));
-  return all.length>=5 ? all : EVID.filter((r,i)=>qt.some(w=>SDOCS[i].has(w)));
+  const has = (i,w) => syn(w).some(x=>SDOCS[i].has(x));
+  const all=EVID.filter((r,i)=>qt.every(w=>has(i,w)));
+  return all.length>=5 ? all : EVID.filter((r,i)=>qt.some(w=>has(i,w)));
 }
 function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^\s*none|unknown|^other$/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
 let sampleNS = null;
@@ -306,9 +315,24 @@ const INTENTS = [
   [/phrase|type|word|query|formulat|search for it/i, "query_typed", "Searches people quoted, word for word", null],
 ];
 function corpusCounts(field){ const m={}; EVID.filter(r=>field==="failure_stage"||r.relevance==="retrieval_story").forEach(r=>[].concat(r[field]||[]).forEach(v=>{if(v&&!/^\s*none|unknown/.test(v))m[v]=(m[v]||0)+1})); return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,8); }
+const SMALLTALK = /^\s*(hi+|hii+|hello+|hey+|hola|namaste|yo|sup|ok(ay)?|cool|nice|thanks?( you)?|thank u|ty|bye|good (morning|afternoon|evening|night)|test(ing)?|who are you|what (is|are) (this|you)|how are you|help|\?+)\s*[!.?]*\s*$/i;
+// Questions the engine can't place: answer honestly with a short gist of the nearest problems, without calling the AI.
+function notUnderstood(q, out){
+  const near = SMALLTALK.test(q) ? [] : retrieve(q, 40).filter(r=>r.failure_stage && !/none/.test(r.failure_stage));
+  const pool = near.length >= 5 ? near : EVID.filter(r=>r.failure_stage && !/none/.test(r.failure_stage));
+  const m = {}; pool.forEach(r=>m[r.failure_stage]=(m[r.failure_stage]||0)+1);
+  const top = Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const ex = ["Why can't people find screenshots?","What goes wrong when searching for a person by name?","What do people say about Ask Photos?"];
+  out.innerHTML = `<div class="answerbox"><section class="asec ai-sec"><header><span class="snum">!</span><div><h3>${SMALLTALK.test(q) || !toks(q).length ? "Sorry, I don't understand that question" : "Sorry, I couldn't find enough posts about that"}</h3><p>I answer questions about why people can't find photos in Google Photos.</p></div></header><div class="abody">
+    <p><b>${near.length>=5?"The closest problems I found for your words:":"The biggest problems across all posts:"}</b></p>
+    <ul class="gist">${top.map(([k,v])=>`<li>${esc(nice(k))} <span class="muted">(${fmt(v)} posts)</span></li>`).join("")}</ul>
+    <p><b>Try asking:</b></p><div class="presets">${ex.map(x=>`<button type="button">${esc(x)}</button>`).join("")}</div></div></section></div>`;
+  out.querySelectorAll(".presets button").forEach(bt=>bt.onclick=()=>{ $("#ask-q").value=bt.textContent; ask(bt.textContent); });
+}
 async function ask(q){
   if(!q.trim()) return;
   const out=$("#ask-out"); const intent = INTENTS.find(i=>i[0].test(q));
+  if(SMALLTALK.test(q) || (!intent && (matchSet(q)||[]).length < 5)){ notUnderstood(q, out); return; }
   // Prefer posts that describe an actual failure; praise and chatter rarely answer a research question.
   let hits = retrieve(q, 80).filter(r=>(r.text||"").split(/\s+/).length>=12 && r.failure_stage && r.failure_stage!=="none");
   if(intent && intent[1]!=="query_typed") hits = hits.filter(r=>[].concat(r[intent[1]]||[]).some(v=>v&&!/^\s*none|unknown/.test(v))).concat(hits).filter((r,i,a)=>a.indexOf(r)===i);
