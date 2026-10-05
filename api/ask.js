@@ -7,8 +7,11 @@ export default async function handler(req, res) {
   const key = process.env.GEMINI_API_KEY;
   const prompt = String((req.body && req.body.prompt) || "").slice(0, 60000);
   if (!key || !prompt) return res.status(200).json({ text: "" });
-  // Free-tier models hit daily quotas (429) and demand spikes (503): try each model twice, then the next one.
-  for (const model of MODELS.flatMap(m => [m, m])) {
+  // Free-tier models hit daily quotas (429) and demand spikes (503). Spikes often hit every model at once for a few seconds,
+  // so try every model, then make up to 2 more passes after a short pause.
+  const order = [0, 2500, 6000].flatMap(wait => MODELS.map((m, i) => [m, i === 0 ? wait : 0]));
+  for (const [model, wait] of order) {
+    if (wait) await new Promise(r => setTimeout(r, wait));
     try {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: "POST",

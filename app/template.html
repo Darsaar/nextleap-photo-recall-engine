@@ -2,21 +2,24 @@
 <title>Photo Recall Engine</title>
 <meta name="description" content="AI discovery engine: what people remember, forget and type when they can't find a photo in Google Photos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a research notebook — one reading column for findings, wide panels for the map, explorer and chat. */
 :root{
-  --bg:#f6f7f9; --panel:#ffffff; --ink:#16202b; --muted:#5b6876; --line:#dde2e8;
-  --accent:#1f5fbf;            /* "search" blue */
-  --c1:#0072b2; --c2:#e69f00; --c3:#009e73; --c4:#cc79a7; --c5:#56b4e9; --c6:#d55e00; --c7:#7f7f7f; /* Okabe–Ito, colour-blind safe */
-  --heat0:#eef3fa; --heat1:#1f5fbf;
-  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  /* Google Photos-inspired: neutral greys, one blue accent, the four brand hues used sparingly as markers */
+  --bg:#f8f9fa; --panel:#ffffff; --ink:#202124; --muted:#5f6368; --line:#e3e6ea;
+  --accent:#1a73e8; --accent-soft:#e8f0fe;
+  --g-blue:#4285f4; --g-red:#ea4335; --g-yellow:#fbbc04; --g-green:#34a853;
+  --c1:#4285f4; --c2:#f9ab00; --c3:#34a853; --c4:#ea4335; --c5:#8ab4f8; --c6:#d93025; --c7:#9aa0a6;
+  --good:#1a73e8; --bad:#e37400;   /* blue vs orange for better/worse: colour-blind safe */
+  --heat0:#eef3fd; --heat1:#1a73e8;
+  --display:"Outfit",ui-sans-serif,system-ui,sans-serif;
+  --body:"Roboto",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#10151c; --panel:#171e27; --ink:#e7ecf2; --muted:#9aa7b5; --line:#2a3440; --accent:#7fb0ff; --heat0:#1b2430; --heat1:#5f9cff; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#10151c; --panel:#171e27; --ink:#e7ecf2; --muted:#9aa7b5; --line:#2a3440; --accent:#7fb0ff; --heat0:#1b2430; --heat1:#5f9cff; color-scheme:dark}
+  --bg:#131416; --panel:#1e1f22; --ink:#e8eaed; --muted:#9aa0a6; --line:#33363b; --accent:#8ab4f8; --accent-soft:#25324a; --heat0:#232a36; --heat1:#8ab4f8; --good:#8ab4f8; --bad:#fdae61; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131416; --panel:#1e1f22; --ink:#e8eaed; --muted:#9aa0a6; --line:#33363b; --accent:#8ab4f8; --accent-soft:#25324a; --heat0:#232a36; --heat1:#8ab4f8; --good:#8ab4f8; --bad:#fdae61; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
@@ -24,7 +27,7 @@ header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justif
 .brand{font:700 1.35rem/1.1 var(--display);letter-spacing:-.01em}
 .brand small{display:block;font:400 .8rem var(--body);color:var(--muted);letter-spacing:0;margin-top:4px}
 nav.tabs{display:flex;flex-wrap:wrap;gap:4px}
-nav.tabs button{font:500 .85rem var(--body);background:none;border:1px solid transparent;color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer}
+nav.tabs button{font:500 .88rem var(--body);background:none;border:1px solid transparent;color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--line);background:var(--panel)}
 nav.tabs button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 section.tab{padding-top:24px}
@@ -78,7 +81,7 @@ a{color:var(--accent)}
 .filters input{flex:1 1 220px}
 .card{border-bottom:1px solid var(--line);padding:12px 0}
 .card .tags{font:.74rem var(--mono);color:var(--muted);margin-top:6px}
-.btn{font:500 .88rem var(--body);background:var(--accent);color:var(--panel);border:0;border-radius:6px;padding:8px 14px;cursor:pointer}
+.btn{font:500 .9rem var(--body);background:var(--accent);color:#fff;border:0;border-radius:999px;padding:9px 18px;cursor:pointer}
 .btn.ghost{background:none;color:var(--accent);border:1px solid var(--line)}
 .ask{display:flex;gap:8px;flex-wrap:wrap}
 .ask input{flex:1 1 280px}
@@ -107,17 +110,70 @@ a{color:var(--accent)}
 .hyp b.h{font:700 1.1rem var(--display);color:var(--accent)}
 ol.steps{padding-left:20px} ol.steps li{margin:6px 0}
 pre.code{white-space:pre-wrap;font:.78rem/1.5 var(--mono);background:var(--heat0);padding:12px;border-radius:6px;overflow-x:auto;max-height:340px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0 8px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font:700 1.7rem/1.1 var(--display)}
+.kpi span{display:block;font-size:.84rem;color:var(--muted);margin-top:4px}
+.syn{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px}
+.syn>*{min-width:0}
+.scard{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.scard>header{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:14px 16px;background:var(--heat0);border-bottom:1px solid var(--line)}
+.scard>header h3{margin:0}
+.scard .imp{text-align:right;flex:none}
+.scard .imp b{display:block;font:700 1.4rem/1 var(--display);color:var(--accent)}
+.scard .imp span{font:.7rem var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.flow{margin:0;padding:6px 16px 14px}
+.flow>div{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.flow>div:last-child{border-bottom:0}
+.flow dt{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding-top:2px}
+.flow dd{margin:0}
+.badge{display:inline-block;font:600 .74rem var(--body);border-radius:999px;padding:2px 9px;border:1px solid currentColor}
+.badge.High{color:#188038} .badge.Medium{color:#b06000} .badge.Low{color:var(--bad)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.small{font-size:.8rem}
+.segrow td{cursor:pointer}
+.segrow:hover td{background:var(--heat0)}
+.arows .flow{padding:0}
+.arows .flow>div{grid-template-columns:150px 1fr}
+@media (max-width:520px){.flow>div,.arows .flow>div{grid-template-columns:1fr;gap:2px}}
+.dots{display:inline-grid;grid-template-columns:8px 8px;gap:3px;margin-right:10px;vertical-align:2px}
+.dots i{width:8px;height:8px;border-radius:50%}
+.dots i:nth-child(1){background:var(--g-red)}.dots i:nth-child(2){background:var(--g-yellow)}.dots i:nth-child(3){background:var(--g-blue)}.dots i:nth-child(4){background:var(--g-green)}
+nav.tabs button[aria-selected="true"]{background:var(--accent-soft)!important;color:var(--accent)!important;border-color:transparent!important}
+.syn .scard:nth-child(4n+1){border-top:4px solid var(--g-blue)}.syn .scard:nth-child(4n+2){border-top:4px solid var(--g-red)}.syn .scard:nth-child(4n+3){border-top:4px solid var(--g-yellow)}.syn .scard:nth-child(4n+4){border-top:4px solid var(--g-green)}
+.kpi:nth-child(1){border-left:4px solid var(--g-blue)}.kpi:nth-child(2){border-left:4px solid var(--g-red)}.kpi:nth-child(3){border-left:4px solid var(--g-yellow)}.kpi:nth-child(4){border-left:4px solid var(--g-green)}.kpi:nth-child(5){border-left:4px solid var(--g-blue)}
+.cmp{margin:18px 0}
+.cmpt th{width:180px}.cmpt td{width:40%}
+.cmpt td.win{background:var(--accent-soft);font-weight:500}
+#chat{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+.turn{display:flex;flex-direction:column;gap:10px;scroll-margin-top:12px}
+.ubub{align-self:flex-end;max-width:78%;background:var(--accent);color:#fff;padding:10px 16px;border-radius:18px 18px 4px 18px;font-weight:500}
+.starter{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.sgroup{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.sgroup:nth-child(5n+1){border-top:3px solid var(--g-blue)}.sgroup:nth-child(5n+2){border-top:3px solid var(--g-red)}.sgroup:nth-child(5n+3){border-top:3px solid var(--g-yellow)}.sgroup:nth-child(5n+4){border-top:3px solid var(--g-green)}.sgroup:nth-child(5n+5){border-top:3px solid var(--c7)}
+.chipq{font:inherit;font-size:.85rem;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;text-align:left}
+.chipq:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.next{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.next>span{margin-right:4px}
+.chatbar{position:sticky;bottom:0;background:var(--bg);padding:12px 0;margin-top:16px;border-top:1px solid var(--line);z-index:2}
+.chatbar input{border-radius:999px!important;padding:10px 16px!important}
+table.rank tr.top td{background:var(--accent-soft)}
+a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font:600 .74rem var(--body);text-align:center;text-decoration:none;vertical-align:1px}
+.flash .quote{background:#fef7e0;transition:background .3s}
+.arows .flow>div.lead dd{font-size:1.02rem;font-weight:500}
+.asec header h3 .badge{margin-left:8px;vertical-align:1px}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
 </style>
 
 <div class="wrap">
 <header class="top">
-  <div class="brand">Photo Recall Engine<small>Google Photos · why vaguely remembered photos are hard to retrieve</small></div>
+  <div class="brand"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Photo Recall Engine<small>Google Photos · why vaguely remembered photos are hard to retrieve</small></div>
   <nav class="tabs" role="tablist" id="tabs"></nav>
 </header>
 
-<section class="tab" id="t-findings"></section>
+<section class="tab" id="t-overview"></section>
+<section class="tab" id="t-segments" hidden></section>
 <section class="tab" id="t-map" hidden></section>
 <section class="tab" id="t-cues" hidden></section>
 <section class="tab" id="t-evidence" hidden></section>
@@ -137,12 +193,12 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 const fmt = n => Number(n).toLocaleString("en-IN");
 const pct = (a,b) => b ? Math.round(100*a/b) + "%" : "–";
 const SRC = {play_store:"Google Play", app_store:"App Store", reddit:"Reddit", help_forum:"Photos Help Community", youtube:"YouTube", hacker_news:"Hacker News", stack_exchange:"Stack Exchange", play_store_deep:"Google Play"};
-const NICE = {other:"Not stated / other", unknown:"Not stated", trip_place:"Trip / place", event_occasion:"Event / occasion", child_family:"Child / family", screenshot_info:"Screenshot", document_id:"Document / ID", receipt_bill:"Receipt / bill", product_shopping:"Product / shopping", text_in_image:"Text in image", old_scanned:"Old / scanned", scroll_timeline:"Scrolled the timeline", gave_up:"Gave up", other_app:"Used another app", albums_folders:"Albums / folders", people_tab:"People tab", date_jump:"Jumped to a date", ask_someone:"Asked someone", map_or_places:"Map / places", third_party_tool:"Third-party tool", not_found:"Not found", found_with_effort:"Found with effort", retrieval_story:"Retrieval story", search_feedback:"Search feedback", off_goal:"Off-goal", none:"None"};
+const NICE = {other:"Not stated / other", person:"Person", pet:"Pet", video:"Video", food:"Food", object:"Object", medical:"Medical", unknown:"Not stated", trip_place:"Trip / place", event_occasion:"Event / occasion", child_family:"Child / family", screenshot_info:"Screenshot", document_id:"Document / ID", receipt_bill:"Receipt / bill", product_shopping:"Product / shopping", text_in_image:"Text in image", old_scanned:"Old / scanned", scroll_timeline:"Scrolled the timeline", gave_up:"Gave up", other_app:"Used another app", albums_folders:"Albums / folders", people_tab:"People tab", date_jump:"Jumped to a date", ask_someone:"Asked someone", map_or_places:"Map / places", third_party_tool:"Third-party tool", not_found:"Not found", found_with_effort:"Found with effort", retrieval_story:"Retrieval story", search_feedback:"Search feedback", off_goal:"Off-goal", none:"None"};
 const nice = s => (ENGINE.stage_labels||{})[s] || NICE[s] || String(s||"").replace(/_/g," ");
 const CUE = {rough_time:"Rough time", exact_date:"Exact date", place:"Place", person:"Person", object:"Object / thing in it", text_in_image:"Words in the image", event_context:"The event", life_context:"What was going on in life", visual_look:"How it looked (colour, scene)", source_app:"Which app it came from", why_taken:"Why they took it", device:"Device", date:"Date", album_folder:"Album / folder", what_to_type:"What to type", who_sent:"Who sent it", which_account_device:"Which account / device", filename:"File name"};
 const cue = c => CUE[c] || nice(c);
 
-const TABS = [["findings","Findings"],["map","Opportunity map"],["cues","Memory cues"],["evidence","Evidence"],["ask","Ask the engine"],["method","Method"]];
+const TABS = [["overview","Overview"],["ask","Ask the engine"],["map","Opportunities"],["segments","Segments"],["cues","Memory cues"],["evidence","Evidence"],["method","Method & quality"]];
 function show(id){
   TABS.forEach(([t]) => { $("#t-"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id); });
   try{ localStorage.setItem("tab", id) }catch(e){}
@@ -155,14 +211,91 @@ function bars(list, total, color, fmtLabel=cue){
   return list.map(([k,v]) => `<div class="bar"><span>${esc(fmtLabel(k))}</span><div class="track"><div class="fill" style="width:${100*v/max}%;background:${color}"></div></div><span class="num muted">${total?pct(v,total):fmt(v)}</span></div>`).join("");
 }
 
-/* ---------- Findings ---------- */
-function renderFindings(){
-  const F = ENGINE.funnel, S = ENGINE.sources;
-  const srcRows = Object.entries(S).sort((a,b)=>b[1].stories-a[1].stories);
-  $("#t-findings").innerHTML = `
-  <div class="eyebrow">AI discovery engine · ${fmt(F.raw)} public posts · ${srcRows.length} sources</div>
+/* ---------- Shared analysis helpers ---------- */
+const clean = v => v && !/^\s*(none|none_stated|unknown|other)\s*$/.test(v);
+const segsOf = r => (r.segment_signal||[]).map(s=>String(s).trim());
+const SEG = {android:"Android users", ios:"iPhone users", web:"Web / desktop users", large_library:"Large libraries", heavy_screenshots:"Heavy screenshot takers", parent:"Parents", traveller:"Travellers", professional:"Using it for work", uses_as_document_store:"Store documents in Photos", older_user:"Older users"};
+const STORIES = EVID.filter(r=>r.relevance==="retrieval_story");
+const KNOWN = r => ["not_found","found","found_with_effort"].includes(r.outcome);
+// "Never found" everywhere = share of retrieval stories with a known ending where the photo was never found (same basis as the 73% headline).
+const nfRate = rows => { const k=rows.filter(r=>r.relevance==="retrieval_story"&&KNOWN(r)); return k.length ? k.filter(r=>r.outcome==="not_found").length/k.length : null; };
+const topOf = (rows, key, n=1) => { const m={}; rows.forEach(r=>[].concat(r[key]||[]).forEach(v=>{ if(clean(v)) m[v]=(m[v]||0)+1; })); return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,n); };
+// Which segments show up more often in these posts than in the data overall (lift), with at least `min` posts.
+function overIndexed(rows, min=5){
+  const all={}, sub={}; EVID.forEach(r=>segsOf(r).forEach(s=>all[s]=(all[s]||0)+1)); rows.forEach(r=>segsOf(r).forEach(s=>sub[s]=(sub[s]||0)+1));
+  return Object.keys(SEG).filter(s=>(sub[s]||0)>=min).map(s=>[s, sub[s], (sub[s]/rows.length)/(all[s]/EVID.length)]).sort((a,b)=>b[2]-a[2]);
+}
+function strength(n, sources){ return n>=300&&sources>=6 ? "High" : n>=60&&sources>=3 ? "Medium" : "Low"; }
+
+/* ---------- Overview ---------- */
+function renderOverview(){
+  const F=ENGINE.funnel, R=ENGINE.richness, SY=STORY.synthesis||{stages:{}};
+  const nf=nfRate(STORIES), known=STORIES.filter(KNOWN).length;
+  const wk=ENGINE.workarounds.filter(w=>clean(w[0]));
+  const opps=(ENGINE.opportunities||[]).filter(o=>SY.stages[o.stage]);
+  const card=(o,i)=>{ const s=SY.stages[o.stage], rows=EVID.filter(r=>r.failure_stage===o.stage);
+    const who=overIndexed(rows,15).filter(x=>x[2]>=1.15).slice(0,2);
+    const st=strength(o.mentions,o.sources); const wa=o.workarounds.filter(w=>clean(w[0])).slice(0,2);
+    return `<article class="scard"><header><div><div class="eyebrow">Problem ${i+1}</div><h3>${esc(o.label)}</h3></div><div class="imp"><b class="num">${o.score}</b><span>impact score</span></div></header>
+    <dl class="flow">
+      <div><dt>Underlying need</dt><dd>${esc(s.need)}</dd></div>
+      <div><dt>What users do instead</dt><dd>${wa.map(([k,v])=>`${esc(nice(k))} (${v})`).join(", ")||"Not stated"}</dd></div>
+      <div><dt>How bad</dt><dd>${Math.round(nfRate(rows)*100)}% never found the photo (of ${rows.filter(r=>r.relevance==="retrieval_story"&&KNOWN(r)).length} stories that say how it ended) · severity ${o.severity} of 1</dd></div>
+      <div><dt>Who it hits most</dt><dd>${who.length?who.map(([k,n,l])=>`${esc(SEG[k])} (${n} posts, ${l.toFixed(1)}× usual)`).join("; "):"Spread evenly across groups"}</dd></div>
+      <div><dt>Evidence</dt><dd><span class="badge ${st}">${st}</span> ${fmt(o.mentions)} posts from ${o.sources} sources</dd></div>
+      <div><dt>Hypothesis</dt><dd>${s.hyp.length?s.hyp.map(h=>{const H=(STORY.hypotheses||[]).find(x=>x.id===h);return `<b>${h}</b> ${esc(H?H.claim:"")}`}).join("<br>"):"None (outside search)"}</dd></div>
+      <div><dt>Product bet</dt><dd>${esc(s.bet)}</dd></div>
+      <div><dt>Target metric</dt><dd>${esc(s.metric)}</dd></div>
+    </dl></article>`; };
+  $("#t-overview").innerHTML = `
+  <div class="eyebrow">Overview · AI discovery engine · ${fmt(F.raw)} public posts · ${Object.keys(ENGINE.sources).length} sources</div>
   <h1>${esc(STORY.headline)}</h1>
   <p class="lede">${esc(STORY.dek)}</p>
+  <div class="kpis">
+    <div class="kpi"><b class="num">${fmt(F.raw)}</b><span>public posts collected from ${Object.keys(ENGINE.sources).length} sources</span></div>
+    <div class="kpi"><b class="num">${fmt(F.stories)}</b><span>real stories of someone hunting for a photo</span></div>
+    <div class="kpi"><b class="num">${Math.round(nf*100)}%</b><span>of those (${fmt(known)} with a known ending) never found it</span></div>
+    <div class="kpi"><b class="num">${Math.round(R.share_queries_1_2_words*100)}%</b><span>of ${R.queries_quoted} quoted searches were just 1–2 words</span></div>
+    <div class="kpi"><b class="num">${pct(wk[0][1]+wk[1][1],F.stories)}</b><span>scrolled the timeline or gave up when search failed</span></div>
+  </div>
+  <h2>Synthesis: from problem to metric</h2>
+  <p class="muted">${esc(SY.intro)} Counts come from posts the AI read and tagged. Impact score = √posts × (0.5 + severity) × (0.5 + source spread) × how fixable it is by search. North-star metric: ${esc(SY.north_star)}.</p>
+  <p class="muted small">The top four scores are close (${opps.slice(0,4).map(o=>o.score).join(", ")}), so the engine ranks them as a group; the survey and interviews decide between them.</p>
+  <div class="syn">${opps.slice(0,5).map(card).join("")}</div>
+  <div class="links"><button class="btn ghost" data-go="map">Compare problems</button><button class="btn ghost" data-go="segments">See who it hits</button><button class="btn ghost" data-go="ask">Ask the engine</button></div>
+  ${findingsHTML()}`;
+  $("#t-overview").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ show(b.dataset.go); window.scrollTo(0,0); });
+}
+
+/* ---------- Segments ---------- */
+function renderSegments(){
+  const baseNF=nfRate(STORIES), allStage={}; EVID.forEach(r=>{ if(clean(r.failure_stage)) allStage[r.failure_stage]=(allStage[r.failure_stage]||0)+1; });
+  const nStage=Object.values(allStage).reduce((a,b)=>a+b,0);
+  const rows=Object.keys(SEG).map(k=>{ const rs=EVID.filter(r=>segsOf(r).includes(k)), ss=rs.filter(r=>r.relevance==="retrieval_story");
+    const st={}; rs.forEach(r=>{ if(clean(r.failure_stage)) st[r.failure_stage]=(st[r.failure_stage]||0)+1; }); const ns=Object.values(st).reduce((a,b)=>a+b,0);
+    const lift=Object.entries(st).filter(([s,v])=>v>=5).map(([s,v])=>[s,v,(v/ns)/(allStage[s]/nStage)]).sort((a,b)=>b[2]-a[2])[0];
+    return {k, posts:rs.length, stories:ss.length, known:ss.filter(KNOWN).length, nf:nfRate(ss), top:topOf(rs,"failure_stage")[0], lift, type:topOf(ss,"content_type")[0], wa:topOf(ss,"workaround")[0]}; }).sort((a,b)=>b.posts-a.posts);
+  $("#t-segments").innerHTML = `
+  <div class="eyebrow">Segments · who hits which problem</div>
+  <h1>The same search problems land differently on different users</h1>
+  <p class="lede">A post counts toward a group only when the writer says so (their phone, library size, being a parent and so on), so groups overlap and most posts belong to none. "Never found" uses retrieval stories with a known ending; overall it is ${Math.round(baseNF*100)}%. Click a row to read the posts.</p>
+  <div class="tablewrap"><table><thead><tr><th>Group</th><th class="r">Posts</th><th class="r">Never found</th><th>Biggest problem</th><th>Hits harder than usual</th><th>Photo they want most</th><th>What they do instead</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr class="segrow" data-seg="${r.k}"><td><b>${esc(SEG[r.k])}</b>${r.known<30?`<br><span class="muted small">small sample (${r.known} stories)</span>`:""}</td><td class="r num">${fmt(r.posts)}</td>
+    <td class="r num">${r.nf==null?"–":Math.round(r.nf*100)+"%"}${r.nf!=null&&r.known>=30&&Math.abs(r.nf-baseNF)>=.05?`<br><span class="small" style="color:${r.nf>baseNF?"var(--bad)":"var(--good)"}">${r.nf>baseNF?"+":""}${Math.round((r.nf-baseNF)*100)} pts</span>`:""}</td>
+    <td>${r.top?`${esc(nice(r.top[0]))} <span class="muted">(${r.top[1]})</span>`:"–"}</td>
+    <td>${r.lift&&r.lift[2]>=1.2?`${esc(nice(r.lift[0]))} <span class="muted">(${r.lift[2].toFixed(1)}×)</span>`:'<span class="muted">none stands out</span>'}</td>
+    <td>${r.type?`${esc(nice(r.type[0]))} <span class="muted">(${r.type[1]})</span>`:"–"}</td>
+    <td>${r.wa?`${esc(nice(r.wa[0]))} <span class="muted">(${r.wa[1]})</span>`:"–"}</td></tr>`).join("")}
+  </tbody></table></div>
+  <p class="note">"Hits harder than usual" is the problem whose share in this group is highest compared with all posts (1.0× means the same as everyone).</p>`;
+  $("#t-segments").querySelectorAll(".segrow").forEach(tr=>tr.onclick=()=>{ ["f-q","f-src","f-rel","f-type","f-stage","f-cue"].forEach(id=>$("#"+id).value=""); $("#f-seg").value=tr.dataset.seg; drawEvidence(); show("evidence"); window.scrollTo(0,0); });
+}
+
+/* ---------- Findings ---------- */
+function sourcesHTML(){
+  const F = ENGINE.funnel, S = ENGINE.sources;
+  const srcRows = Object.entries(S).sort((a,b)=>b[1].stories-a[1].stories);
+  return `<h2>From ${fmt(F.raw)} posts to the evidence</h2>
   <div class="funnel">
     <div><b class="num">${fmt(F.raw)}</b><span>posts collected</span></div>
     <div><b class="num">${fmt(F.clean)}</b><span>after dedupe + language</span></div>
@@ -175,16 +308,24 @@ function renderFindings(){
   <p class="muted">Volume and usefulness are different things. "Story rate" is the share of tagged posts that describe someone actually trying to find a specific photo.</p>
   <div class="tablewrap"><table><thead><tr><th>Source</th><th class="r">Collected</th><th class="r">Tagged</th><th class="r">Retrieval stories</th><th class="r">Story rate</th><th class="r">Median words</th></tr></thead><tbody>
   ${srcRows.map(([k,v])=>`<tr><td>${SRC[k]||k}</td><td class="r num">${fmt(v.raw)}</td><td class="r num">${fmt(v.tagged)}</td><td class="r num">${fmt(v.stories)}</td><td class="r num">${Math.round(100*v.density)}%</td><td class="r num">${v.median_words||"–"}</td></tr>`).join("")}
-  </tbody></table></div>
-  <h2>What the engine found</h2>
+  </tbody></table></div>`;
+}
+function findingsHTML(){
+  return `<h2>What the engine found</h2>
   ${(STORY.findings||[]).map((f,i)=>`<div class="finding"><div class="eyebrow">Finding ${i+1}${f.tag?" · "+esc(f.tag):""}</div><h3>${esc(f.title)}</h3><p>${esc(f.body)}</p></div>`).join("")}
   <div class="boundary"><div class="eyebrow">What this data can't show</div><p>${esc(STORY.boundary)}</p></div>
   <h2>Hypotheses for the survey and interviews</h2>
-  ${(STORY.hypotheses||[]).map(h=>`<div class="hyp"><b class="h">${esc(h.id)}</b><div><h3>${esc(h.claim)}</h3><p class="muted">Engine signal: ${esc(h.signal)}</p><p class="muted">Validate with: ${esc(h.validate)}</p></div></div>`).join("")}
-  `;
+  ${(STORY.hypotheses||[]).map(h=>`<div class="hyp"><b class="h">${esc(h.id)}</b><div><h3>${esc(h.claim)}</h3><p class="muted">Engine signal: ${esc(h.signal)}</p><p class="muted">Validate with: ${esc(h.validate)}</p></div></div>`).join("")}`;
 }
 
 /* ---------- Opportunity map ---------- */
+function probStats(stage){
+  const o=(ENGINE.opportunities||[]).find(x=>x.stage===stage), rows=EVID.filter(r=>(r.failure_stage||"").trim()===stage);
+  const w=overIndexed(rows,15).filter(x=>x[2]>=1.15)[0];
+  return {label:o.label, score:o.score, n:o.mentions, nf:nfRate(rows), sev:o.severity, srcs:o.sources, addr:o.addressable,
+    types:topOf(rows.filter(r=>r.relevance==="retrieval_story"),"content_type",3), cues:topOf(rows,"cues_remembered",3), wa:topOf(rows,"workaround",2),
+    who: w?`${esc(SEG[w[0]])} (${w[2].toFixed(1)}×)`:"No group stands out", syn:(STORY.synthesis?.stages||{})[stage]||{}};
+}
 function renderMap(){
   const O = ENGINE.opportunities, M = ENGINE.matrix;
   const stages = O.map(o=>o.stage);
@@ -195,8 +336,14 @@ function renderMap(){
   <div class="eyebrow">Opportunity areas</div>
   <h1>Where retrieval breaks, ranked by what a product change could move</h1>
   <p class="lede">Each area is a stage of the retrieval journey. Score = √mentions × (0.5 + severity) × (0.5 + source spread) × addressability. Addressability is lower when the cause is backup or storage, which better search can't fix. Open a row for the posts behind it.</p>
+  <div class="panel cmp"><h3>Compare two problems</h3>
+    <div class="filters"><select id="cmp-a" aria-label="First problem">${O.map((o,i)=>`<option value="${o.stage}"${i===0?" selected":""}>${esc(o.label)}</option>`).join("")}</select>
+    <span class="muted" style="align-self:center">vs</span>
+    <select id="cmp-b" aria-label="Second problem">${O.map((o,i)=>`<option value="${o.stage}"${i===2?" selected":""}>${esc(o.label)}</option>`).join("")}</select></div>
+    <div id="cmp-out"></div></div>
+  <h2>All problem areas, ranked</h2>
   ${O.map((o,i)=>`<details class="opp"${i===0?" open":""}><summary><span class="rank">${i+1}</span><div><h3>${esc(o.label)}</h3>
-    <div class="chips"><span class="chip">${o.mentions} posts</span><span class="chip">${Math.round(o.prevalence*100)}% of evidence</span><span class="chip">severity ${o.severity} of 1</span><span class="chip">${o.sources} sources</span><span class="chip">not found ${Math.round(o.not_found_rate*100)}%</span><span class="chip">addressable ${o.addressable}</span></div></div>
+    <div class="chips"><span class="chip">${o.mentions} posts</span><span class="chip">${Math.round(o.prevalence*100)}% of evidence</span><span class="chip">severity ${o.severity} of 1</span><span class="chip">${o.sources} sources</span><span class="chip">never found ${Math.round(nfRate(EVID.filter(r=>(r.failure_stage||"").trim()===o.stage))*100)}%</span><span class="chip">addressable ${o.addressable}</span></div></div>
     <span class="score num">${o.score}</span></summary>
     <div class="body"><p class="muted">Most affected: ${o.content_types.map(([k,v])=>esc(nice(k))+" ("+v+")").join(", ")}. Workarounds: ${o.workarounds.map(([k,v])=>esc(nice(k))+" ("+v+")").join(", ")||"none stated"}.</p>
     ${o.quotes.map(q=>quoteHTML(q)).join("")}</div></details>`).join("")}
@@ -205,6 +352,27 @@ function renderMap(){
   <div class="tablewrap"><table class="heat"><thead><tr><th></th>${stages.map(s=>`<th title="${esc(nice(s))}">${esc(s.replace(/_/g," "))}</th>`).join("")}</tr></thead><tbody>
   ${types.map(([t])=>`<tr><td class="lab">${esc(nice(t))}</td>${stages.map(s=>{const v=M[t]?.[s]||0;return `<td class="c num" data-t="${t}" data-s="${s}" style="background:${mix(v)};color:${v>max*.55?"var(--panel)":"var(--ink)"}">${v||""}</td>`}).join("")}</tr>`).join("")}
   </tbody></table></div>`;
+  const drawCmp=()=>{ const A=probStats($("#cmp-a").value), B=probStats($("#cmp-b").value);
+    const better=(a,b,hi)=>a==null||b==null||a===b?["",""]:((a>b)===hi?[' class="win"','']:['',' class="win"']);
+    const row=(lab,fa,fb,va,vb,hi)=>{ const w=hi==null?["",""]:better(va,vb,hi); return `<tr><th>${lab}</th><td${w[0]}>${fa}</td><td${w[1]}>${fb}</td></tr>`; };
+    const L=(arr,f=nice)=>arr.map(([k,v])=>`${esc(f(k))} (${v})`).join(", ")||"–";
+    $("#cmp-out").innerHTML = `<div class="tablewrap"><table class="cmpt"><thead><tr><th></th><th>${esc(A.label)}</th><th>${esc(B.label)}</th></tr></thead><tbody>
+      ${row("Impact score",A.score,B.score,A.score,B.score,true)}
+      ${row("Posts",fmt(A.n),fmt(B.n),A.n,B.n,true)}
+      ${row("Never found the photo",pct(A.nf*100,100),pct(B.nf*100,100),A.nf,B.nf,true)}
+      ${row("Severity (0–1)",A.sev,B.sev,A.sev,B.sev,true)}
+      ${row("Sources it shows up in",A.srcs+" of 7",B.srcs+" of 7",A.srcs,B.srcs,true)}
+      ${row("Fixable by search",A.addr,B.addr,A.addr,B.addr,true)}
+      ${row("Photos it hits most",L(A.types),L(B.types))}
+      ${row("What they remembered",L(A.cues,cue),L(B.cues,cue))}
+      ${row("What they do instead",L(A.wa),L(B.wa))}
+      ${row("Who it hits hardest",A.who,B.who)}
+      ${row("Underlying need",esc(A.syn.need||"–"),esc(B.syn.need||"–"))}
+      ${row("Hypothesis",(A.syn.hyp||[]).join(", ")||"–",(B.syn.hyp||[]).join(", ")||"–")}
+      ${row("Product bet",esc(A.syn.bet||"–"),esc(B.syn.bet||"–"))}
+      ${row("Target metric",esc(A.syn.metric||"–"),esc(B.syn.metric||"–"))}
+    </tbody></table></div><p class="note">Highlighted cells are the stronger case for prioritising (bigger, worse, wider, more fixable).</p>`; };
+  $("#cmp-a").onchange=drawCmp; $("#cmp-b").onchange=drawCmp; drawCmp();
   $("#t-map").querySelectorAll("td.c").forEach(td=>td.onclick=()=>{ $("#f-type").value=td.dataset.t; $("#f-stage").value=td.dataset.s; $("#f-rel").value="retrieval_story"; drawEvidence(); show("evidence"); });
 }
 function quoteHTML(q){
@@ -248,13 +416,14 @@ function renderEvidenceShell(){
     ${opt("f-type","Photo type",uniq("content_type"))}
     ${opt("f-stage","Broke at",uniq("failure_stage"))}
     ${opt("f-cue","Remembered",uniq("cues_remembered"),cue)}
+    ${opt("f-seg","Group",Object.keys(SEG),s=>SEG[s])}
   </div>
   <p class="muted" id="ev-count"></p><div id="ev-list"></div>`;
-  ["f-q","f-src","f-rel","f-type","f-stage","f-cue"].forEach(id=>$("#"+id).addEventListener("input", drawEvidence));
+  ["f-q","f-src","f-rel","f-type","f-stage","f-cue","f-seg"].forEach(id=>$("#"+id).addEventListener("input", drawEvidence));
 }
 function filtered(){
-  const q=$("#f-q").value.toLowerCase().trim(), s=$("#f-src").value, rel=$("#f-rel").value, t=$("#f-type").value, st=$("#f-stage").value, c=$("#f-cue").value;
-  return EVID.filter(r=>(!s||r.source===s)&&(!rel||r.relevance===rel)&&(!t||r.content_type===t)&&(!st||r.failure_stage===st)&&(!c||(r.cues_remembered||[]).includes(c))&&(!q||(r.text+" "+r.quote+" "+r.user_need).toLowerCase().includes(q)));
+  const q=$("#f-q").value.toLowerCase().trim(), s=$("#f-src").value, rel=$("#f-rel").value, t=$("#f-type").value, st=$("#f-stage").value, c=$("#f-cue").value, sg=$("#f-seg").value;
+  return EVID.filter(r=>(!s||r.source===s)&&(!rel||r.relevance===rel)&&(!t||r.content_type===t)&&(!st||r.failure_stage===st)&&(!c||(r.cues_remembered||[]).includes(c))&&(!sg||segsOf(r).includes(sg))&&(!q||(r.text+" "+r.quote+" "+r.user_need).toLowerCase().includes(q)));
 }
 function drawEvidence(){
   const rows = filtered();
@@ -294,110 +463,237 @@ function matchSet(q){
 function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^\s*none|unknown|^other$/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
 let sampleNS = null;
 (async()=>{ try{ if(window.claude?.use){ sampleNS = await window.claude.use("sample"); } }catch(e){} })();
-function renderAsk(){
-  $("#t-ask").innerHTML = `
-  <div class="eyebrow">Ask the engine</div>
-  <h1>Ask a question of ${fmt(EVID.length)} real posts</h1>
-  <p class="lede">Counts come from the tagged data. Quotes come from the posts themselves, each linked to its source. ${META.chat_note||""}</p>
-  <form class="ask" id="ask-form"><input id="ask-q" type="text" placeholder="e.g. How do people describe screenshots they can't find?" aria-label="Your question"><button class="btn" type="submit">Ask</button></form>
-  <div class="presets">${(STORY.questions||[]).map(q=>`<button type="button">${esc(q)}</button>`).join("")}</div>
-  <div class="answer" id="ask-out"></div>`;
-  $("#ask-form").addEventListener("submit", e=>{ e.preventDefault(); ask($("#ask-q").value); });
-  $("#t-ask").querySelectorAll(".presets button").forEach(b=>b.onclick=()=>{ $("#ask-q").value=b.textContent; ask(b.textContent); });
-}
-let askCtl=null;
-const INTENTS = [
-  [/(problem|issue|pain|struggl|break|wrong|fail|complain).*(most|biggest|top|common|main|frequent)|(most|biggest|top|common|main|frequent).*(problem|issue|pain|struggl|break|wrong|fail|complain)/i, "failure_stage", "Where search breaks, across all retrieval posts", nice],
-  [/kind|type|what (photos|pictures)|which photos/i, "content_type", "Photo types across all retrieval stories", nice],
-  [/forg[eo]t/i, "cues_forgotten", "What people had forgotten, across all retrieval stories", cue],
-  [/remember|recall|know about/i, "cues_remembered", "What people remembered, across all retrieval stories", cue],
-  [/instead|fallback|when search fails|do when|workaround|give up/i, "workaround", "What people did instead, across all retrieval stories", nice],
-  [/phrase|type|word|query|formulat|search for it/i, "query_typed", "Searches people quoted, word for word", null],
-];
 function corpusCounts(field){ const m={}; EVID.filter(r=>field==="failure_stage"||r.relevance==="retrieval_story").forEach(r=>[].concat(r[field]||[]).forEach(v=>{if(v&&!/^\s*none|unknown/.test(v))m[v]=(m[v]||0)+1})); return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,8); }
 const SMALLTALK = /^\s*(hi+|hii+|hello+|hey+|hola|namaste|yo|sup|ok(ay)?|cool|nice|thanks?( you)?|thank u|ty|bye|good (morning|afternoon|evening|night)|test(ing)?|who are you|what (is|are) (this|you)|how are you|help|\?+)\s*[!.?]*\s*$/i;
-// Questions the engine can't place: answer honestly with a short gist of the nearest problems, without calling the AI.
-function notUnderstood(q, out){
+
+/* Research chat: every answer ranks and compares retrieval problems inside the question's own posts,
+   then the AI explains the ranking. Counts, scores and groups are computed here, never by the AI. */
+const SYNS = STORY.synthesis || {stages:{}};
+const ADDR = Object.fromEntries((ENGINE.opportunities||[]).map(o=>[o.stage,o.addressable]));
+const NSRC = Object.keys(ENGINE.sources).length;
+const BASE = {}; let BASE_N = 0; EVID.forEach(r=>{ const s=(r.failure_stage||"").trim(); if(ADDR[s]!=null){ BASE[s]=(BASE[s]||0)+1; BASE_N++; } });
+// Same formula as the Opportunities tab, applied to any subset of posts.
+function rankProblems(rows){
+  const by={}; rows.forEach(r=>{ const s=(r.failure_stage||"").trim(); if(ADDR[s]!=null) (by[s]=by[s]||[]).push(r); });
+  const n=Object.values(by).reduce((a,b)=>a+b.length,0);
+  return Object.entries(by).filter(([s,p])=>p.length>=3).map(([s,p])=>{
+    const sev=p.reduce((a,r)=>a+(+r.severity||1),0)/p.length/3, srcs=new Set(p.map(r=>r.source)).size;
+    return {stage:s, label:nice(s), n:p.length, share:p.length/n, lift:(p.length/n)/(BASE[s]/BASE_N), sev, srcs, nf:nfRate(p),
+      score:Math.sqrt(p.length)*(0.5+sev)*(0.5+srcs/NSRC)*ADDR[s], wa:topOf(p,"workaround",2), syn:SYNS.stages[s]||{}};
+  }).sort((a,b)=>b.score-a.score);
+}
+const STAGE_RX = [["buried",/\bburied|endless scroll|scroll(ing)? (through|forever)/i],["cannot_refine",/\bcombin|narrow|filter|more than one (cue|thing)/i],["index_gap",/not (indexed|searchable)|isn'?t searchable|\bocr\b|face (group|recogn)/i],
+  ["misunderstood",/misread|wrong results|doesn'?t understand|misunderst/i],["feature_regression",/got worse|search changed|used to work|update broke|regress/i],["cannot_express",/put (it|the memory) into words|can'?t describe|don'?t know what to type/i],["not_in_library",/backup|backed up|deleted|missing from (the )?library/i]];
+const SEG_RX = {android:/\bandroid|\bpixel|samsung/i, ios:/\b(iphone|ios|ipad)\b/i, web:/\b(web|desktop|browser|laptop|computer)\b/i, large_library:/\b(large|big|huge) (photo )?librar|thousands of photos|heavy users?/i,
+  heavy_screenshots:/screenshot takers|heavy screenshot/i, parent:/\bparents?\b/i, traveller:/\btravell?ers?\b/i, professional:/\bprofessionals?\b|for work|work users?/i, uses_as_document_store:/document stor|store (their )?documents/i, older_user:/\b(older|elderly|senior)( users?| people)?\b/i};
+const SEGWORDS = new Set("android pixel samsung iphone io ipad web desktop browser laptop computer parent traveller traveler professional work older elderly senior large big huge library librarie heavy".split(" "));
+const CHATGEN = new Set("hit hits hardest harder most least first build should opportunity opportunitie prioritize prioritise priority segment group user compare contradict evidence know don't dont fix solve metric hypothesi why who which what more tell explain detail differ different difference between biggest top main common strongest weakest finding data show retrieval struggle remember forget forgot result cue search photos picture overall average strong".split(" "));
+const METHOD_RX = /\b(method|methodology|pipeline|how (did|does|was|were|is) (you|the engine|this|it|the data|data)\b|data ?sets?\b|how many posts|collect|scrap|which sources|what sources|tagg|accura|reliab|limitation|bias|blind spot|which model|gemini|quality check|can'?t (this|the) data|(this|the) data (can'?t|cannot|doesn'?t))/i;
+const FOLLOW_RX = /^\s*(and|but|what about|how about|so|then|ok(ay)?|also)\b|\b(this|that|these|those|them|it)\b/i;
+const topicWords = q => [...new Set(toks(q).map(stem))].filter(w=>!GEN.has(w)&&!CHATGEN.has(w)&&!SEGWORDS.has(w));
+// Turn a piece of a question into a set of posts: a problem stage, a user group, a topic, or everyone.
+const PHRASES = [[/ask photos|\bgemini\b|ai search|new search/i, "Ask Photos and AI search"], [/\b(people|person)('s)? (photos?|pictures?)|(photos?|pictures?) of (people|a person)|\bperson\b|\bfaces?\b/i, "people photos", "person"]];
+function scopeOf(text){
+  const ph = PHRASES.find(([rx])=>rx.test(text));
+  if(ph && (ph[2] ? !topicWords(text).length : true)){ const rows = EVID.filter(r=>ph[2] ? r.content_type===ph[2] || /\b(face|person|people|named?)\b/i.test(r.quote||"") : ph[0].test((r.text||"")+" "+(r.quote||""))); if(rows.length>=5) return {kind:"topic", name:ph[1], rows}; }
+  if(/^\s*(all|every(one|body)|overall|all users|average( user)?)\s*$/i.test(text.replace(/[?.!]/g,""))) return {kind:"all", name:"all users", rows:EVID};
+  const st = STAGE_RX.find(([s,rx])=>rx.test(text));
+  const segs = Object.keys(SEG_RX).filter(k=>SEG_RX[k].test(text));
+  const tw = topicWords(text), tm = tw.length ? (matchSet(tw.join(" "))||[]) : [];
+  if(st && !tw.filter(w=>!st[1].test(w)).length) return {kind:"stage", stage:st[0], name:`"${nice(st[0])}"`, rows:EVID.filter(r=>(r.failure_stage||"").trim()===st[0])};
+  if(segs.length){ let rows=EVID.filter(r=>segs.some(s=>segsOf(r).includes(s))); const both=tm.length?rows.filter(r=>tm.includes(r)):[];
+    return both.length>=10 ? {kind:"segment", segs, name:`${tw.join(" ")} among ${segs.map(s=>SEG[s].toLowerCase()).join(" and ")}`, rows:both} : {kind:"segment", segs, name:segs.map(s=>SEG[s].toLowerCase()).join(" and "), rows}; }
+  if(tm.length) return {kind:"topic", name:tw.join(" "), rows:tm};
+  if(st) return {kind:"stage", stage:st[0], name:`"${nice(st[0])}"`, rows:EVID.filter(r=>(r.failure_stage||"").trim()===st[0])};
+  return null;
+}
+let CHAT = [];
+function resolve(q){
+  if(METHOD_RX.test(q) && !/\b(screenshot|person|people photo|parent|android|iphone|problem)\b/i.test(q)) return {kind:"method", name:"how the engine works"};
+  const hm = q.match(/\bH([1-6])\b/i);
+  if(hm){ const id="H"+hm[1], stages=Object.entries(SYNS.stages).filter(([s,v])=>(v.hyp||[]).includes(id)).map(([s])=>s);
+    return {kind:"hyp", hyp:id, name:`hypothesis ${id}`, rows:EVID.filter(r=>stages.includes((r.failure_stage||"").trim()))}; }
+  const cm = q.split(/\s+(?:vs\.?|versus|compared (?:to|with)|against)\s+/i);
+  let sides = cm.length===2 ? cm : null;
+  const cm2 = !sides && q.match(/compare\s+(.+?)\s+(?:and|with|to)\s+(.+?)\s*\??$/i); if(cm2) sides=[cm2[1],cm2[2]];
+  if(sides){ const A=scopeOf(sides[0].replace(/^.*\bcompare\s+/i,"").replace(/^(how do|how does|do|does|are)\s+/i,"")), B=scopeOf(sides[1].replace(/\b(differ|compare|in what they struggle with).*$/i,""));
+    if(A&&B&&A.rows.length>=5&&B.rows.length>=5) return {kind:"compare", A, B, name:`${A.name} vs ${B.name}`, rows:[...new Set([...A.rows,...B.rows])]}; }
+  const prev = CHAT.length ? CHAT[CHAT.length-1].scope : null;
+  const own = scopeOf(q);
+  if(prev && prev.kind!=="method" && ((!own && FOLLOW_RX.test(q)) || (own && FOLLOW_RX.test(q) && topicWords(q).length<=1 && own.kind==="topic" && own.rows.length<40))) return {...prev, followUp:true};
+  if(own) return own;
+  return {kind:"all", name:"all users", rows:EVID};
+}
+const ALABS = {
+  default:["Answer","Problems compared","Why it happens","Who it hits most","Counter-evidence","What we don't know","Opportunity","Hypothesis to test","Metric to move"],
+  compare:["Answer","Key differences","Why it happens","Counter-evidence","What we don't know","Opportunity","Hypothesis to test","Metric to move"],
+  method:["Answer","How it works","Limits","What to check next"]};
+const ALL_LABS = [...new Set(Object.values(ALABS).flat())];
+function paintAI(el, text, k, max){
+  el.classList.remove("muted");
+  const re = new RegExp("^\\s*(" + ALL_LABS.map(l=>l.replace("'", "['’]")).join("|") + ")\\s*:\\s*", "gim");
+  const cite = s => esc(s).replace(/\[(\d+)\]/g,(m,n)=>+n>=1&&+n<=max?`<a href="#" class="cite" data-k="${k}" data-n="${n}">${n}</a>`:"");
+  const parts=[]; let m, last=null;
+  while((m=re.exec(text))){ if(last) last.body=text.slice(last.end,m.index); last={lab:m[1],end:re.lastIndex}; parts.push(last); }
+  if(last) last.body=text.slice(last.end);
+  if(parts.length<2){ el.className="ai"; el.innerHTML=cite(text); }
+  else { el.className="arows"; el.innerHTML=`<dl class="flow">${parts.map(p=>{ const lines=p.body.trim().split(/\n+/).map(s=>s.trim()).filter(Boolean), bl=lines.filter(s=>/^[-•*]\s/.test(s));
+    const html = bl.length ? lines.filter(s=>!/^[-•*]\s/.test(s)).map(cite).join(" ")+`<ul class="gist">${bl.map(b=>`<li>${cite(b.replace(/^[-•*]\s*/,""))}</li>`).join("")}</ul>` : cite(lines.join(" "));
+    return `<div class="${/^Answer/i.test(p.lab)?"lead":""}"><dt>${esc(p.lab)}</dt><dd>${html}</dd></div>`; }).join("")}</dl>`; }
+  el.querySelectorAll("a.cite").forEach(a=>a.onclick=e=>{ e.preventDefault(); const d=$(`#src-${a.dataset.k}`), q=$(`#q-${a.dataset.k}-${a.dataset.n}`); if(d) d.open=true; if(q){ q.scrollIntoView({behavior:"smooth",block:"center"}); q.classList.add("flash"); setTimeout(()=>q.classList.remove("flash"),1600); } });
+}
+async function callAI(prompt){
+  if(sampleNS){ const r = await sampleNS(prompt,{cache:false, modelTier:"quick"}); return r.text||""; }
+  if(META.ask_endpoint){ const r = await fetch(META.ask_endpoint,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt})}); const j = await r.json(); return j.text||""; }
+  return "";
+}
+const CHIPS = [
+  ["Understand", ["What are the biggest retrieval problems?","Why can't people find screenshots?","What goes wrong when searching for a person by name?","What do people remember about a photo they can't find?"]],
+  ["Segments", ["Which problems hit parents hardest?","Compare iPhone users vs Android users","What do people with large libraries struggle with?"]],
+  ["Compare", ["Compare screenshots vs people photos","Compare buried in results vs can't combine cues","Compare trip photos vs all users"]],
+  ["Challenge", ["Which opportunity has the strongest evidence?","What evidence contradicts H1?","What can't this data tell us?"]],
+  ["The engine", ["How was this data collected?","How accurate is the AI tagging?"]]];
+function renderAsk(){
+  $("#t-ask").innerHTML = `
+  <div class="chathead"><div><div class="eyebrow">Ask the engine · research chat</div>
+  <h1>Ask ${fmt(EVID.length)} real posts which retrieval problem matters most</h1>
+  <p class="lede">Every answer ranks the problems inside the posts your question is about, compares them with the average user, and ends in an opportunity, a hypothesis and a metric. Counts are computed from the tagged data; the AI explains them and cites the posts. Ask follow-ups: it remembers the conversation.</p></div></div>
+  <div id="chat"></div>
+  <div id="chat-empty" class="starter">${CHIPS.map(([g,qs])=>`<div class="sgroup"><div class="eyebrow">${g}</div>${qs.map(x=>`<button type="button" class="chipq">${esc(x)}</button>`).join("")}</div>`).join("")}</div>
+  <form class="ask chatbar" id="ask-form"><input id="ask-q" type="text" autocomplete="off" placeholder="Ask about problems, photo types, user groups, comparisons or the engine…" aria-label="Your question"><button class="btn" type="submit">Ask</button><button class="btn ghost" type="button" id="chat-new" hidden>New chat</button></form>`;
+  $("#ask-form").addEventListener("submit", e=>{ e.preventDefault(); const v=$("#ask-q").value; $("#ask-q").value=""; ask(v); });
+  $("#chat-new").onclick=()=>{ CHAT=[]; $("#chat").innerHTML=""; $("#chat-empty").hidden=false; $("#chat-new").hidden=true; };
+  $("#t-ask").querySelectorAll(".chipq").forEach(b=>b.onclick=()=>ask(b.textContent));
+}
+function rankTable(rank, scope){
+  const rel = scope.rows!==EVID;
+  return `<div class="tablewrap"><table class="rank"><thead><tr><th>#</th><th>Problem</th><th class="r">Posts</th>${rel?`<th class="r" title="Share of this problem here vs. among all posts">vs average</th>`:""}<th class="r">Never found</th><th class="r">Impact</th><th>Tests</th><th>Metric to move</th></tr></thead><tbody>
+  ${rank.slice(0,5).map((p,i)=>`<tr${i===0?' class="top"':""}><td class="num">${i+1}</td><td><b>${esc(p.label)}</b></td><td class="r num">${p.n}</td>${rel?`<td class="r num" style="color:${p.lift>=1.2?"var(--bad)":p.lift<=.8?"var(--good)":"inherit"}">${p.lift.toFixed(1)}×</td>`:""}<td class="r num">${p.nf==null?"–":Math.round(p.nf*100)+"%"}</td><td class="r num"><b>${p.score.toFixed(1)}</b></td><td>${(p.syn.hyp||[]).join(", ")||"–"}</td><td class="small">${esc(p.syn.metric||"–")}</td></tr>`).join("")}
+  </tbody></table></div>`;
+}
+const rankTxt = rank => rank.slice(0,5).map((p,i)=>`${i+1}. ${p.label}: impact ${p.score.toFixed(1)}, ${p.n} posts (${Math.round(p.share*100)}% of this set, ${p.lift.toFixed(1)} times its share among all posts), never found ${p.nf==null?"unknown":Math.round(p.nf*100)+"%"}, severity ${p.sev.toFixed(2)}, ${p.srcs} of ${NSRC} sources, what they do instead: ${p.wa.map(([k,v])=>nice(k)+" "+v).join(", ")||"not stated"}; need: ${p.syn.need||"-"}; hypothesis: ${(p.syn.hyp||[]).map(h=>h+" ("+((STORY.hypotheses||[]).find(x=>x.id===h)||{}).claim+")").join("; ")||"none"}; product bet: ${p.syn.bet||"-"}; target metric: ${p.syn.metric||"-"}`).join("\n");
+function sourcesBlock(list, k){
+  return `<details class="more" id="src-${k}"><summary>Source posts: the ${list.length} posts the AI read</summary>${list.map((r,i)=>`<div id="q-${k}-${i+1}">${quoteHTML({n:i+1,q:r.quote||(r.text||"").slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:(r.failure_stage||"").trim()})}</div>`).join("")}</details>`;
+}
+function followUps(scope, rank){
+  const out=[];
+  if(scope.kind==="method") return ["What are the biggest retrieval problems?","What can't this data tell us?"];
+  if(scope.kind!=="compare"&&scope.kind!=="all") out.push("Who does this hit hardest?");
+  out.push("What should we build first for this?","What evidence contradicts this?");
+  if(scope.kind==="topic"||scope.kind==="segment") out.push(`Compare ${scope.name} vs all users`);
+  if(scope.kind==="all"&&rank[1]) out.push(`Compare ${rank[0].label.toLowerCase().replace(/\s*\(.*\)/,"")} vs ${rank[1].label.toLowerCase().replace(/\s*\(.*\)/,"")}`);
+  return out.slice(0,4);
+}
+function notUnderstood(q, wrap){
   const near = SMALLTALK.test(q) ? [] : retrieve(q, 40).filter(r=>r.failure_stage && !/none/.test(r.failure_stage));
-  const pool = near.length >= 5 ? near : EVID.filter(r=>r.failure_stage && !/none/.test(r.failure_stage));
-  const m = {}; pool.forEach(r=>m[r.failure_stage]=(m[r.failure_stage]||0)+1);
-  const top = Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3);
-  const ex = ["Why can't people find screenshots?","What goes wrong when searching for a person by name?","What do people say about Ask Photos?"];
-  out.innerHTML = `<div class="answerbox"><section class="asec ai-sec"><header><span class="snum">!</span><div><h3>${SMALLTALK.test(q) || !toks(q).length ? "Sorry, I don't understand that question" : "Sorry, I couldn't find enough posts about that"}</h3><p>I answer questions about why people can't find photos in Google Photos.</p></div></header><div class="abody">
+  const pool = near.length >= 5 ? near : EVID;
+  const top = rankProblems(pool).slice(0,3);
+  wrap.innerHTML += `<div class="answerbox"><section class="asec ai-sec"><header><span class="snum">!</span><div><h3>${SMALLTALK.test(q)||!toks(q).length?"Sorry, I don't understand that question":"Sorry, I couldn't find enough posts about that"}</h3><p>I answer questions about why people can't find photos in Google Photos: problems, photo types, user groups, comparisons and how this engine works.</p></div></header><div class="abody">
     <p><b>${near.length>=5?"The closest problems I found for your words:":"The biggest problems across all posts:"}</b></p>
-    <ul class="gist">${top.map(([k,v])=>`<li>${esc(nice(k))} <span class="muted">(${fmt(v)} posts)</span></li>`).join("")}</ul>
-    <p><b>Try asking:</b></p><div class="presets">${ex.map(x=>`<button type="button">${esc(x)}</button>`).join("")}</div></div></section></div>`;
-  out.querySelectorAll(".presets button").forEach(bt=>bt.onclick=()=>{ $("#ask-q").value=bt.textContent; ask(bt.textContent); });
+    <ul class="gist">${top.map(p=>`<li>${esc(p.label)} <span class="muted">(${fmt(p.n)} posts, impact ${p.score.toFixed(1)})</span></li>`).join("")}</ul></div></section></div>`;
 }
 async function ask(q){
-  if(!q.trim()) return;
-  const out=$("#ask-out"); const intent = INTENTS.find(i=>i[0].test(q));
-  if(SMALLTALK.test(q) || (!intent && (matchSet(q)||[]).length < 5)){ notUnderstood(q, out); return; }
-  // Prefer posts that describe an actual failure; praise and chatter rarely answer a research question.
-  let hits = retrieve(q, 80).filter(r=>(r.text||"").split(/\s+/).length>=12 && r.failure_stage && r.failure_stage!=="none");
-  if(intent && intent[1]!=="query_typed") hits = hits.filter(r=>[].concat(r[intent[1]]||[]).some(v=>v&&!/^\s*none|unknown/.test(v))).concat(hits).filter((r,i,a)=>a.indexOf(r)===i);
-  if(intent && intent[1]==="query_typed") hits = EVID.filter(r=>r.query_typed).sort((a,b)=>b.text.length-a.text.length);
-  // Broad "what is most common" questions: show a spread of posts across the top failure stages, not keyword matches.
-  if(intent && intent[1]==="failure_stage"){
-    const byUrl = new Map(EVID.map(r=>[r.url,r]));
-    hits = (ENGINE.opportunities||[]).slice(0,4).flatMap(o=>o.quotes.slice(0,2).map(qq=>byUrl.get(qq.url)||{quote:qq.q,text:qq.need||"",source:qq.source,url:qq.url,date:qq.date,content_type:qq.type,failure_stage:qq.stage}));
-  }
-  const matched = intent ? null : matchSet(q);
-  if(matched && matched.length){ const ms=new Set(matched); hits = hits.filter(r=>ms.has(r)).concat(hits.filter(r=>!ms.has(r))); }
-  hits = hits.slice(0,14);
-  const pool = matched && matched.length ? matched : hits;
-  const c = countsFor(pool);
-  // What the AI reads: for topic questions, every matching post (most relevant first, capped at 150); otherwise the 8 shown.
-  let readList = hits.slice(0,8);
-  if(matched && matched.length){
-    const rk = new Map(retrieve(q, EVID.length).map((r,i)=>[r,i])); const first = new Set(readList);
-    readList = readList.concat(matched.filter(r=>!first.has(r)).sort((a,b)=>(rk.get(a)??1e9)-(rk.get(b)??1e9))).slice(0,150);
-  }
-  const readsAll = readList.length > 8;
-  const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}</b><br>${arr.slice(0,3).map(([k,v])=>esc(f(k))+" ("+v+" post"+(v>1?"s":"")+")").join(", ")}</p>`:"";
-  let head = "";
-  if(intent && intent[1]!=="query_typed"){ const n=intent[1]==="failure_stage"?EVID.length:ENGINE.funnel.stories; head = `<div class="eyebrow">${esc(intent[2])} · ${fmt(n)} ${intent[1]==="failure_stage"?"posts":"stories"}</div>${bars(corpusCounts(intent[1]), n, "var(--c1)", intent[3])}`; }
-  if(intent && intent[1]==="query_typed"){ const R=ENGINE.richness; head = `<div class="eyebrow">${esc(intent[2])}</div><p>${fmt(R.queries_quoted)} stories quote their search. Median length: ${R.query_median_words} word. ${Math.round(R.share_queries_1_2_words*100)}% are one or two words.</p><p>${EVID.filter(r=>r.query_typed).slice(0,24).map(r=>`<code>${esc(r.query_typed)}</code>`).join(" · ")}</p>`; }
-  const hasAI = !!(sampleNS || META.ask_endpoint);
-  const secs = [];
-  if(hasAI) secs.push(["AI summary", readsAll ? `Written by AI after reading ${fmt(readList.length)} matching posts${pool.length>readList.length?` (the ${readList.length} most relevant of ${fmt(pool.length)})`:""}. A number like [2] points to a source post below.` : "Written by AI from the numbered source posts. A number like [2] points to that post.", `<div id="ai" class="ai muted"></div>`, "ai-sec"]);
-  if(head) secs.push(["Across all posts", "", head, ""]);
-  if(!intent) secs.push([`At a glance · ${fmt(pool.length)} of ${fmt(EVID.length)} posts match your question`, "Counted across every post that mentions your topic, so these change with every question. The source posts below are the 8 most relevant.", line("What photo were they looking for?",c.types)+line("Where did search let them down?",c.stages)+line("What did they still remember?",c.remembered,cue)+line("What had they forgotten?",c.forgotten,cue)+line("What did they do instead?",c.workarounds), ""]);
-  secs.push(["Source posts", "Real quotes from users, each linked to where it was posted.", readList.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")+(readsAll?`<details class="more"><summary>Show all ${readList.length} posts the AI read</summary>${readList.slice(8).map((r,i)=>quoteHTML({n:i+9,q:r.quote||(r.text||"").slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</details>`:""), ""]);
-  out.innerHTML = `<div class="answerbox">${secs.map(([t,sub,body,cls],k)=>`<section class="asec ${cls}"><header><span class="snum">${k+1}</span><div><h3>${esc(t)}</h3>${sub?`<p>${esc(sub)}</p>`:""}</div></header><div class="abody">${body}</div></section>`).join("")}</div>`;
-  const ai=$("#ai") || document.createElement("div");
-  const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
-  const ctx = readList.map((r,i)=> i<8
-    ? `[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}; outcome: ${nice(r.outcome||"not stated")}) ${r.quote||""} | ${(r.text||"").slice(0,400)}`
-    : `[${i+1}] (${nice(r.failure_stage)}; ${nice(r.outcome||"not stated")}) wanted: ${r.user_need||""} | "${r.quote||""}"`).join("\n");
-  const oc = {}; pool.forEach(r=>{ if(r.outcome && !/none|unknown/.test(r.outcome)) oc[r.outcome]=(oc[r.outcome]||0)+1; });
-  const fmtC = (arr,f=nice)=>arr.map(([k,v])=>`${f(k)} ${v}`).join(", ");
-  const topicNums = readsAll ? `All ${pool.length} posts that match this question break down as: where search let them down: ${fmtC(c.stages)}; photo type: ${fmtC(c.types)}; what they remembered: ${fmtC(c.remembered,cue)}; what they did instead: ${fmtC(c.workarounds)}; outcome: ${fmtC(Object.entries(oc).sort((a,b)=>b[1]-a[1]))}.` : "";
-  const top = (f,k=5)=>corpusCounts(f).slice(0,k).map(([k2,v])=>`${(f.startsWith("cues")?cue:nice)(k2)} ${v}`).join(", ");
-  const overall = `Where search breaks (all ${EVID.length} posts): ${top("failure_stage",6)}. What people remember (${ENGINE.funnel.stories} stories): ${top("cues_remembered")}. What they do when search fails: ${top("workaround",4)}. Outcomes: ${top("outcome",3)}.`;
-  const prompt = `You are a senior user researcher briefing a product manager on why people can't find photos in Google Photos. Use ONLY the numbered user posts and the numbers below.${readsAll?` You are given ${readList.length} posts that match the question: posts 1 to 8 with more of their text, the rest as a one-line summary plus a quote. Read all of them and describe what is common across them, not just the first few.`:""}
+  q = (q||"").trim(); if(!q) return;
+  $("#chat-empty").hidden = true; $("#chat-new").hidden = false;
+  const k = CHAT.length + 1 + Math.floor(Math.random()*1e6);
+  const wrap = document.createElement("div"); wrap.className="turn"; wrap.innerHTML = `<div class="ubub">${esc(q)}</div>`; $("#chat").appendChild(wrap);
+  const scope = SMALLTALK.test(q) ? null : resolve(q);
+  if(!scope || (scope.kind!=="method" && scope.rows.length<5)){ notUnderstood(q, wrap); wrap.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+  const hist = CHAT.slice(-2).map(t=>`Q: ${t.q}\nA: ${(t.answer||"").slice(0,500)}`).join("\n\n");
+  const focus = /\b(who|hit|segment|group)\b/i.test(q) ? "Focus on who it hits most and how groups differ." : /\b(build|opportunit|priorit|should we|fix|first)\b/i.test(q) ? "Focus on which opportunity to pursue first and why it beats the next one." : /\b(contradict|counter|challenge|assum|wrong|against|disprove)\b/i.test(q) ? "Focus on counter-evidence and what would change the ranking." : "";
+  let prompt, secs=[], labs, readList=[], badge="";
+  if(scope.kind==="method"){
+    labs = ALABS.method;
+    const F=ENGINE.funnel;
+    const facts = `Funnel: ${F.raw} posts collected, ${F.clean} after dedupe and language filter, ${F.candidates} mention finding or searching, ${F.tagged} tagged by an LLM, ${F.stories} retrieval stories, ${F.feedback} search feedback posts.
+Sources (collected / tagged / stories): ${Object.entries(ENGINE.sources).map(([s,v])=>`${SRC[s]||s} ${v.raw}/${v.tagged}/${v.stories}`).join("; ")}.
+Pipeline: ${(STORY.method||[]).map(s=>s[0]+": "+s[1]).join(" | ")}
+Fields extracted: ${(STORY.fields||[]).map(f=>f[0]+" ("+f[1]+")").join("; ")}
+Quality check: ${STORY.quality||""}
+Limits: ${STORY.limits||""} ${STORY.boundary||""}
+Models: ${(ENGINE.models||[]).map(m=>m[0]+" "+m[1]).join(", ")}. Opportunity score = sqrt(posts) x (0.5 + severity) x (0.5 + share of sources) x how fixable by search.`;
+    prompt = `You explain how a research engine about Google Photos search works to a product manager. Use ONLY these facts.\n\n${facts}\n\n${hist?`Earlier in this chat:\n${hist}\n\n`:""}Question: ${q}\n\nReply with exactly these labelled lines, each label followed by a colon: Answer: (1–2 sentences). How it works: (2–4 lines starting "- "). Limits: (1–2 sentences). What to check next: (1 sentence). Plain everyday words, 120 to 200 words, no markdown.`;
+    secs.push(["How the engine works", "From the engine's own pipeline numbers and method notes.", `<div id="ai-${k}" class="ai muted">Thinking…</div>`, "ai-sec"]);
+  } else {
+    labs = scope.kind==="compare" ? ALABS.compare : ALABS.default;
+    const rows = scope.rows, rank = rankProblems(rows);
+    const nSrc = new Set(rows.map(r=>r.source)).size, st = strength(rows.length, nSrc);
+    badge = `<span class="badge ${st}">${st} evidence</span>`;
+    const who = overIndexed(rows, rows.length>=200?15:4).filter(x=>x[2]>=1.15).slice(0,3);
+    const whoTxt = scope.kind==="all" ? rank.slice(0,4).map(p=>{ const w=overIndexed(EVID.filter(r=>(r.failure_stage||"").trim()===p.stage),15)[0]; return `${p.label}: ${w&&w[2]>=1.15?`${SEG[w[0]]} (${w[1]} posts, ${w[2].toFixed(1)} times their usual share)`:"no group stands out"}`; }).join("; ")
+      : scope.kind==="segment" ? `This set IS a user group; use the "times its share among all posts" numbers to say which problems hit this group harder than average.`
+      : who.length ? who.map(([s,n,l])=>`${SEG[s]}: ${n} posts, ${l.toFixed(1)} times their usual share`).join("; ") : "no group stands out";
+    // Group breakdown inside this set: how big, how often never found, and which problem tops it.
+    const segBreak = Object.keys(SEG).map(s=>{ const g=rows.filter(r=>segsOf(r).includes(s)); if(g.length<5) return null; const rp=rankProblems(g)[0], nf=nfRate(g);
+      return `${SEG[s]}: ${g.length} posts, never found ${nf==null?"unknown":Math.round(nf*100)+"%"}, top problem ${rp?rp.label:"unclear"}`; }).filter(Boolean).join("; ");
+    const c = countsFor(rows), oc = {}; rows.forEach(r=>{ if(KNOWN(r)) oc[r.outcome]=(oc[r.outcome]||0)+1; });
+    const fmtC=(arr,f=nice)=>arr.map(([a,b])=>`${f(a)} ${b}`).join(", ");
+    // What the AI reads: the most relevant posts first (8 in full, the rest as one-liners), plus a few where search worked.
+    const rk = new Map(retrieve(q+" "+(scope.name||""), EVID.length).map((r,i)=>[r,i]));
+    const sorted = rows.filter(r=>clean((r.failure_stage||"").trim())).sort((a,b)=>(rk.get(a)??1e9)-(rk.get(b)??1e9)||(b.relevance==="retrieval_story")-(a.relevance==="retrieval_story"));
+    readList = sorted.slice(0,116); const inR=new Set(readList); readList = readList.concat(rows.filter(r=>/^found/.test(r.outcome||"")&&!inR.has(r)).slice(0,4));
+    const ctx = readList.map((r,i)=> i<8 ? `[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice((r.failure_stage||"").trim())}; outcome: ${nice(r.outcome||"not stated")}) ${r.quote||""} | ${(r.text||"").slice(0,380)}`
+      : `[${i+1}] (${nice((r.failure_stage||"").trim())}; ${nice(r.outcome||"not stated")}) wanted: ${r.user_need||""} | "${r.quote||""}"`).join("\n");
+    let setTxt = `This question is about ${scope.name} (${rows.length} posts from ${nSrc} sources; evidence strength ${st}).`;
+    let rankBlock = `Problems ranked by impact score inside this set (same formula as the engine's opportunity map; "times its share" compares with all ${BASE_N} posts that name a problem):\n${rankTxt(rank)}`;
+    if(scope.kind==="compare"){ const rA=rankProblems(scope.A.rows), rB=rankProblems(scope.B.rows), nfA=nfRate(scope.A.rows), nfB=nfRate(scope.B.rows);
+      setTxt = `This question compares A = ${scope.A.name} (${scope.A.rows.length} posts, never found ${nfA==null?"unknown":Math.round(nfA*100)+"%"}) with B = ${scope.B.name} (${scope.B.rows.length} posts, never found ${nfB==null?"unknown":Math.round(nfB*100)+"%"}).`;
+      rankBlock = `Problems ranked for A (${scope.A.name}):\n${rankTxt(rA)}\n\nProblems ranked for B (${scope.B.name}):\n${rankTxt(rB)}`; }
+    if(scope.kind==="hyp"){ const H=(STORY.hypotheses||[]).find(x=>x.id===scope.hyp)||{}; setTxt += ` Hypothesis ${scope.hyp}: ${H.claim} Engine signal: ${H.signal} Planned validation: ${H.validate}`; }
+    const overall = scope.kind==="all" ? `\nWhat people remember (${ENGINE.funnel.stories} stories): ${fmtC(corpusCounts("cues_remembered").slice(0,5),cue)}. Forgotten: ${fmtC(corpusCounts("cues_forgotten").slice(0,4),cue)}. ${ENGINE.richness.queries_quoted} stories quote their search; ${Math.round(ENGINE.richness.share_queries_1_2_words*100)}% are 1–2 words, e.g. ${EVID.filter(r=>r.query_typed).slice(0,8).map(r=>'"'+r.query_typed+'"').join(", ")}.` : "";
+    const fmtLabs = scope.kind==="compare"
+      ? `Answer: 1–2 sentences: which side has the bigger retrieval problem and which problem drives it, with numbers.
+Key differences: 2–3 lines starting "- ", each comparing A and B on one problem using impact, posts, "times its share" and never-found numbers.
+Why it happens: 2 lines starting "- " explaining the user's situation behind the gap, citing posts like [2][5] and quoting a few words.
+Counter-evidence: 1 sentence on posts where search worked or that weaken the comparison, with citations, or say there are none.
+What we don't know: 1 sentence, including what the survey or interviews should check.
+Opportunity: 1 sentence on the product bet this points to and why it beats the alternative.
+Hypothesis to test: the H number(s) from the data and how they would confirm it.
+Metric to move: the target metric from the data.`
+      : `Answer: 1–2 sentences naming the top problem for this question and why it ranks above the second one (compare their impact, posts, never-found or "times its share" numbers).
+Problems compared: 2–3 lines starting "- ", one per top problem: its numbers in words and what makes it different from the others (bigger, more severe, more specific to this set, more fixable).
+Why it happens: 2–3 lines starting "- " explaining what users remembered, what they tried and where it broke, citing posts like [2][5] and quoting a few words.
+Who it hits most: 1 sentence using only the group numbers given.
+Counter-evidence: 1 sentence on posts where search worked or that point the other way, with citations, or say there are none.
+What we don't know: 1 sentence, including what the survey or interviews should check.
+Opportunity: 1 sentence: the product bet for the top problem and the user need it serves.
+Hypothesis to test: the H number(s) given for the top problem and what result would confirm it.
+Metric to move: the target metric given for the top problem.`;
+    prompt = `You are a senior user researcher helping a product manager decide which Google Photos retrieval problem to work on. Your job is to identify and compare problems and opportunity areas using evidence from real users, not to summarise reviews or sentiment. Use ONLY the numbers and numbered posts below. Every number you write must come from them.
 
-Write it like this:
-1. One opening sentence that answers the question directly by naming the main problem (not the "not found" count), with the most relevant number.
-2. Then 3 bullet points starting with "- ". Each bullet names a pattern you see across the posts (say how many posts share it when you know), explains WHY it happens for the user (what they remembered, what they tried, where it broke), and cites the posts like [2][5]. Quote a few words from a post when it makes the point vivid.
-3. End with one line starting "What this means:" giving the product implication.
-
-Rules: plain everyday words, no jargon ("index", "index gap", "failure stage", "retrieval", "corpus", "surface" are banned). Only claim "most" or "how often" from the overall numbers, and only when the question is about all users: the overall numbers cover every post, so never present them as counts for a narrower topic (e.g. do not call the overall "not found" count a number for screenshots). For a narrow topic, describe what the posts show instead of quoting overall numbers. If the posts don't answer the question, say so. 120 to 170 words. No bold, headings or other markdown.
-
-${stats?`Numbers for this question: ${stats}\nOverall numbers: ${overall}`:topicNums?`${topicNums} Use these for any "most" or "how many" claim, e.g. "32 of the ${pool.length} posts".`:"No overall numbers apply to this question; use only the posts."}
-
+${setTxt}
+${rankBlock}
+Other numbers for this set: photo types: ${fmtC(c.types)}; what they remembered: ${fmtC(c.remembered,cue)}; what they had forgotten: ${fmtC(c.forgotten,cue)}; what they did instead: ${fmtC(c.workarounds)}; outcomes: ${fmtC(Object.entries(oc).sort((a,b)=>b[1]-a[1]))}.${overall}
+Groups that show up more than usual: ${whoTxt}.
+Groups inside this set: ${segBreak||"too few posts name a group"}. Overall never-found rate: ${Math.round(nfRate(STORIES)*100)}%.
+${hist?`\nEarlier in this chat (use it to understand follow-up questions):\n${hist}\n`:""}
 Question: ${q}
+${focus}
+
+Reply with exactly these labelled lines, in this order, each label at the start of a line followed by a colon:
+${fmtLabs}
+
+Rules: answer the exact question asked in the Answer line first (if it asks who, lead with the groups and their numbers; if it asks what to build, lead with the opportunity; if it asks for counter-evidence, lead with that), then keep the rest of the structure. Write numbers as digits. Plain everyday words; banned words: "index", "index gap", "failure stage", "retrieval", "corpus", "surface", "leverage". Say "times as common as for everyone" instead of "lift". If the posts don't answer the question, say so under Answer. 220 to 320 words. No bold, headings or other markdown.
 
 Posts:
 ${ctx}`;
-  if(sampleNS){
-    askCtl?.abort(); askCtl=new AbortController(); ai.textContent="Thinking…";
-    try{ const r = await sampleNS(prompt,{signal:askCtl.signal, cache:false, modelTier:"quick", onText:({text})=>{ai.textContent=text; ai.classList.remove("muted");}}); ai.textContent=r.text; ai.classList.remove("muted"); }
-    catch(e){ ai.textContent=""; }
-  } else if(META.ask_endpoint){
-    ai.textContent="Thinking…";
-    try{ const r = await fetch(META.ask_endpoint,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt})}); const j=await r.json(); ai.textContent=j.text||""; ai.classList.remove("muted"); }catch(e){ ai.textContent=""; }
+    const glance = `Photo types: ${c.types.slice(0,3).map(([a,b])=>`${esc(nice(a))} (${b})`).join(", ")||"–"} · Remembered: ${c.remembered.slice(0,3).map(([a,b])=>`${esc(cue(a))} (${b})`).join(", ")||"–"} · Did instead: ${c.workarounds.slice(0,2).map(([a,b])=>`${esc(nice(a))} (${b})`).join(", ")||"–"}`;
+    secs.push([`Research answer · ${scope.name}`, `${fmt(rows.length)} posts from ${nSrc} sources. Numbers are computed from the tagged posts; the AI explains them. A number like [2] opens that post.`, `<div id="ai-${k}" class="ai muted">Reading ${readList.length} posts…</div>`, "ai-sec"]);
+    if(scope.kind==="compare") secs.push(["Problems ranked on each side", "Impact = √posts × (0.5 + severity) × (0.5 + source spread) × fixable by search. \"vs average\" above 1× means the problem is more common here than for everyone.", `<div class="grid2"><div><h3>${esc(scope.A.name)} <span class="muted small">${scope.A.rows.length} posts</span></h3>${rankTable(rankProblems(scope.A.rows),scope.A)}</div><div><h3>${esc(scope.B.name)} <span class="muted small">${scope.B.rows.length} posts</span></h3>${rankTable(rankProblems(scope.B.rows),scope.B)}</div></div>`, ""]);
+    else secs.push(["Problems ranked for this question", "Impact = √posts × (0.5 + severity) × (0.5 + source spread) × fixable by search. \"vs average\" above 1× means the problem is more common here than for everyone.", rankTable(rank, scope)+`<p class="note">${glance}</p>`, ""]);
+    secs.push(["Evidence", "Real posts, each linked to where it was written.", sourcesBlock(readList, k), ""]);
+    scope._rank = rank;
   }
+  wrap.innerHTML += `<div class="answerbox">${secs.map(([t,sub,body,cls],i)=>`<section class="asec ${cls}"><header><span class="snum">${i+1}</span><div><h3>${esc(t)} ${i===0?badge:""}</h3>${sub?`<p>${esc(sub)}</p>`:""}</div></header><div class="abody">${body}</div></section>`).join("")}</div>
+    <div class="next"><span class="muted small">Explore further</span>${followUps(scope, scope._rank||[]).map(x=>`<button type="button" class="chipq">${esc(x)}</button>`).join("")}</div>`;
+  wrap.querySelectorAll(".next .chipq").forEach(b=>b.onclick=()=>ask(b.textContent));
+  wrap.scrollIntoView({behavior:"smooth",block:"start"});
+  const turn = {q, scope, answer:""}; CHAT.push(turn);
+  const el = $(`#ai-${k}`);
+  let text = ""; try{ text = await callAI(prompt); }catch(e){}
+  if(text){ paintAI(el, text, k, readList.length); turn.answer = text; }
+  else { el.classList.add("muted"); el.innerHTML = `Google's AI is busy right now, so there is no write-up for this one. The ranking and posts below are computed from the data and still answer the question. <button type="button" class="chipq">Try the write-up again</button>`;
+    el.querySelector("button").onclick = async()=>{ el.textContent="Reading posts again…"; let t2=""; try{ t2=await callAI(prompt); }catch(e){} if(t2){ paintAI(el,t2,k,readList.length); turn.answer=t2; } else el.textContent="Still busy. Please try again in a minute."; }; }
 }
 
 /* ---------- Method ---------- */
@@ -405,6 +701,8 @@ function renderMethod(){
   $("#t-method").innerHTML = `
   <div class="eyebrow">Method</div>
   <h1>How the engine turns public posts into comparable retrieval problems</h1>
+  ${sourcesHTML()}
+  <h2>Pipeline</h2>
   <ol class="steps">${(STORY.method||[]).map(s=>`<li><b>${esc(s[0])}.</b> ${esc(s[1])}</li>`).join("")}</ol>
   <h2>What the LLM extracts from every post</h2>
   <div class="tablewrap"><table><thead><tr><th>Field</th><th>Why it matters</th></tr></thead><tbody>${(STORY.fields||[]).map(f=>`<tr><td><code>${esc(f[0])}</code></td><td>${esc(f[1])}</td></tr>`).join("")}</tbody></table></div>
@@ -413,7 +711,7 @@ function renderMethod(){
   <p class="muted">Model: ${esc((ENGINE.models||[]).map(m=>m[0]).join(", "))}. Data collected ${esc(META.collected||"")}. Code: ${META.repo?`<a href="${esc(META.repo)}" target="_blank" rel="noopener">${esc(META.repo)}</a>`:"repository link to follow"}.</p>`;
 }
 
-renderFindings(); renderMap(); renderCues(); renderEvidenceShell(); drawEvidence(); renderAsk(); renderMethod();
-let start="findings"; try{ start = (location.hash.slice(1)) || localStorage.getItem("tab") || "findings" }catch(e){}
-show(TABS.some(t=>t[0]===start)?start:"findings");
+renderOverview(); renderSegments(); renderMap(); renderCues(); renderEvidenceShell(); drawEvidence(); renderAsk(); renderMethod();
+let start="overview"; try{ start = (location.hash.slice(1)) || localStorage.getItem("tab") || "overview" }catch(e){}
+show(TABS.some(t=>t[0]===start)?start:"overview");
 </script>

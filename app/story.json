@@ -164,5 +164,67 @@
   ]
  ],
  "quality": "80 tagged posts (50 from the Help Community, 30 from the other sources) were re-read against their full text by a second model (Claude), not by a person. It agreed with Gemini on relevance for 69 of 80 (86%) and on where the search broke for 75 of 80 (94%). The two error patterns: face-grouping failures sometimes tagged off-goal, which undercounts the indexing problem, and short praise or general Hacker News chatter sometimes tagged as search feedback. Neither creates false retrieval stories at any scale.",
- "limits": "Public posts are self-selected and skew to frustrated, technical and Android users. Help Community and Reddit posts are long and rich; Play Store reviews are short. YouTube comments are numerous but short (median 25 words), so only 307 passed the prefilter and 51 are retrieval stories. Severity and failure stage are LLM judgements, checked on a sample. Scores rank areas within this corpus; they are not market sizes."
+ "limits": "Public posts are self-selected and skew to frustrated, technical and Android users. Help Community and Reddit posts are long and rich; Play Store reviews are short. YouTube comments are numerous but short (median 25 words), so only 307 passed the prefilter and 51 are retrieval stories. Severity and failure stage are LLM judgements, checked on a sample. Scores rank areas within this corpus; they are not market sizes.",
+ "synthesis": {
+  "intro": "Each card follows one problem from what breaks, to what people do instead, to how bad it is, to the hypothesis that tests it and the metric that would show it is fixed.",
+  "north_star": "% of searches for a half-remembered photo that end with the photo found",
+  "stages": {
+   "cannot_refine": {
+    "need": "Search with everything I remember at once (who, where, roughly when).",
+    "hyp": [
+     "H1"
+    ],
+    "metric": "% of searches using 2+ cues that end with the photo found",
+    "bet": "Let people stack cues (person + place + rough time) in one search."
+   },
+   "buried": {
+    "need": "Get to the right stretch of time without scrolling through years.",
+    "hyp": [
+     "H2"
+    ],
+    "metric": "Median time from opening search to finding the photo",
+    "bet": "Jump by rough time or event (\"summer 2019\", \"Diwali\") and rank the likely match first."
+   },
+   "index_gap": {
+    "need": "Find a photo by the person in it or the words written in it.",
+    "hyp": [
+     "H3",
+     "H4"
+    ],
+    "metric": "% of person and text searches that return the photo",
+    "bet": "Prompt people to name key faces; make words in screenshots and documents searchable."
+   },
+   "misunderstood": {
+    "need": "Describe the photo in my own words and get that photo back.",
+    "hyp": [
+     "H5",
+     "H6"
+    ],
+    "metric": "% of searches the user refines or abandons after the first results",
+    "bet": "Show what search understood and let people correct it in one tap."
+   },
+   "feature_regression": {
+    "need": "Keep the precise name and date search I relied on.",
+    "hyp": [
+     "H6"
+    ],
+    "metric": "Repeat-search rate among heavy users after a search change",
+    "bet": "Keep classic exact search one tap away from Ask Photos."
+   },
+   "cannot_express": {
+    "need": "Start a search from context (what was happening, which app) when I can't name the photo.",
+    "hyp": [
+     "H5"
+    ],
+    "metric": "% of context-style searches that return the photo",
+    "bet": "Accept context cues like \"the photo Riya sent on WhatsApp\"."
+   },
+   "not_in_library": {
+    "need": "Know whether the photo was ever backed up.",
+    "hyp": [],
+    "metric": "Out of scope: a backup problem, not a search problem",
+    "bet": "Tell people when a photo isn't in the library."
+   }
+  }
+ }
 }
