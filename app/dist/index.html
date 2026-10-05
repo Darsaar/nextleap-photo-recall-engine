@@ -256,7 +256,7 @@ function retrieve(q,k=12){
     qt.forEach(w=>{ if(!tf[w])return; const idf=Math.log(1+(N-DF[w]+.5)/(DF[w]+.5)); s+=idf*tf[w]*2.2/(tf[w]+1.2*(.25+.75*d.length/avg)); });
     if(EVID[i].relevance==="retrieval_story") s*=1.5; return [s,i]; }).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k).map(x=>EVID[x[1]]);
 }
-function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^none|unknown/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
+function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^\s*none|unknown/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
 let sampleNS = null;
 (async()=>{ try{ if(window.claude?.use){ sampleNS = await window.claude.use("sample"); } }catch(e){} })();
 function renderAsk(){
@@ -272,32 +272,39 @@ function renderAsk(){
 }
 let askCtl=null;
 const INTENTS = [
+  [/(problem|issue|pain|struggl|break|wrong|fail|complain).*(most|biggest|top|common|main|frequent)|(most|biggest|top|common|main|frequent).*(problem|issue|pain|struggl|break|wrong|fail|complain)/i, "failure_stage", "Where search breaks, across all retrieval posts", nice],
   [/kind|type|what (photos|pictures)|which photos/i, "content_type", "Photo types across all retrieval stories", nice],
   [/forg[eo]t/i, "cues_forgotten", "What people had forgotten, across all retrieval stories", cue],
   [/remember|recall|know about/i, "cues_remembered", "What people remembered, across all retrieval stories", cue],
   [/instead|fallback|when search fails|do when|workaround|give up/i, "workaround", "What people did instead, across all retrieval stories", nice],
   [/phrase|type|word|query|formulat|search for it/i, "query_typed", "Searches people quoted, word for word", null],
 ];
-function corpusCounts(field){ const m={}; EVID.filter(r=>r.relevance==="retrieval_story").forEach(r=>[].concat(r[field]||[]).forEach(v=>{if(v&&!/^none|unknown/.test(v))m[v]=(m[v]||0)+1})); return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,8); }
+function corpusCounts(field){ const m={}; EVID.filter(r=>field==="failure_stage"||r.relevance==="retrieval_story").forEach(r=>[].concat(r[field]||[]).forEach(v=>{if(v&&!/^\s*none|unknown/.test(v))m[v]=(m[v]||0)+1})); return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,8); }
 async function ask(q){
   if(!q.trim()) return;
   const out=$("#ask-out"); const intent = INTENTS.find(i=>i[0].test(q));
   // Prefer posts that describe an actual failure; praise and chatter rarely answer a research question.
   let hits = retrieve(q, 80).filter(r=>(r.text||"").split(/\s+/).length>=12 && r.failure_stage && r.failure_stage!=="none");
-  if(intent && intent[1]!=="query_typed") hits = hits.filter(r=>[].concat(r[intent[1]]||[]).some(v=>v&&!/^none|unknown/.test(v))).concat(hits).filter((r,i,a)=>a.indexOf(r)===i);
+  if(intent && intent[1]!=="query_typed") hits = hits.filter(r=>[].concat(r[intent[1]]||[]).some(v=>v&&!/^\s*none|unknown/.test(v))).concat(hits).filter((r,i,a)=>a.indexOf(r)===i);
   if(intent && intent[1]==="query_typed") hits = EVID.filter(r=>r.query_typed).sort((a,b)=>b.text.length-a.text.length);
+  // Broad "what is most common" questions: show a spread of posts across the top failure stages, not keyword matches.
+  if(intent && intent[1]==="failure_stage"){
+    const byUrl = new Map(EVID.map(r=>[r.url,r]));
+    hits = (ENGINE.opportunities||[]).slice(0,4).flatMap(o=>o.quotes.slice(0,2).map(qq=>byUrl.get(qq.url)||{quote:qq.q,text:qq.need||"",source:qq.source,url:qq.url,date:qq.date,content_type:qq.type,failure_stage:qq.stage}));
+  }
   hits = hits.slice(0,14);
   const c = countsFor(hits);
-  const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}:</b> ${arr.map(([k,v])=>esc(f(k))+" ("+v+")").join(", ")}</p>`:"";
+  const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}:</b> ${arr.map(([k,v])=>esc(f(k))+" ("+v+" post"+(v>1?"s":"")+")").join(", ")}</p>`:"";
   let head = "";
-  if(intent && intent[1]!=="query_typed"){ const n=ENGINE.funnel.stories; head = `<div class="eyebrow">${esc(intent[2])} · ${fmt(n)} stories</div>${bars(corpusCounts(intent[1]), n, "var(--c1)", intent[3])}`; }
+  if(intent && intent[1]!=="query_typed"){ const n=intent[1]==="failure_stage"?EVID.length:ENGINE.funnel.stories; head = `<div class="eyebrow">${esc(intent[2])} · ${fmt(n)} ${intent[1]==="failure_stage"?"posts":"stories"}</div>${bars(corpusCounts(intent[1]), n, "var(--c1)", intent[3])}`; }
   if(intent && intent[1]==="query_typed"){ const R=ENGINE.richness; head = `<div class="eyebrow">${esc(intent[2])}</div><p>${fmt(R.queries_quoted)} stories quote their search. Median length: ${R.query_median_words} word. ${Math.round(R.share_queries_1_2_words*100)}% are one or two words.</p><p>${EVID.filter(r=>r.query_typed).slice(0,24).map(r=>`<code>${esc(r.query_typed)}</code>`).join(" · ")}</p>`; }
   out.innerHTML = `<div class="panel">${head}<div class="eyebrow" style="margin-top:${head?"14px":"0"}">Most relevant posts · ${hits.length}</div><div id="ai" class="ai muted"></div>
-   ${intent?"":line("Photo types",c.types)+line("Where it broke",c.stages)+line("Remembered",c.remembered,cue)+line("Forgotten",c.forgotten,cue)+line("Workarounds",c.workarounds)}
+   ${intent?"":`<p class="muted">Counts from the ${hits.length} matching posts:</p>`+line("Photo types",c.types)+line("Where it broke",c.stages)+line("Remembered",c.remembered,cue)+line("Forgotten",c.forgotten,cue)+line("Workarounds",c.workarounds)}
    ${hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
   const ai=$("#ai");
+  const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
   const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${r.source}, ${r.content_type}, broke at ${r.failure_stage}) ${r.quote||""} | ${r.text.slice(0,500)}`).join("\n");
-  const prompt = `You are a product researcher. Answer the question using ONLY the numbered posts below from public Google Photos feedback. Cite posts like [3]. Say plainly when the posts don't answer it. 120 words max, plain English.\n\nQuestion: ${q}\n\nPosts:\n${ctx}`;
+  const prompt = `You are a product researcher. Answer the question using ONLY the numbered posts below from public Google Photos feedback. Cite posts like [3]. Say plainly when the posts don't answer it. 120 words max, plain English, no markdown.${stats?`\n\nCounts across all ${intent[1]==="failure_stage"?EVID.length+" retrieval posts":ENGINE.funnel.stories+" retrieval stories"} (use these for any "most common" claim): ${stats}`:""}\n\nQuestion: ${q}\n\nPosts:\n${ctx}`;
   if(sampleNS){
     askCtl?.abort(); askCtl=new AbortController(); ai.textContent="Thinking…";
     try{ const r = await sampleNS(prompt,{signal:askCtl.signal, cache:false, modelTier:"quick", onText:({text})=>{ai.textContent=text; ai.classList.remove("muted");}}); ai.textContent=r.text; ai.classList.remove("muted"); }
