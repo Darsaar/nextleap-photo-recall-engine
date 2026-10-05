@@ -303,8 +303,21 @@ async function ask(q){
    ${hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
   const ai=$("#ai");
   const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
-  const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${r.source}, ${r.content_type}, broke at ${r.failure_stage}) ${r.quote||""} | ${r.text.slice(0,500)}`).join("\n");
-  const prompt = `You are a product researcher. Answer the question using ONLY the numbered posts below from public Google Photos feedback. Cite posts like [3]. Say plainly when the posts don't answer it. 120 words max, plain English, no markdown.${stats?`\n\nCounts across all ${intent[1]==="failure_stage"?EVID.length+" retrieval posts":ENGINE.funnel.stories+" retrieval stories"} (use these for any "most common" claim): ${stats}`:""}\n\nQuestion: ${q}\n\nPosts:\n${ctx}`;
+  const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}) ${r.quote||""} | ${(r.text||"").slice(0,500)}`).join("\n");
+  const prompt = `You help a product manager understand why people can't find photos in Google Photos. Answer the question using ONLY the numbered user posts below.
+
+How to write:
+- Start with one short sentence that directly answers the question.
+- Then give 2 or 3 bullet points starting with "- ". Each bullet is one simple sentence about what users actually experience, followed by the post number in brackets, like [2].
+- Use everyday words a non-technical reader understands. Never use internal labels like "index gap", "failure stage", "retrieval" or "corpus".
+- If numbers are given below, use them for any "most" or "how often" claim, written as plain counts (e.g. "538 posts").
+- If the posts don't answer the question, say so in one sentence.
+- Under 90 words. No bold, no headings, no markdown other than the bullets.${stats?`\n\nOverall numbers across all ${intent[1]==="failure_stage"?EVID.length+" posts about finding photos":ENGINE.funnel.stories+" stories of someone looking for a photo"}: ${stats}`:""}
+
+Question: ${q}
+
+Posts:
+${ctx}`;
   if(sampleNS){
     askCtl?.abort(); askCtl=new AbortController(); ai.textContent="Thinking…";
     try{ const r = await sampleNS(prompt,{signal:askCtl.signal, cache:false, modelTier:"quick", onText:({text})=>{ai.textContent=text; ai.classList.remove("muted");}}); ai.textContent=r.text; ai.classList.remove("muted"); }
