@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Photo Recall Engine</title>
 <meta name="description" content="AI discovery engine: what people remember, forget and type when they can't find a photo in Google Photos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +85,10 @@ a{color:var(--accent)}
 .presets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .presets button{font:inherit;font-size:.82rem;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer;text-align:left}
 .answer{margin-top:14px}
-.answer .ai{white-space:pre-wrap}
+.answer .ai{white-space:pre-wrap;font-size:1rem;line-height:1.6}
+.aibox{background:var(--heat0);border-left:4px solid var(--accent);border-radius:8px;padding:14px 16px}
+.answer .sec{margin-top:16px}
+.note{font-size:.8rem;color:var(--muted);margin:10px 0 0;max-width:none}
 .hyp{display:grid;grid-template-columns:44px 1fr;gap:10px;border-top:1px solid var(--line);padding:12px 0}
 .hyp b.h{font:700 1.1rem var(--display);color:var(--accent)}
 ol.steps{padding-left:20px} ol.steps li{margin:6px 0}
@@ -190,7 +194,7 @@ function renderMap(){
   $("#t-map").querySelectorAll("td.c").forEach(td=>td.onclick=()=>{ $("#f-type").value=td.dataset.t; $("#f-stage").value=td.dataset.s; $("#f-rel").value="retrieval_story"; drawEvidence(); show("evidence"); });
 }
 function quoteHTML(q){
-  return `<div class="quote">${q.n?`<b class="num">[${q.n}]</b> `:""}<q>${esc(q.q)}</q><div class="meta">${SRC[q.source]||q.source} · ${esc(q.date||"")} · ${esc(nice(q.type))} · ${esc(nice(q.stage))} · <a href="${esc(q.url)}" target="_blank" rel="noopener">source</a></div></div>`;
+  return `<div class="quote">${q.n?`<b class="num">[${q.n}]</b> `:""}<q>${esc(q.q)}</q><div class="meta">${[SRC[q.source]||q.source, q.date, nice(q.type), nice(q.stage)].filter(Boolean).map(esc).join(" · ")} · <a href="${esc(q.url)}" target="_blank" rel="noopener">source</a></div></div>`;
 }
 
 /* ---------- Memory cues ---------- */
@@ -256,7 +260,7 @@ function retrieve(q,k=12){
     qt.forEach(w=>{ if(!tf[w])return; const idf=Math.log(1+(N-DF[w]+.5)/(DF[w]+.5)); s+=idf*tf[w]*2.2/(tf[w]+1.2*(.25+.75*d.length/avg)); });
     if(EVID[i].relevance==="retrieval_story") s*=1.5; return [s,i]; }).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k).map(x=>EVID[x[1]]);
 }
-function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^\s*none|unknown/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
+function countsFor(rows){ const c=(k)=>{const m={};rows.forEach(r=>[].concat(r[k]||[]).forEach(v=>{if(v&&!/^\s*none|unknown|^other$/.test(v))m[v]=(m[v]||0)+1}));return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5)}; return {types:c("content_type"),stages:c("failure_stage"),remembered:c("cues_remembered"),forgotten:c("cues_forgotten"),workarounds:c("workaround")}; }
 let sampleNS = null;
 (async()=>{ try{ if(window.claude?.use){ sampleNS = await window.claude.use("sample"); } }catch(e){} })();
 function renderAsk(){
@@ -294,13 +298,15 @@ async function ask(q){
   }
   hits = hits.slice(0,14);
   const c = countsFor(hits);
-  const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}:</b> ${arr.map(([k,v])=>esc(f(k))+" ("+v+" post"+(v>1?"s":"")+")").join(", ")}</p>`:"";
+  const line = (lab, arr, f=nice) => arr.length?`<p><b>${lab}</b><br>${arr.slice(0,3).map(([k,v])=>esc(f(k))+" ("+v+" post"+(v>1?"s":"")+")").join(", ")}</p>`:"";
   let head = "";
   if(intent && intent[1]!=="query_typed"){ const n=intent[1]==="failure_stage"?EVID.length:ENGINE.funnel.stories; head = `<div class="eyebrow">${esc(intent[2])} · ${fmt(n)} ${intent[1]==="failure_stage"?"posts":"stories"}</div>${bars(corpusCounts(intent[1]), n, "var(--c1)", intent[3])}`; }
   if(intent && intent[1]==="query_typed"){ const R=ENGINE.richness; head = `<div class="eyebrow">${esc(intent[2])}</div><p>${fmt(R.queries_quoted)} stories quote their search. Median length: ${R.query_median_words} word. ${Math.round(R.share_queries_1_2_words*100)}% are one or two words.</p><p>${EVID.filter(r=>r.query_typed).slice(0,24).map(r=>`<code>${esc(r.query_typed)}</code>`).join(" · ")}</p>`; }
-  out.innerHTML = `<div class="panel">${head}<div class="eyebrow" style="margin-top:${head?"14px":"0"}">Most relevant posts · ${hits.length}</div><div id="ai" class="ai muted"></div>
-   ${intent?"":`<p class="muted">Counts from the ${hits.length} matching posts:</p>`+line("Photo types",c.types)+line("Where it broke",c.stages)+line("Remembered",c.remembered,cue)+line("Forgotten",c.forgotten,cue)+line("Workarounds",c.workarounds)}
-   ${hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
+  out.innerHTML = `<div class="aibox" id="aibox"><div class="eyebrow">AI summary</div><div id="ai" class="ai muted"></div><p class="note">Written by AI from the numbered posts further down. A number like [2] points to that post.</p></div>
+   ${head?`<div class="panel sec">${head}</div>`:""}
+   ${intent?"":`<div class="panel sec"><div class="eyebrow">At a glance · the ${hits.length} posts that match your question</div><p class="note" style="margin:4px 0 10px">Counted from these posts only, so they change with every question.</p>`+line("What photo were they looking for?",c.types)+line("Where did search let them down?",c.stages)+line("What did they still remember?",c.remembered,cue)+line("What had they forgotten?",c.forgotten,cue)+line("What did they do instead?",c.workarounds)+`</div>`}
+   <div class="panel sec"><div class="eyebrow">Source posts · real quotes, each linked to where it was posted</div>${hits.slice(0,8).map((r,i)=>quoteHTML({n:i+1,q:r.quote||r.text.slice(0,240),source:r.source,url:r.url,date:r.date,type:r.content_type,stage:r.failure_stage})).join("")}</div>`;
+  if(!sampleNS && !META.ask_endpoint) $("#aibox").remove();
   const ai=$("#ai");
   const stats = intent && intent[1]!=="query_typed" ? corpusCounts(intent[1]).map(([k,v])=>`${intent[3](k)}: ${v}`).join("; ") : "";
   const ctx = hits.slice(0,8).map((r,i)=>`[${i+1}] (${SRC[r.source]||r.source}; photo: ${nice(r.content_type)}; problem: ${nice(r.failure_stage)}) ${r.quote||""} | ${(r.text||"").slice(0,500)}`).join("\n");
