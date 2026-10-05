@@ -602,7 +602,7 @@ const ALL_LABS = [...new Set(Object.values(ALABS).flat())];
 function paintAI(el, text, k, max){
   el.classList.remove("muted");
   const re = new RegExp("^\\s*(" + ALL_LABS.map(l=>l.replace("'", "['’]")).join("|") + ")\\s*:\\s*", "gim");
-  const cite = s => esc(s).replace(/\[(\d+)\]/g,(m,n)=>+n>=1&&+n<=max?`<a href="#" class="cite" data-k="${k}" data-n="${n}">${n}</a>`:"");
+  const cite = s => esc(s).replace(/\[(\d+(?:\s*,\s*\d+)*)\]/g,(m,ns)=>ns.split(/\s*,\s*/).map(n=>+n>=1&&+n<=max?`<a href="#" class="cite" data-k="${k}" data-n="${n}">${n}</a>`:"").join(""));
   const parts=[]; let m, last=null;
   while((m=re.exec(text))){ if(last) last.body=text.slice(last.end,m.index); last={lab:m[1],end:re.lastIndex}; parts.push(last); }
   if(last) last.body=text.slice(last.end);
@@ -736,7 +736,9 @@ What they really need: the deeper need behind the request in the user's own voic
 Who feels it most: the user groups for whom this is worse and what is different about their situation, from the group data given.
 What doesn't fit: counter-evidence or contradictions, e.g. posts where search worked, users who blame something else, or signals pointing the other way, with citations. Say plainly if there is none.
 Still unknown: what this data can't tell us, and the one thing the survey or interviews should check.
-Opportunity: the product opportunity that serves the need you described (the "product bet" lines in the data are starting points, adapt them to this question), why it beats the obvious alternative, the hypothesis it tests by its H number (e.g. "tests H2") and the metric that would show it worked.
+Opportunity: a NEW, practical feature (not something Google Photos already has) that serves the need you described: say concretely what the user would see or tap, in one sentence, and why the existing feature falls short for these users (the "product bet" lines in the data are starting points, adapt them to this question), why it beats the obvious alternative, the hypothesis it tests, always written as its H number (e.g. "tests H2") and chosen so the hypothesis is about this same problem and the metric that would show it worked.
+
+Google Photos already has these, so never propose them as the opportunity: natural-language search and Ask Photos (conversational search with follow-up questions), face groups with naming and face shortcuts in search, pets, places and the map view, search for things and for text inside photos, exact-match search with quotes, sort results by date or relevance, captions and descriptions search, the date scrubber, albums, favourites, Memories, the Screenshots and Documents collections, Locked Folder, and backup status. Build on them instead (e.g. what is missing in them for these users).
 
 Answer the question that was asked first: if it asks who, open with the groups; if it asks what to build, open with the opportunity; if it asks for contradictions, open with those. 200 to 290 words.`;
     prompt = `You are a senior user researcher helping a product manager decide which Google Photos retrieval problem to work on. Your job is to identify and compare problems and opportunity areas using evidence from real users, not to summarise reviews or sentiment. Use ONLY the numbers and numbered posts below. Every number you write must come from them.
@@ -753,7 +755,7 @@ ${focus}
 How to reply:
 ${fmtLabs}
 
-Rules: cite posts by writing their number in square brackets right after the claim, like [3] or [3][12]; Why it happens and What doesn't fit must each have at least one. The numbers above are for your reasoning, not for repeating. Write numbers as digits. Banned words: "index", "index gap", "failure stage", "retrieval", "corpus", "surface", "leverage", "impact score". Say "times as common as for everyone" instead of "lift". If the posts don't answer the question, say so. No headings, bullets, bold or other markdown; only the lead-ins above.
+Rules: cite posts by writing their number in square brackets right after the claim, like [3] or [3][12] (one number per bracket, never run numbers together); Why it happens and What doesn't fit must each have at least one. The numbers above are for your reasoning, not for repeating. Write numbers as digits. Banned words: "index", "index gap", "failure stage", "retrieval", "corpus", "surface", "leverage", "impact score". Say "times as common as for everyone" instead of "lift". If the posts don't answer the question, say so. No headings, bullets, bold or other markdown; only the lead-ins above.
 
 Posts:
 ${ctx}`;

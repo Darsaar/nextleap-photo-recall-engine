@@ -175,7 +175,7 @@
      "H1"
     ],
     "metric": "% of searches using 2+ cues that end with the photo found",
-    "bet": "Let people stack cues (person + place + rough time) in one search."
+    "bet": "Memory checklist: when a search misses, offer a \"what else do you remember?\" panel of one-tap cues from the user's own library (people, places, trips, the app it came from), so they add cues instead of retyping."
    },
    "buried": {
     "need": "Get to the right stretch of time without scrolling through years.",
@@ -183,7 +183,7 @@
      "H2"
     ],
     "metric": "Median time from opening search to finding the photo",
-    "bet": "Jump by rough time or event (\"summer 2019\", \"Diwali\") and rank the likely match first."
+    "bet": "Life-chapter jump: mark auto-detected chapters (a trip, a move, an old phone, a new job) on the scroll bar, so \"roughly when\" becomes one tap instead of scrolling through years."
    },
    "index_gap": {
     "need": "Find a photo by the person in it or the words written in it.",
@@ -192,7 +192,7 @@
      "H4"
     ],
     "metric": "% of person and text searches that return the photo",
-    "bet": "Prompt people to name key faces; make words in screenshots and documents searchable."
+    "bet": "Rescue the unsearchable: when a name or text search finds little, show the unnamed faces and hard-to-read photos most likely to match and let the user confirm them in one tap."
    },
    "misunderstood": {
     "need": "Describe the photo in my own words and get that photo back.",
@@ -201,7 +201,7 @@
      "H6"
     ],
     "metric": "% of searches the user refines or abandons after the first results",
-    "bet": "Show what search understood and let people correct it in one tap."
+    "bet": "Show what search heard: an editable line under the results (\"person: Mom · place: Goa · around 2019\"), so a misread is fixed in one tap instead of a retype."
    },
    "feature_regression": {
     "need": "Keep the precise name and date search I relied on.",
@@ -209,7 +209,7 @@
      "H6"
     ],
     "metric": "Repeat-search rate among heavy users after a search change",
-    "bet": "Keep classic exact search one tap away from Ask Photos."
+    "bet": "Pinned exact searches: let heavy users pin the name and date searches they rely on, and warn them when an update changes those results."
    },
    "cannot_express": {
     "need": "Start a search from context (what was happening, which app) when I can't name the photo.",
@@ -217,13 +217,13 @@
      "H5"
     ],
     "metric": "% of context-style searches that return the photo",
-    "bet": "Accept context cues like \"the photo Riya sent on WhatsApp\"."
+    "bet": "Search by where it came from: let people find a photo by the app or person it came from (\"sent by Riya on WhatsApp\", \"screenshot from Instagram\") plus what was happening at the time."
    },
    "not_in_library": {
     "need": "Know whether the photo was ever backed up.",
     "hyp": [],
     "metric": "Out of scope: a backup problem, not a search problem",
-    "bet": "Tell people when a photo isn't in the library."
+    "bet": "\"Was it ever backed up?\" answer: check device-only folders and other signed-in accounts and say plainly where the photo is, or that it never reached Photos."
    }
   }
  }
