@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       if (!r.ok) continue;
       const j = await r.json();
       const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("") || "";
-      if (text) return res.status(200).json({ text });
+      if (text) return res.status(200).json({ text: text.replace(/\*\*/g, "") });
     } catch (e) {}
   }
   return res.status(200).json({ text: "" });
