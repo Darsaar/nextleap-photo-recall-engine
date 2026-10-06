@@ -1,0 +1,572 @@
+{
+ "cards": [
+  {
+   "q": "What do people remember about a photo they can't find?",
+   "headline": "A rough sense of when, plus who or what was in it.",
+   "body": "Rough time, a person and an object are the most remembered details (chart 1). Only 21% of stories mention two or more, but that is what people write down, not all they recall.",
+   "counter": "These are the details people chose to write down; the survey asks what they actually recall.",
+   "recs": [
+    "Treat time as a range (\"around 2019\", \"before the move\"), not an exact date.",
+    "Use people and objects the library already knows as one-tap cues."
+   ],
+   "hyp": [
+    "H1",
+    "H2"
+   ],
+   "chart": 1,
+   "filter": {
+    "rel": "retrieval_story"
+   },
+   "n": 1091,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "What do they type into search?",
+   "headline": "One or two words, even when they remember more.",
+   "body": "79% of the 235 quoted searches are 1–2 words (chart 2). Of 76 people who remembered two or more things, 56 still typed two words or fewer.",
+   "counter": "Only 235 of 1091 stories quote the exact search, so this rests on a small share of posts.",
+   "recs": [
+    "Let one search hold several cues (person + place + time) as chips.",
+    "After the first word, suggest the next cue (\"Riya\" → \"in Goa?\", \"around Diwali?\").",
+    "Show why each result matched, so a wrong cue is easy to fix."
+   ],
+   "hyp": [
+    "H1"
+   ],
+   "chart": 2,
+   "filter": {
+    "rel": "retrieval_story",
+    "q": true
+   },
+   "n": 235,
+   "sources": 7,
+   "badge": "Medium"
+  },
+  {
+   "q": "Do real posts back the two branches slide 2 picked?",
+   "headline": "Yes: combining cues and buried results rank 1 and 2, but \"not searchable\" is a close third.",
+   "body": "Combining cues (30.4) and buried results (30.2) top the ranking, and \"never backed up\" is last (3.8), matching slide 2's fix / out calls (chart 3).",
+   "counter": "\"Not searchable\" has the most posts (538) and scores 29.9; slide 2 parks it on feasibility, not size.",
+   "recs": [
+    "Keep combining cues and buried as the two focus branches.",
+    "Say on the slide why \"not searchable\" is parked: it is an indexing fix, not a search-experience one."
+   ],
+   "hyp": [
+    "H1",
+    "H2",
+    "H3"
+   ],
+   "chart": 3,
+   "filter": {
+    "stages": [
+     "cannot_refine",
+     "buried",
+     "index_gap",
+     "misunderstood"
+    ]
+   },
+   "n": 1814,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "Combining cues: what exactly goes wrong?",
+   "headline": "Search drops the second cue, and there is no way to narrow by date or place.",
+   "body": "Of 452 \"can't combine\" posts, 197 describe trying two things at once (two people, a person and a place) and 69 ask for a filter or date range. 78% of these stories end without the photo.",
+   "counter": "The split comes from keyword matching on the post text, so treat it as direction, not exact counts.",
+   "recs": [
+    "Measure slide 2's inputs: share of multi-cue searches and zero results on them.",
+    "Prototype cue chips plus a date-range slider in the same search."
+   ],
+   "hyp": [
+    "H1"
+   ],
+   "chart": 3,
+   "filter": {
+    "stages": [
+     "cannot_refine"
+    ]
+   },
+   "n": 452,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "Buried results: is it look-alikes or sheer volume?",
+   "headline": "Where people say why, it is volume and wrong dates more than look-alikes.",
+   "body": "Of 347 \"buried\" posts, 50 talk about too many results or long scrolls and 26 about photos in the wrong date or order; only 18 mention duplicates or look-alike shots.",
+   "counter": "Keyword matching, and most buried posts don't say why, so look-alikes may be under-described.",
+   "recs": [
+    "Consider renaming slide 2's branch to \"buried in volume\" and keep look-alikes as one input.",
+    "Track scroll depth and the rank of the photo finally opened (slide 2's inputs)."
+   ],
+   "hyp": [
+    "H2"
+   ],
+   "chart": 4,
+   "filter": {
+    "stages": [
+     "buried"
+    ]
+   },
+   "n": 347,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "What do people do when search fails?",
+   "headline": "They scroll the timeline or give up.",
+   "body": "73% of stories with a known ending never found the photo. Where the next step is stated, scrolling and giving up lead, and some move to another app (chart 4).",
+   "counter": "287 stories did find the photo (128 easily, 159 with effort), so search works for some.",
+   "recs": [
+    "Make \"roughly when\" a one-tap jump instead of a long scroll.",
+    "When a search misses, offer \"what else do you remember?\" rather than an empty page."
+   ],
+   "hyp": [
+    "H2"
+   ],
+   "chart": 4,
+   "filter": {
+    "rel": "retrieval_story",
+    "outcome": "not_found"
+   },
+   "n": 1048,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "Which photos are hardest to find?",
+   "headline": "Information photos: screenshots, IDs, bills, medicines.",
+   "body": "70% of these stories end without the photo, and they usually fail because the words in them aren't searchable (chart 6).",
+   "counter": "A small base: 106 stories.",
+   "recs": [
+    "Make text in screenshots and documents searchable and say when it is.",
+    "Let people search by the app a screenshot came from."
+   ],
+   "hyp": [
+    "H4"
+   ],
+   "chart": 6,
+   "filter": {
+    "types": [
+     "document_id",
+     "medical",
+     "receipt_bill",
+     "screenshot_info",
+     "text_in_image"
+    ]
+   },
+   "n": 106,
+   "sources": 6,
+   "badge": "Medium"
+  },
+  {
+   "q": "Who is hit hardest?",
+   "headline": "People with large libraries and web / desktop users: the more photos, the more cues they need to combine.",
+   "body": "People with large libraries show up 1.4× more often than usual in \"can't combine cues\" posts (181 posts). Web / desktop users show up 1.4× more often than usual in \"can't combine cues\" posts (63 posts).",
+   "counter": "Groups are self-declared and overlap, and Android dominates because most posts come from Google Play.",
+   "recs": [
+    "Pilot multi-cue search with large-library users first.",
+    "Recruit large-library users for the interviews."
+   ],
+   "hyp": [
+    "H1"
+   ],
+   "chart": null,
+   "filter": {
+    "stages": [
+     "cannot_refine"
+    ]
+   },
+   "n": 452,
+   "sources": 7,
+   "badge": "High"
+  },
+  {
+   "q": "Are photos of people a memory problem or an indexing problem?",
+   "headline": "Mostly indexing: the photo exists but search can't see the face or name.",
+   "body": "260 of 608 people and pet posts are indexing gaps: faces not grouped, names lost after a reset, old photos never processed. 89% of indexing-gap stories end without the photo.",
+   "counter": "The spot check found some face-grouping posts tagged off-goal, so this is undercounted, not overcounted.",
+   "recs": [
+    "When a name search finds little, show likely unnamed faces to confirm in one tap.",
+    "Warn people when names were lost after a restore or reset."
+   ],
+   "hyp": [
+    "H3"
+   ],
+   "chart": 6,
+   "filter": {
+    "types": [
+     "person",
+     "pet",
+     "child_family"
+    ],
+    "stages": [
+     "index_gap"
+    ]
+   },
+   "n": 260,
+   "sources": 7,
+   "badge": "Medium"
+  },
+  {
+   "q": "Did the new AI search (Ask Photos) help?",
+   "headline": "For some heavy users it made things worse.",
+   "body": "520 posts say search changed or got worse, 131 of them naming Ask Photos, Gemini or AI. Their share of posts was 0–10% a year before 2023 and 14–16% since 2024 (chart 5).",
+   "counter": "Loud but ranks 5th: the fix is a rollback debate, not a new way to find photos.",
+   "recs": [
+    "Keep exact name and date search one tap away for heavy users.",
+    "Warn users when an update changes results they relied on."
+   ],
+   "hyp": [
+    "H6"
+   ],
+   "chart": 5,
+   "filter": {
+    "stages": [
+     "feature_regression"
+    ]
+   },
+   "n": 520,
+   "sources": 6,
+   "badge": "High"
+  }
+ ],
+ "charts": {
+  "remembered": [
+   [
+    "rough_time",
+    238,
+    22
+   ],
+   [
+    "person",
+    183,
+    17
+   ],
+   [
+    "object",
+    160,
+    15
+   ],
+   [
+    "text_in_image",
+    114,
+    10
+   ],
+   [
+    "source_app",
+    97,
+    9
+   ],
+   [
+    "visual_look",
+    65,
+    6
+   ],
+   [
+    "place",
+    64,
+    6
+   ],
+   [
+    "event_context",
+    59,
+    5
+   ]
+  ],
+  "length": {
+   "all": [
+    [
+     "1",
+     129
+    ],
+    [
+     "2",
+     57
+    ],
+    [
+     "3",
+     23
+    ],
+    [
+     "4+",
+     26
+    ]
+   ],
+   "n": 235,
+   "multi_n": 76,
+   "multi_short": 56
+  },
+  "stages": [
+   [
+    "cannot_refine",
+    "Can't combine or narrow cues",
+    452,
+    0.7846153846153846
+   ],
+   [
+    "buried",
+    "Right photo buried in results / timeline",
+    347,
+    0.6289592760180995
+   ],
+   [
+    "index_gap",
+    "Photo isn't searchable (faces, text, place not indexed)",
+    538,
+    0.8934010152284264
+   ],
+   [
+    "misunderstood",
+    "Search misreads the query",
+    477,
+    0.8247011952191236
+   ],
+   [
+    "feature_regression",
+    "Search changed or got worse",
+    520,
+    0.8636363636363636
+   ],
+   [
+    "cannot_express",
+    "Can't put the memory into words",
+    154,
+    1.0
+   ],
+   [
+    "not_in_library",
+    "Photo actually missing",
+    92,
+    1.0
+   ]
+  ],
+  "next": {
+   "outcomes": [
+    [
+     "found",
+     128
+    ],
+    [
+     "found_with_effort",
+     159
+    ],
+    [
+     "not_found",
+     761
+    ]
+   ],
+   "known": 1048,
+   "workarounds": [
+    [
+     "scroll_timeline",
+     208
+    ],
+    [
+     "gave_up",
+     207
+    ],
+    [
+     "other_app",
+     70
+    ],
+    [
+     "albums_folders",
+     36
+    ],
+    [
+     "people_tab",
+     15
+    ]
+   ],
+   "stated": 577
+  },
+  "heat": {
+   "types": [
+    "person",
+    "video",
+    "trip_place",
+    "screenshot_info",
+    "event_occasion",
+    "pet",
+    "document_id",
+    "child_family"
+   ],
+   "stages": [
+    "cannot_refine",
+    "buried",
+    "index_gap",
+    "misunderstood",
+    "feature_regression",
+    "cannot_express",
+    "not_in_library"
+   ],
+   "cells": [
+    [
+     10,
+     4,
+     73,
+     23,
+     7,
+     12,
+     6
+    ],
+    [
+     6,
+     14,
+     13,
+     26,
+     2,
+     5,
+     6
+    ],
+    [
+     10,
+     11,
+     10,
+     11,
+     4,
+     2,
+     6
+    ],
+    [
+     1,
+     17,
+     9,
+     10,
+     2,
+     5,
+     6
+    ],
+    [
+     5,
+     16,
+     0,
+     13,
+     1,
+     2,
+     1
+    ],
+    [
+     1,
+     2,
+     7,
+     12,
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     4,
+     9,
+     2,
+     1,
+     2
+    ],
+    [
+     2,
+     2,
+     5,
+     1,
+     0,
+     1,
+     9
+    ]
+   ]
+  },
+  "time": [
+   [
+    "2018",
+    46,
+    0,
+    0
+   ],
+   [
+    "2019",
+    98,
+    3,
+    3
+   ],
+   [
+    "2020",
+    90,
+    9,
+    10
+   ],
+   [
+    "2021",
+    100,
+    0,
+    0
+   ],
+   [
+    "2022",
+    116,
+    4,
+    3
+   ],
+   [
+    "2023",
+    340,
+    33,
+    10
+   ],
+   [
+    "2024",
+    466,
+    67,
+    14
+   ],
+   [
+    "2025",
+    394,
+    55,
+    14
+   ],
+   [
+    "2026",
+    1275,
+    208,
+    16
+   ]
+  ]
+ },
+ "tiers": {
+  "cannot_refine": 1,
+  "buried": 1,
+  "index_gap": 1,
+  "misunderstood": 1,
+  "cannot_express": 2,
+  "feature_regression": 3,
+  "not_in_library": 3
+ },
+ "focus": [
+  "cannot_refine",
+  "buried"
+ ],
+ "hmw": {
+  "cannot_refine": "How might we let one search carry everything a person remembers?",
+  "buried": "How might we get people to the right stretch of time without scrolling?",
+  "index_gap": "How might we make faces and words in photos findable?",
+  "misunderstood": "How might we show what search understood, so a misread is fixed in one tap?",
+  "cannot_express": "How might we start a search from context (what was happening, which app)?",
+  "feature_regression": "How might we keep the exact searches heavy users rely on?",
+  "not_in_library": "How might we tell people early that a photo was never backed up?"
+ },
+ "cue_labels": {
+  "rough_time": "Rough time",
+  "person": "Person",
+  "object": "Object / thing in it",
+  "text_in_image": "Words in the image",
+  "source_app": "Which app it came from",
+  "visual_look": "How it looked",
+  "place": "Place",
+  "event_context": "The event",
+  "exact_date": "Exact date",
+  "device": "Device"
+ }
+}

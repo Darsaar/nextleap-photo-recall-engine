@@ -76,7 +76,7 @@ a{color:var(--accent)}
 .heat td,.heat th{border:0;padding:6px;text-align:center}
 .heat th{white-space:nowrap}
 .heat td.lab{text-align:left;white-space:nowrap;color:var(--ink)}
-.heat td.c{border-radius:3px;min-width:44px;cursor:pointer}
+.heat td.c{border-radius:3px;min-width:34px;cursor:pointer}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .filters select,.filters input,.ask input{font:inherit;font-size:.9rem;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);min-width:0}
 .filters input{flex:1 1 220px}
@@ -221,6 +221,76 @@ a.cite{display:inline-block;min-width:18px;padding:0 5px;margin:0 1px;border-rad
 .ameta{border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
 footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 @media (max-width:520px){.bar{grid-template-columns:110px 1fr 36px}.opp summary{grid-template-columns:22px 1fr}.opp .score{grid-column:2}}
+/* Overview: insight cards, MVP chain, charts; posts dialog; Opportunities matrix and tiers */
+.icards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px;margin-top:12px}
+.icards>*{min-width:0}
+.icard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.icard p{margin:0;font-size:.92rem}
+.iq{font:600 .95rem/1.35 var(--body)}
+.ih{font:700 1.08rem/1.35 var(--display);color:var(--accent);text-decoration:none}
+.ih:hover{text-decoration:underline}
+.icard .counter{color:var(--muted);font-size:.86rem}
+.recs span{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.recs ul{margin:4px 0 0;padding:0;list-style:none}
+.recs li{font-size:.9rem;padding-left:18px;position:relative;margin:3px 0}
+.recs li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+.ifoot{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.8rem;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px;margin-top:12px}
+.charts>*{min-width:0}
+figure.chart.wide{grid-column:1/-1}
+figure.chart{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+figure.chart figcaption{display:flex;gap:10px;margin-bottom:10px}
+figure.chart figcaption h3{margin:0}
+figure.chart figcaption p{margin:2px 0 0;font-size:.82rem;color:var(--muted)}
+.cnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 .8rem var(--body)}
+.cbar{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:minmax(110px,170px) 1fr auto;gap:8px;align-items:center;font-size:.85rem;padding:3px 4px;border-radius:4px;cursor:pointer}
+.cbar:hover,.cbar:focus-visible{background:var(--heat0)}
+.cbar .track{height:12px;background:var(--heat0);border-radius:3px;overflow:hidden;display:block}
+.cbar .fill{height:100%;display:block;border-radius:3px}
+.cbar .val{color:var(--muted);white-space:nowrap}
+.stack{display:flex;height:30px;border-radius:6px;overflow:hidden;gap:2px}
+.stack button{all:unset;cursor:pointer;display:grid;place-items:center;color:#fff;font:600 .8rem var(--body);min-width:28px}
+.sub{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 4px}
+.cols{display:flex;align-items:flex-end;gap:6px;height:190px;padding-top:6px}
+.col{all:unset;cursor:pointer;flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.col .cb{width:100%;max-width:40px;background:var(--bad);border-radius:3px 3px 0 0}
+.col .cv{font-size:.74rem;color:var(--muted)}
+.col .cy{font:.72rem var(--mono);color:var(--muted)}
+.col:hover .cb{opacity:.8}
+dialog#posts{max-width:760px;width:calc(100% - 32px);max-height:85vh;border:1px solid var(--line);border-radius:12px;padding:0;background:var(--panel);color:var(--ink)}
+dialog#posts::backdrop{background:rgb(0 0 0 / .45)}
+.dhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
+.dhead h3{margin:2px 0 0}
+.dbody{padding:4px 18px 16px}
+svg.matrix{width:100%;height:auto;font:11px var(--body);fill:var(--muted)}
+svg.matrix .g{stroke:var(--line)}
+svg.matrix .ax{font:500 10px var(--mono);text-transform:uppercase}
+svg.matrix circle{fill-opacity:.75;stroke:var(--panel);stroke-width:1.5}
+svg.matrix circle.f{fill:var(--accent)} svg.matrix circle.t{fill:var(--c7)} svg.matrix circle.o{fill:var(--line)}
+svg.matrix .pt{cursor:pointer} svg.matrix .pt text{fill:var(--ink);font-weight:500}
+details.how{margin:10px 0;font-size:.9rem} details.how summary{cursor:pointer;color:var(--accent)}
+h3.tier{font:500 .76rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 4px}
+.focus{font:600 .7rem var(--body);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.hmw{font:600 1rem/1.4 var(--display);margin:2px 0 10px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;font-size:.88rem;margin-bottom:12px}
+.facts .eyebrow{display:block;color:var(--muted);margin-bottom:2px}
+.cmp{margin-top:24px}
+.segcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:10px}
+.segcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.segcard header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.segcard h3{margin:0}
+.seghead{font-size:.92rem;margin:0}
+.nfbar{display:grid;grid-template-columns:90px 1fr 40px;gap:8px;align-items:center;font-size:.85rem}
+.nfbar .track{position:relative;height:12px;background:var(--heat0);border-radius:3px;display:block}
+.nfbar .fill{display:block;height:100%;border-radius:3px}
+.nfbar .mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.segfacts{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.88rem;margin-bottom:6px}
+.segfacts .eyebrow{display:block;color:var(--muted);margin-bottom:2px}
+.segcard .btn{align-self:flex-start;margin-top:auto}
+.heat.lift td.c{min-width:70px}
+.segcards.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.segcard.star{border-color:var(--g-blue);box-shadow:0 0 0 1px var(--g-blue) inset}
+.panel.urgent{margin:12px 0 4px;line-height:1.6}
 </style>
 
 <div class="wrap">
@@ -232,11 +302,11 @@ footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 <section class="tab" id="t-overview"></section>
 <section class="tab" id="t-segments" hidden></section>
 <section class="tab" id="t-map" hidden></section>
-<section class="tab" id="t-cues" hidden></section>
 <section class="tab" id="t-evidence" hidden></section>
 <section class="tab" id="t-ask" hidden></section>
 <section class="tab" id="t-method" hidden></section>
 <footer id="foot"></footer>
+<dialog id="posts" aria-label="Posts"></dialog>
 </div>
 
 <script>
@@ -244,6 +314,7 @@ const ENGINE = /*__ENGINE__*/null;
 const EVID = /*__EVIDENCE__*/[];
 const STORY = /*__STORY__*/{};
 const META = /*__META__*/{};
+const INS = /*__INSIGHTS__*/{};
 
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -255,7 +326,7 @@ const nice = s => (ENGINE.stage_labels||{})[s] || NICE[s] || String(s||"").repla
 const CUE = {rough_time:"Rough time", exact_date:"Exact date", place:"Place", person:"Person", object:"Object / thing in it", text_in_image:"Words in the image", event_context:"The event", life_context:"What was going on in life", visual_look:"How it looked (colour, scene)", source_app:"Which app it came from", why_taken:"Why they took it", device:"Device", date:"Date", album_folder:"Album / folder", what_to_type:"What to type", who_sent:"Who sent it", which_account_device:"Which account / device", filename:"File name"};
 const cue = c => CUE[c] || nice(c);
 
-const TABS = [["overview","Overview"],["ask","Ask the engine"],["map","Opportunities"],["segments","Segments"],["cues","Memory cues"],["evidence","Evidence"],["method","Method & quality"]];
+const TABS = [["overview","Overview"],["ask","Ask the engine"],["map","Opportunities"],["segments","Segments"],["evidence","Evidence"],["method","Method & quality"]];
 function show(id){
   TABS.forEach(([t]) => { $("#t-"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id); });
   try{ localStorage.setItem("tab", id) }catch(e){}
@@ -284,26 +355,69 @@ function overIndexed(rows, min=5){
 }
 function strength(n, sources){ return n>=300&&sources>=6 ? "High" : n>=60&&sources>=3 ? "Medium" : "Low"; }
 
+/* ---------- Clickable "show me the posts" (cards, chart bars, cells) ---------- */
+const CLICK = [];
+const clk = (title, test) => { CLICK.push({title, test}); return `data-k="${CLICK.length-1}"`; };
+function openPosts(title, rows){
+  rows = rows.slice().sort((a,b)=>(a.relevance!=="retrieval_story")-(b.relevance!=="retrieval_story"));
+  const d=$("#posts");
+  d.innerHTML = `<div class="dhead"><div><div class="eyebrow">${fmt(rows.length)} posts</div><h3>${esc(title)}</h3></div><button class="btn ghost" id="dclose" aria-label="Close">Close</button></div>
+  <div class="dbody">${rows.slice(0,40).map(r=>`<div class="quote"><q>${esc(r.quote||r.text.slice(0,260))}</q><div class="meta">${[SRC[r.source]||r.source, r.date, nice(r.content_type), nice(r.failure_stage)].filter(Boolean).map(esc).join(" · ")}${r.query_typed?` · typed “${esc(r.query_typed)}”`:""} · <a href="${esc(r.url)}" target="_blank" rel="noopener">source</a></div></div>`).join("")}
+  ${rows.length>40?`<p class="note">Showing 40 of ${fmt(rows.length)}. The Evidence tab has them all.</p>`:""}</div>`;
+  $("#dclose").onclick=()=>d.close(); d.showModal(); d.scrollTop=0;
+}
+document.addEventListener("click", e=>{ const el=e.target.closest("[data-k]"); if(!el) return; e.preventDefault(); const c=CLICK[+el.dataset.k]; openPosts(c.title, EVID.filter(c.test)); });
+document.addEventListener("click", e=>{ const d=$("#posts"); if(e.target===d) d.close(); });
+const stageOf = r => (r.failure_stage||"").trim();
+// A card's filter spec (from insights.json) -> row test
+const specTest = f => r => (!f.rel||r.relevance===f.rel) && (!f.q||(r.query_typed||"").trim()) && (!f.outcome||r.outcome===f.outcome)
+  && (!f.stages||f.stages.includes(stageOf(r))) && (!f.types||f.types.includes(r.content_type));
+
 /* ---------- Overview ---------- */
+function chartBars(items, color, opts={}){
+  const max=Math.max(1,...items.map(x=>x.v));
+  return items.map(x=>`<button class="cbar" ${clk(x.title,x.test)}><span class="lab">${esc(x.label)}</span><span class="track"><span class="fill" style="width:${100*x.v/max}%;background:${x.color||color}"></span></span><span class="val num">${esc(x.show??fmt(x.v))}</span></button>`).join("");
+}
+function overviewCharts(){
+  const C=INS.charts, n=STORIES.length, CL=INS.cue_labels, focus=INS.focus;
+  const qlen=r=>(r.query_typed||"").trim().split(/\s+/).filter(Boolean).length;
+  const c1 = chartBars(C.remembered.map(([k,v,p])=>({label:CL[k]||cue(k), v, show:p+"%", title:`Stories where people remembered: ${CL[k]||cue(k)}`, test:r=>r.relevance==="retrieval_story"&&(r.cues_remembered||[]).includes(k)})), "var(--c1)");
+  const c2 = chartBars(C.length.all.map(([b,v])=>({label:b==="1"?"1 word":b+" words", v, show:pct(v,C.length.n), title:`Quoted searches of ${b} word${b==="1"?"":"s"}`, test:r=>r.relevance==="retrieval_story"&&(r.query_typed||"").trim()&&(b==="4+"?qlen(r)>=4:qlen(r)===+b)})), "var(--c1)");
+  const c3 = chartBars(C.stages.map(([s,l,v,nfr])=>({label:l, v, show:`${fmt(v)} · ${Math.round(nfr*100)}% lost`, color:focus.includes(s)?"var(--accent)":"var(--c7)", title:l, test:r=>stageOf(r)===s})), "var(--c7)");
+  const O=C.next, oc={found:"Found it", found_with_effort:"Found with effort", not_found:"Never found"}, ocol={found:"var(--c3)",found_with_effort:"var(--c2)",not_found:"var(--bad)"};
+  const stack = `<div class="stack">${O.outcomes.map(([k,v])=>`<button ${clk(oc[k],r=>r.relevance==="retrieval_story"&&r.outcome===k)} style="flex:${v};background:${ocol[k]}" title="${oc[k]}: ${v}"><span>${pct(v,O.known)}</span></button>`).join("")}</div>
+    <div class="legend">${O.outcomes.map(([k,v])=>`<span><i style="background:${ocol[k]}"></i>${oc[k]} (${fmt(v)})</span>`).join("")}</div>`;
+  const c4 = stack + `<div class="sub">What they did instead (${fmt(O.stated)} stories that say)</div>` + chartBars(O.workarounds.map(([k,v])=>({label:nice(k), v, show:pct(v,O.stated), title:`What they did instead: ${nice(k)}`, test:r=>r.relevance==="retrieval_story"&&r.workaround===k})), "var(--c2)");
+  const H0=C.heat, H={types:H0.types, stages:H0.stages.slice(0,5), cells:H0.cells.map(r=>r.slice(0,5))}, hmax=Math.max(1,...H.cells.flat()), short={cannot_refine:"Combine",buried:"Buried",index_gap:"Not indexed",misunderstood:"Misread",feature_regression:"Got worse",cannot_express:"Can't say",not_in_library:"Missing"};
+  const c5 = `<div class="tablewrap"><table class="heat"><thead><tr><th></th>${H.stages.map(s=>`<th title="${esc(nice(s))}">${short[s]||s}</th>`).join("")}</tr></thead><tbody>
+    ${H.types.map((t,i)=>`<tr><td class="lab">${esc(nice(t))}</td>${H.cells[i].map((v,j)=>`<td class="c num" ${clk(`${nice(t)} · ${nice(H.stages[j])}`,r=>r.relevance==="retrieval_story"&&r.content_type===t&&stageOf(r)===H.stages[j])} style="background:color-mix(in oklab, var(--heat1) ${Math.round(100*v/hmax)}%, var(--heat0));color:${v>hmax*.55?"var(--panel)":"var(--ink)"}">${v||""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  const tmax=Math.max(...C.time.map(x=>x[3]));
+  const c6 = `<div class="cols">${C.time.map(([y,tot,v,p])=>`<button class="col" ${clk(`"Search got worse" posts from ${y}`,r=>stageOf(r)==="feature_regression"&&(r.date||"").startsWith(y))} title="${v} of ${tot} posts"><span class="cv num">${p}%</span><span class="cb" style="height:${Math.max(2,100*p/tmax)}%"></span><span class="cy">${y}</span></button>`).join("")}</div>`;
+  const box=(i,title,cap,body,wide)=>`<figure class="chart${wide?" wide":""}"><figcaption><span class="cnum">${i}</span><div><h3>${title}</h3><p>${cap}</p></div></figcaption>${body}</figure>`;
+  const L=C.length;
+  return `<div class="charts">
+    ${box(1,"What people remembered","Share of the "+fmt(n)+" retrieval stories that mention each detail. Rough time leads.",c1)}
+    ${box(2,"How long their searches were",`${fmt(L.n)} stories quote the exact words typed. Of ${L.multi_n} people who remembered 2+ things, ${L.multi_short} still typed 2 words or fewer.`,c2)}
+    ${box(3,"Where search broke","Posts per failure stage and how often the photo was never found. Blue = the two branches slide 2 picked.",c3)}
+    ${box(4,"What happened next",`How ${fmt(O.known)} stories with a known ending turned out, and the fallback people used.`,c4)}
+    ${box(5,"\"Search got worse\" over time","Share of each year's posts saying search changed or got worse. Years with 40+ posts.",c6)}
+    ${box(6,"Which photos fail where","Retrieval stories by photo type and failure stage. Darker = more posts; the five biggest stages. People fail at indexing; screenshots and events get buried.",c5)}
+  </div><p class="note">Click any bar, segment or cell to read the posts behind it.</p>`;
+}
+function insightCards(){
+  return INS.cards.map((c,i)=>`<article class="icard">
+    <div class="iq">${esc(c.q)}</div>
+    <a class="ih" href="#" ${clk(c.q, specTest(c.filter))}>${esc(c.headline)}</a>
+    <p>${esc(c.body)}</p>
+    <p class="counter"><b>What doesn't fit:</b> ${esc(c.counter)}</p>
+    <div class="recs"><span>Recommendations</span><ul>${c.recs.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="ifoot"><span class="badge ${c.badge}">● ${c.badge} evidence</span><span class="num">${fmt(c.n)} posts · ${c.sources} sources</span>${c.hyp.length?`<span>tests ${c.hyp.join(", ")}</span>`:""}${c.chart?`<span>see chart ${c.chart}</span>`:""}</div>
+  </article>`).join("");
+}
 function renderOverview(){
-  const F=ENGINE.funnel, R=ENGINE.richness, SY=STORY.synthesis||{stages:{}};
+  const F=ENGINE.funnel, R=ENGINE.richness;
   const nf=nfRate(STORIES), known=STORIES.filter(KNOWN).length;
   const wk=ENGINE.workarounds.filter(w=>clean(w[0]));
-  const opps=(ENGINE.opportunities||[]).filter(o=>SY.stages[o.stage]);
-  const card=(o,i)=>{ const s=SY.stages[o.stage], rows=EVID.filter(r=>r.failure_stage===o.stage);
-    const who=overIndexed(rows,15).filter(x=>x[2]>=1.15).slice(0,2);
-    const st=strength(o.mentions,o.sources); const wa=o.workarounds.filter(w=>clean(w[0])).slice(0,2);
-    return `<article class="scard"><header><div><div class="eyebrow">Problem ${i+1}</div><h3>${esc(o.label)}</h3></div><div class="imp"><b class="num">${o.score}</b><span>impact score</span></div></header>
-    <dl class="flow">
-      <div><dt>Underlying need</dt><dd>${esc(s.need)}</dd></div>
-      <div><dt>What users do instead</dt><dd>${wa.map(([k,v])=>`${esc(nice(k))} (${v})`).join(", ")||"Not stated"}</dd></div>
-      <div><dt>How bad</dt><dd>${Math.round(nfRate(rows)*100)}% never found the photo (of ${rows.filter(r=>r.relevance==="retrieval_story"&&KNOWN(r)).length} stories that say how it ended) · severity ${o.severity} of 1</dd></div>
-      <div><dt>Who it hits most</dt><dd>${who.length?who.map(([k,n,l])=>`${esc(SEG[k])} (${n} posts, ${l.toFixed(1)}× usual)`).join("; "):"Spread evenly across groups"}</dd></div>
-      <div><dt>Evidence</dt><dd><span class="badge ${st}">${st}</span> ${fmt(o.mentions)} posts from ${o.sources} sources</dd></div>
-      <div><dt>Hypothesis</dt><dd>${s.hyp.length?s.hyp.map(h=>{const H=(STORY.hypotheses||[]).find(x=>x.id===h);return `<b>${h}</b> ${esc(H?H.claim:"")}`}).join("<br>"):"None (outside search)"}</dd></div>
-      <div><dt>Product bet</dt><dd>${esc(s.bet)}</dd></div>
-      <div><dt>Target metric</dt><dd>${esc(s.metric)}</dd></div>
-    </dl></article>`; };
   $("#t-overview").innerHTML = `
   <div class="eyebrow">Overview · AI discovery engine · ${fmt(F.raw)} public posts · ${Object.keys(ENGINE.sources).length} sources</div>
   <h1>${esc(STORY.headline)}</h1>
@@ -315,16 +429,41 @@ function renderOverview(){
     <div class="kpi"><b class="num">${Math.round(R.share_queries_1_2_words*100)}%</b><span>of ${R.queries_quoted} quoted searches were just 1–2 words</span></div>
     <div class="kpi"><b class="num">${pct(wk[0][1]+wk[1][1],F.stories)}</b><span>scrolled the timeline or gave up when search failed</span></div>
   </div>
-  <h2>Synthesis: from problem to metric</h2>
-  <p class="muted">${esc(SY.intro)} Counts come from posts the AI read and tagged. Impact score = √posts × (0.5 + severity) × (0.5 + source spread) × how fixable it is by search. North-star metric: ${esc(SY.north_star)}.</p>
-  <p class="muted small">The top four scores are close (${opps.slice(0,4).map(o=>o.score).join(", ")}), so the engine ranks them as a group; the survey and interviews decide between them.</p>
-  <div class="syn">${opps.slice(0,5).map(card).join("")}</div>
-  <div class="links"><button class="btn ghost" data-go="map">Compare problems</button><button class="btn ghost" data-go="segments">See who it hits</button><button class="btn ghost" data-go="ask">Ask the engine</button></div>
-  ${findingsHTML()}`;
+  <h2>Key insights</h2>
+  <p class="muted">One card per research question, including two that test the recall tree on slide 2 of the deck. Numbers are computed from the tagged posts; click a headline to read the posts behind it. Evidence: High = 300+ posts from 6+ sources, Medium = 60+ from 3+, otherwise Low.</p>
+  <div class="icards">${insightCards()}</div>
+  <h2>The evidence in six charts</h2>
+  ${overviewCharts()}
+  <div class="boundary"><div class="eyebrow">What this data can't show</div><p>${esc(STORY.boundary)}</p></div>
+  <h2>Hypotheses for the survey and interviews</h2>
+  ${(STORY.hypotheses||[]).map(h=>`<div class="hyp"><b class="h">${esc(h.id)}</b><div><h3>${esc(h.claim)}</h3><p class="muted">Engine signal: ${esc(h.signal)}</p><p class="muted">Validate with: ${esc(h.validate)}</p></div></div>`).join("")}
+  <div class="links"><button class="btn ghost" data-go="map">Compare problems</button><button class="btn ghost" data-go="segments">See who it hits</button><button class="btn ghost" data-go="ask">Ask the engine</button></div>`;
   $("#t-overview").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ show(b.dataset.go); window.scrollTo(0,0); });
 }
 
 /* ---------- Segments ---------- */
+// Behavioural clusters from tags (photo type), not self-declared groups.
+const CLUSTERS=[
+  {k:"moment", name:"Moment seekers", sub:"people, pets, kids, trips, events", star:true, types:["person","pet","child_family","event_occasion","trip_place","food","animal"]},
+  {k:"info", name:"Info fetchers", sub:"screenshots, receipts, documents", types:["screenshot_info","document_id","receipt_bill","medical","text_in_image","product_shopping"]},
+  {k:"media", name:"Video and old scans", sub:"clips and digitised prints", types:["video","old_scanned"]}];
+function clustersHTML(){
+  const base=Math.round(nfRate(STORIES)*100), L=(a,f=nice)=>a.map(([k,v])=>`${esc(f(k))} <span class="muted num">${v}</span>`).join(", ")||"–";
+  const card=c=>{ const rs=STORIES.filter(r=>c.types.includes(r.content_type)), nfp=Math.round(nfRate(rs)*100);
+    return `<article class="segcard${c.star?" star":""}"><header><h3>${c.star?"⭐ ":""}${esc(c.name)}</h3><span class="muted num">${fmt(rs.length)} stories</span></header>
+    <p class="note" style="margin:0 0 8px">${esc(c.sub)}${c.star?" · candidate target segment":""}</p>
+    <div class="nfbar"><span class="lab">Never found</span><span class="track"><span class="fill" style="width:${nfp}%;background:${nfp>base?"var(--bad)":"var(--good)"}"></span><span class="mark" style="left:${base}%" title="All stories: ${base}%"></span></span><span class="num">${nfp}%</span></div>
+    <div class="segfacts"><div><span class="eyebrow">Where search breaks</span>${L(topOf(rs,"failure_stage",2))}</div>
+      <div><span class="eyebrow">What they remember</span>${L(topOf(rs,"cues_remembered",3),cue)}</div>
+      <div><span class="eyebrow">What they do instead</span>${L(topOf(rs,"workaround",2))}</div></div>
+    <button class="btn ghost small" ${clk(c.name,r=>r.relevance==="retrieval_story"&&c.types.includes(r.content_type))}>Read their stories</button></article>`; };
+  const U=STORIES.filter(r=>String(r.severity)==="3"), unp=Math.round(nfRate(U)*100), un=STORIES.filter(r=>!CLUSTERS.some(c=>c.types.includes(r.content_type))).length;
+  return `<h2>Why they search</h2>
+  <p class="muted">Retrieval stories grouped by the photo they were after. Line on each bar = all stories (${base}%).</p>
+  <div class="segcards three">${CLUSTERS.map(card).join("")}</div>
+  <div class="panel urgent"><b>Urgent cuts across every cluster:</b> ${fmt(U.length)} stories are tagged most severe. <b>${unp}%</b> never found the photo. The top cause is "${esc(nice(topOf(U,"failure_stage")[0][0]).toLowerCase())}" (${topOf(U,"failure_stage")[0][1]}), and ${topOf(U,"workaround")[0][1]} ${esc(nice(topOf(U,"workaround")[0][0]).toLowerCase())}. <button class="btn ghost small" ${clk("Urgent stories",r=>r.relevance==="retrieval_story"&&String(r.severity)==="3")}>Read them</button></div>
+  <p class="note">Built from our tags, not self-declared. ${fmt(un)} of ${fmt(STORIES.length)} stories don't name the photo type, so they sit outside these clusters.</p>`;
+}
 function renderSegments(){
   const baseNF=nfRate(STORIES), allStage={}; EVID.forEach(r=>{ if(clean(r.failure_stage)) allStage[r.failure_stage]=(allStage[r.failure_stage]||0)+1; });
   const nStage=Object.values(allStage).reduce((a,b)=>a+b,0);
@@ -332,20 +471,30 @@ function renderSegments(){
     const st={}; rs.forEach(r=>{ if(clean(r.failure_stage)) st[r.failure_stage]=(st[r.failure_stage]||0)+1; }); const ns=Object.values(st).reduce((a,b)=>a+b,0);
     const lift=Object.entries(st).filter(([s,v])=>v>=5).map(([s,v])=>[s,v,(v/ns)/(allStage[s]/nStage)]).sort((a,b)=>b[2]-a[2])[0];
     return {k, posts:rs.length, stories:ss.length, known:ss.filter(KNOWN).length, nf:nfRate(ss), top:topOf(rs,"failure_stage")[0], lift, type:topOf(ss,"content_type")[0], wa:topOf(ss,"workaround")[0]}; }).sort((a,b)=>b.posts-a.posts);
+  const STG=(ENGINE.opportunities||[]).map(o=>o.stage).slice(0,5), short={cannot_refine:"Combine cues",buried:"Buried",index_gap:"Not indexed",misunderstood:"Misread",feature_regression:"Got worse"};
+  const big=rows.filter(r=>r.posts>=50);
+  const liftOf=(k,s)=>{ const rs=EVID.filter(r=>segsOf(r).includes(k)&&clean(r.failure_stage)); const v=rs.filter(r=>r.failure_stage===s).length; return rs.length&&allStage[s]?[v,(v/rs.length)/(allStage[s]/nStage)]:[0,0]; };
+  const cell=(k,s)=>{ const [v,l]=liftOf(k,s), t=v<5?0:Math.min(1,Math.abs(l-1)/0.8), col=l>=1?"var(--bad)":"var(--good)";
+    return `<td class="c num" ${clk(`${SEG[k]} · ${nice(s)}`,r=>segsOf(r).includes(k)&&stageOf(r)===s)} title="${v} posts" style="background:color-mix(in oklab, ${col} ${Math.round(t*70)}%, var(--panel));color:${t>.6?"var(--panel)":"var(--ink)"}">${v<5?"–":l.toFixed(1)+"×"}</td>`; };
+  const card=r=>{ const hard=r.lift&&r.lift[2]>=1.2, nfp=r.nf==null?null:Math.round(r.nf*100), base=Math.round(baseNF*100), small=r.known<30;
+    return `<article class="segcard"><header><h3>${esc(SEG[r.k])}</h3><span class="muted num">${fmt(r.posts)} posts</span></header>
+    <p class="seghead">${r.top?`Most often: <b>${esc(nice(r.top[0]))}</b>.`:""} ${hard?`Hit <b>${r.lift[2].toFixed(1)}×</b> harder than usual by <b>${esc(nice(r.lift[0]).toLowerCase())}</b>.`:"No problem hits them harder than usual."}</p>
+    ${nfp==null?"":`<div class="nfbar"><span class="lab">Never found</span><span class="track"><span class="fill" style="width:${nfp}%;background:${nfp>base?"var(--bad)":"var(--good)"}"></span><span class="mark" style="left:${base}%" title="All users: ${base}%"></span></span><span class="num">${nfp}%</span></div>
+    <p class="note" style="margin:2px 0 8px">Line = all users (${base}%).${small?` Small sample: ${r.known} stories.`:""}</p>`}
+    <div class="segfacts"><div><span class="eyebrow">Photo they want most</span>${r.type?esc(nice(r.type[0])):"–"}</div><div><span class="eyebrow">What they do instead</span>${r.wa?esc(nice(r.wa[0])):"–"}</div></div>
+    <button class="btn ghost small" ${clk(SEG[r.k],x=>segsOf(x).includes(r.k))}>Read their posts</button></article>`; };
   $("#t-segments").innerHTML = `
   <div class="eyebrow">Segments · who hits which problem</div>
   <h1>The same search problems land differently on different users</h1>
-  <p class="lede">A post counts toward a group only when the writer says so (their phone, library size, being a parent and so on), so groups overlap and most posts belong to none. "Never found" uses retrieval stories with a known ending; overall it is ${Math.round(baseNF*100)}%. Click a row to read the posts.</p>
-  <div class="tablewrap"><table><thead><tr><th>Group</th><th class="r">Posts</th><th class="r">Never found</th><th>Biggest problem</th><th>Hits harder than usual</th><th>Photo they want most</th><th>What they do instead</th></tr></thead><tbody>
-  ${rows.map(r=>`<tr class="segrow" data-seg="${r.k}"><td><b>${esc(SEG[r.k])}</b>${r.known<30?`<br><span class="muted small">small sample (${r.known} stories)</span>`:""}</td><td class="r num">${fmt(r.posts)}</td>
-    <td class="r num">${r.nf==null?"–":Math.round(r.nf*100)+"%"}${r.nf!=null&&r.known>=30&&Math.abs(r.nf-baseNF)>=.05?`<br><span class="small" style="color:${r.nf>baseNF?"var(--bad)":"var(--good)"}">${r.nf>baseNF?"+":""}${Math.round((r.nf-baseNF)*100)} pts</span>`:""}</td>
-    <td>${r.top?`${esc(nice(r.top[0]))} <span class="muted">(${r.top[1]})</span>`:"–"}</td>
-    <td>${r.lift&&r.lift[2]>=1.2?`${esc(nice(r.lift[0]))} <span class="muted">(${r.lift[2].toFixed(1)}×)</span>`:'<span class="muted">none stands out</span>'}</td>
-    <td>${r.type?`${esc(nice(r.type[0]))} <span class="muted">(${r.type[1]})</span>`:"–"}</td>
-    <td>${r.wa?`${esc(nice(r.wa[0]))} <span class="muted">(${r.wa[1]})</span>`:"–"}</td></tr>`).join("")}
-  </tbody></table></div>
-  <p class="note">"Hits harder than usual" is the problem whose share in this group is highest compared with all posts (1.0× means the same as everyone).</p>`;
-  $("#t-segments").querySelectorAll(".segrow").forEach(tr=>tr.onclick=()=>{ ["f-q","f-src","f-rel","f-type","f-stage","f-cue"].forEach(id=>$("#"+id).value=""); $("#f-seg").value=tr.dataset.seg; drawEvidence(); show("evidence"); window.scrollTo(0,0); });
+  <p class="lede">Two ways to slice the evidence: by why people search (from our tags), and by who they say they are (their phone, library size, being a parent).</p>
+  ${clustersHTML()}
+  <h2>Who they are</h2>
+  <p class="muted">A post counts toward a group only when the writer says so, so groups overlap and most posts belong to none.</p>
+  <figure class="chart"><figcaption><div><h3>Which problem hits which group harder</h3><p>How much more (orange) or less (blue) often a problem shows up in a group's posts than in all posts. 1.0× = same as everyone. Groups with 50+ posts; "–" = under 5 posts. Click a cell to read them.</p></div></figcaption>
+  <div class="tablewrap"><table class="heat lift"><thead><tr><th></th>${STG.map(s=>`<th title="${esc(nice(s))}">${short[s]}</th>`).join("")}</tr></thead><tbody>
+  ${big.map(r=>`<tr><td class="lab">${esc(SEG[r.k])}</td>${STG.map(s=>cell(r.k,s)).join("")}</tr>`).join("")}</tbody></table></div></figure>
+  <h2>Group by group</h2>
+  <div class="segcards">${rows.map(card).join("")}</div>`;
 }
 
 /* ---------- Findings ---------- */
@@ -366,13 +515,6 @@ function sourcesHTML(){
   <div class="tablewrap"><table><thead><tr><th>Source</th><th class="r">Collected</th><th class="r">Tagged</th><th class="r">Retrieval stories</th><th class="r">Story rate</th><th class="r">Median words</th></tr></thead><tbody>
   ${srcRows.map(([k,v])=>`<tr><td>${SRC[k]||k}</td><td class="r num">${fmt(v.raw)}</td><td class="r num">${fmt(v.tagged)}</td><td class="r num">${fmt(v.stories)}</td><td class="r num">${Math.round(100*v.density)}%</td><td class="r num">${v.median_words||"–"}</td></tr>`).join("")}
   </tbody></table></div>`;
-}
-function findingsHTML(){
-  return `<h2>What the engine found</h2>
-  ${(STORY.findings||[]).map((f,i)=>`<div class="finding"><div class="eyebrow">Finding ${i+1}${f.tag?" · "+esc(f.tag):""}</div><h3>${esc(f.title)}</h3><p>${esc(f.body)}</p></div>`).join("")}
-  <div class="boundary"><div class="eyebrow">What this data can't show</div><p>${esc(STORY.boundary)}</p></div>
-  <h2>Hypotheses for the survey and interviews</h2>
-  ${(STORY.hypotheses||[]).map(h=>`<div class="hyp"><b class="h">${esc(h.id)}</b><div><h3>${esc(h.claim)}</h3><p class="muted">Engine signal: ${esc(h.signal)}</p><p class="muted">Validate with: ${esc(h.validate)}</p></div></div>`).join("")}`;
 }
 
 /* ---------- Opportunity map ---------- */
@@ -396,32 +538,49 @@ function probStats(stage){
     types:topOf(rows.filter(r=>r.relevance==="retrieval_story"),"content_type",3), cues:topOf(rows,"cues_remembered",3), wa:topOf(rows,"workaround",2),
     who: w?`${esc(SEG[w[0]])} (${w[2].toFixed(1)}×)`:"No group stands out", syn:(STORY.synthesis?.stages||{})[stage]||{}};
 }
+function oppMatrix(O){
+  // x = posts, y = never-found share (stories with a known ending), bubble area ~ score
+  const W=640,H=300,pl=48,pr=24,pt=30,pb=40, xs=O.map(o=>o.mentions), xmax=Math.ceil(Math.max(...xs)/100)*100;
+  const pts=O.map(o=>({o, nf:nfRate(EVID.filter(r=>stageOf(r)===o.stage))||0}));
+  const X=v=>pl+(W-pl-pr)*v/xmax, Y=v=>pt+(H-pt-pb)*(1-(Math.max(.5,v)-.5)/.5), R=s=>4+Math.sqrt(s)*2.6;
+  const short={cannot_refine:"Combine cues",buried:"Buried",index_gap:"Not indexed",misunderstood:"Misread",feature_regression:"Got worse",cannot_express:"Can't say",not_in_library:"Missing"};
+  const LBL={cannot_refine:"left",buried:"left",misunderstood:"down",feature_regression:"up",index_gap:"right",cannot_express:"right",not_in_library:"left"};
+  const grid=[.5,.625,.75,.875,1].map(v=>`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" class="g"/><text x="${pl-6}" y="${Y(v)+4}" text-anchor="end">${Math.round(v*100)}%</text>`).join("")
+    + [0,.25,.5,.75,1].map(f=>`<text x="${X(f*xmax)}" y="${H-pb+16}" text-anchor="middle">${fmt(Math.round(f*xmax))}</text>`).join("");
+  return `<figure class="chart"><figcaption><div><h3>Opportunity matrix</h3><p>Right = more posts, up = more often never found (axis starts at 50%), bigger = higher score. Blue = our focus (slide 2). Click a bubble to open it below.</p></div></figcaption>
+  <svg viewBox="0 0 ${W} ${H}" class="matrix" role="img" aria-label="Opportunity matrix">${grid}
+  <text x="${(W+pl)/2}" y="${H-4}" text-anchor="middle" class="ax">posts</text><text x="12" y="${(H-pb)/2}" text-anchor="middle" class="ax" transform="rotate(-90 12 ${(H-pb)/2})">never found</text>
+  ${pts.map(({o,nf})=>`<g class="pt" data-open="${o.stage}" tabindex="0"><circle cx="${X(o.mentions)}" cy="${Y(nf)}" r="${R(o.score)}" class="${INS.focus.includes(o.stage)?"f":INS.tiers[o.stage]===3?"o":"t"}"/>${(()=>{ const r=R(o.score), x=X(o.mentions), y=Y(nf), p=LBL[o.stage]||"up"; return p==="left"?`<text x="${x-r-5}" y="${y+4}" text-anchor="end">${short[o.stage]}</text>`:p==="right"?`<text x="${x+r+5}" y="${y+4}">${short[o.stage]}</text>`:p==="down"?`<text x="${x}" y="${y+r+13}" text-anchor="middle">${short[o.stage]}</text>`:`<text x="${x}" y="${y-r-5}" text-anchor="middle">${short[o.stage]}</text>`; })()}</g>`).join("")}
+  </svg></figure>`;
+}
 function renderMap(){
-  const O = ENGINE.opportunities, M = ENGINE.matrix;
-  const stages = O.map(o=>o.stage);
-  const types = Object.entries(M).map(([t,v])=>[t,Object.values(v).reduce((a,b)=>a+b,0)]).sort((a,b)=>b[1]-a[1]).filter(x=>x[0]!=="unknown").slice(0,12);
-  const max = Math.max(1,...types.flatMap(([t])=>stages.map(s=>M[t]?.[s]||0)));
-  const mix = v => `color-mix(in oklab, var(--heat1) ${Math.round(100*v/max)}%, var(--heat0))`;
+  const O = ENGINE.opportunities, T=INS.tiers, TL={1:"Tier 1 · fixable in search",2:"Tier 2 · smaller",3:"Outside search · not now"};
+  const row=(o,i)=>{ const rows=EVID.filter(r=>stageOf(r)===o.stage), w=overIndexed(rows,15).filter(x=>x[2]>=1.15).slice(0,2), s=(STORY.synthesis?.stages||{})[o.stage]||{};
+    return `<details class="opp" id="opp-${o.stage}"${i===0?" open":""}><summary><span class="rank">${i+1}</span><div><h3>${esc(o.label)}${INS.focus.includes(o.stage)?' <span class="focus">Our focus · slide 2</span>':""}</h3>
+    <div class="chips"><span class="chip">${fmt(o.mentions)} posts</span><span class="chip">never found ${Math.round(nfRate(rows)*100)}%</span><span class="chip">${o.sources} of 7 sources</span></div></div>
+    <span class="score num">${o.score}</span></summary>
+    <div class="body">
+      <p class="hmw">${esc(INS.hmw[o.stage]||"")}</p>
+      <div class="facts"><div><span class="eyebrow">Who it hits most</span>${w.length?w.map(([k,n,l])=>`${esc(SEG[k])} (${l.toFixed(1)}×)`).join(", "):"Spread evenly"}</div>
+        <div><span class="eyebrow">Tests</span>${(s.hyp||[]).join(", ")||"–"}</div>
+        <div><span class="eyebrow">Severity · fixable by search</span>${o.severity} · ${o.addressable}</div></div>
+      ${oppBody(o)}
+      <details class="more"><summary>Show the ${o.quotes.length} posts behind this</summary>${o.quotes.map(q=>quoteHTML(q)).join("")}</details></div></details>`; };
+  let html="", i=0;
+  [1,2,3].forEach(t=>{ const g=O.filter(o=>T[o.stage]===t); if(!g.length) return; html+=`<h3 class="tier">${TL[t]}</h3>`+g.map(o=>row(o,i++)).join(""); });
   $("#t-map").innerHTML = `
   <div class="eyebrow">Opportunity areas</div>
   <h1>Where retrieval breaks, ranked by what a product change could move</h1>
-  <p class="lede">Each area is a stage of the retrieval journey. Score = √mentions × (0.5 + severity) × (0.5 + source spread) × addressability. Addressability is lower when the cause is backup or storage, which better search can't fix. Open a row for the posts behind it.</p>
+  <p class="lede">Each area is a stage of the retrieval journey. The top four score within a few points of each other, so they are grouped as one tier.</p>
+  ${oppMatrix(O)}
+  <details class="how"><summary>How we score</summary><p>Score = √posts × (0.5 + severity) × (0.5 + source spread) × fixability. Fixability is our judgement of whether a search-experience change can fix the cause: 1.0 for query and ranking problems, 0.2 for photos never backed up.</p></details>
+  <h2>All problem areas</h2>
+  ${html}
   <div class="panel cmp"><h3>Compare two problems</h3>
     <div class="filters"><select id="cmp-a" aria-label="First problem">${O.map((o,i)=>`<option value="${o.stage}"${i===0?" selected":""}>${esc(o.label)}</option>`).join("")}</select>
     <span class="muted" style="align-self:center">vs</span>
-    <select id="cmp-b" aria-label="Second problem">${O.map((o,i)=>`<option value="${o.stage}"${i===2?" selected":""}>${esc(o.label)}</option>`).join("")}</select></div>
-    <div id="cmp-out"></div></div>
-  <h2>All problem areas, ranked</h2>
-  ${O.map((o,i)=>`<details class="opp"${i===0?" open":""}><summary><span class="rank">${i+1}</span><div><h3>${esc(o.label)}</h3>
-    <div class="chips"><span class="chip">${o.mentions} posts</span><span class="chip">${Math.round(o.prevalence*100)}% of evidence</span><span class="chip">severity ${o.severity} of 1</span><span class="chip">${o.sources} sources</span><span class="chip">never found ${Math.round(nfRate(EVID.filter(r=>(r.failure_stage||"").trim()===o.stage))*100)}%</span><span class="chip">addressable ${o.addressable}</span></div></div>
-    <span class="score num">${o.score}</span></summary>
-    <div class="body">${oppBody(o)}
-    <details class="more"><summary>Show the ${o.quotes.length} posts behind this</summary>${o.quotes.map(q=>quoteHTML(q)).join("")}</details></div></details>`).join("")}
-  <h2>Photo type × where it broke</h2>
-  <p class="muted">Retrieval stories only. Click a cell to see those posts in Evidence.</p>
-  <div class="tablewrap"><table class="heat"><thead><tr><th></th>${stages.map(s=>`<th title="${esc(nice(s))}">${esc(s.replace(/_/g," "))}</th>`).join("")}</tr></thead><tbody>
-  ${types.map(([t])=>`<tr><td class="lab">${esc(nice(t))}</td>${stages.map(s=>{const v=M[t]?.[s]||0;return `<td class="c num" data-t="${t}" data-s="${s}" style="background:${mix(v)};color:${v>max*.55?"var(--panel)":"var(--ink)"}">${v||""}</td>`}).join("")}</tr>`).join("")}
-  </tbody></table></div>`;
+    <select id="cmp-b" aria-label="Second problem">${O.map((o,i)=>`<option value="${o.stage}"${i===1?" selected":""}>${esc(o.label)}</option>`).join("")}</select></div>
+    <div id="cmp-out"></div></div>`;
   const drawCmp=()=>{ const A=probStats($("#cmp-a").value), B=probStats($("#cmp-b").value);
     const better=(a,b,hi)=>a==null||b==null||a===b?["",""]:((a>b)===hi?[' class="win"','']:['',' class="win"']);
     const row=(lab,fa,fb,va,vb,hi)=>{ const w=hi==null?["",""]:better(va,vb,hi); return `<tr><th>${lab}</th><td${w[0]}>${fa}</td><td${w[1]}>${fb}</td></tr>`; };
@@ -430,46 +589,34 @@ function renderMap(){
       ${row("Impact score",A.score,B.score,A.score,B.score,true)}
       ${row("Posts",fmt(A.n),fmt(B.n),A.n,B.n,true)}
       ${row("Never found the photo",pct(A.nf*100,100),pct(B.nf*100,100),A.nf,B.nf,true)}
-      ${row("Severity (0–1)",A.sev,B.sev,A.sev,B.sev,true)}
       ${row("Sources it shows up in",A.srcs+" of 7",B.srcs+" of 7",A.srcs,B.srcs,true)}
-      ${row("Fixable by search",A.addr,B.addr,A.addr,B.addr,true)}
       ${row("Photos it hits most",L(A.types),L(B.types))}
-      ${row("What they remembered",L(A.cues,cue),L(B.cues,cue))}
-      ${row("What they do instead",L(A.wa),L(B.wa))}
       ${row("Who it hits hardest",A.who,B.who)}
       ${row("Underlying need",esc(A.syn.need||"–"),esc(B.syn.need||"–"))}
-      ${row("Hypothesis",(A.syn.hyp||[]).join(", ")||"–",(B.syn.hyp||[]).join(", ")||"–")}
       ${row("Product bet",esc(A.syn.bet||"–"),esc(B.syn.bet||"–"))}
+    </tbody></table></div>
+    <details class="more"><summary>More rows</summary><div class="tablewrap"><table class="cmpt"><tbody>
+      ${row("Severity (0–1)",A.sev,B.sev,A.sev,B.sev,true)}
+      ${row("Fixable by search",A.addr,B.addr,A.addr,B.addr,true)}
+      ${row("What they remembered",L(A.cues,cue),L(B.cues,cue))}
+      ${row("What they do instead",L(A.wa),L(B.wa))}
+      ${row("Hypothesis",(A.syn.hyp||[]).join(", ")||"–",(B.syn.hyp||[]).join(", ")||"–")}
       ${row("Target metric",esc(A.syn.metric||"–"),esc(B.syn.metric||"–"))}
-    </tbody></table></div><p class="note">Highlighted cells are the stronger case for prioritising (bigger, worse, wider, more fixable).</p>`; };
+    </tbody></table></div></details><p class="note">Highlighted cells are the stronger case for prioritising (bigger, worse, wider, more fixable).</p>`; };
   $("#cmp-a").onchange=drawCmp; $("#cmp-b").onchange=drawCmp; drawCmp();
-  $("#t-map").querySelectorAll("td.c").forEach(td=>td.onclick=()=>{ $("#f-type").value=td.dataset.t; $("#f-stage").value=td.dataset.s; $("#f-rel").value="retrieval_story"; drawEvidence(); show("evidence"); });
+  $("#t-map").querySelectorAll("[data-open]").forEach(g=>{ const go=()=>{ const d=$("#opp-"+g.dataset.open); d.open=true; d.scrollIntoView({behavior:"smooth",block:"start"}); }; g.onclick=go; g.onkeydown=e=>{ if(e.key==="Enter") go(); }; });
 }
 function quoteHTML(q){
   return `<div class="quote">${q.n?`<b class="num">[${q.n}]</b> `:""}<q>${esc(q.q)}</q><div class="meta">${[SRC[q.source]||q.source, q.date, nice(q.type), nice(q.stage)].filter(Boolean).map(esc).join(" · ")} · <a href="${esc(q.url)}" target="_blank" rel="noopener">source</a></div></div>`;
 }
 
-/* ---------- Memory cues ---------- */
-function renderCues(){
-  const E = ENGINE, n = E.funnel.stories;
-  const typed = Object.fromEntries(E.typed_cues), withQ = E.queries.length;
-  $("#t-cues").innerHTML = `
-  <div class="eyebrow">Memory cues · ${fmt(n)} retrieval stories</div>
-  <h1>${esc(STORY.cues_headline||"What people remember is not what they can search for")}</h1>
-  <p class="lede">${esc(STORY.cues_dek||"")}</p>
-  <div class="grid2">
-    <div class="panel"><h3>What they remembered</h3><p class="muted">Share of retrieval stories mentioning each cue.</p>${bars(E.remembered.slice(0,12), n, "var(--c1)")}</div>
-    <div class="panel"><h3>What they had forgotten</h3><p class="muted">Share of retrieval stories.</p>${bars(E.forgotten.slice(0,8), n, "var(--c2)")}</div>
-  </div>
-  <div class="grid2" style="margin-top:16px">
-    <div class="panel"><h3>Kinds of photos people struggle to find</h3>${bars(E.content_types.slice(0,12), n, "var(--c3)", nice)}</div>
-    <div class="panel"><h3>What they did instead</h3>${bars(E.workarounds.slice(0,9), n, "var(--c4)", nice)}<h3 style="margin-top:14px">Outcome</h3>${bars(E.outcomes, n, "var(--c7)", nice)}</div>
-  </div>
-  <h2>How people phrase a half-remembered photo</h2>
-  <p class="muted">${fmt(withQ)} stories quote the words they typed. Next to each: the cues they say they remembered.</p>
+/* ---------- Quoted searches (shown in Evidence) ---------- */
+function queriesHTML(){
+  const E=ENGINE;
+  return `<details class="more"><summary>How people phrase a half-remembered photo: ${fmt(E.queries.length)} quoted searches</summary>
   <div class="tablewrap"><table><thead><tr><th>Typed into search</th><th>What they remembered</th><th>Where it broke</th><th>Source</th></tr></thead><tbody>
   ${E.queries.slice(0,60).map(q=>`<tr><td><code>${esc(q.query)}</code></td><td>${q.remembered.map(cue).map(esc).join(", ")}</td><td>${esc(nice(q.stage))}</td><td><a href="${esc(q.url)}" target="_blank" rel="noopener">${SRC[q.source]||q.source}</a></td></tr>`).join("")}
-  </tbody></table></div>`;
+  </tbody></table></div></details>`;
 }
 
 /* ---------- Evidence explorer ---------- */
@@ -488,6 +635,7 @@ function renderEvidenceShell(){
     ${opt("f-cue","Remembered",uniq("cues_remembered"),cue)}
     ${opt("f-seg","Group",Object.keys(SEG),s=>SEG[s])}
   </div>
+  ${queriesHTML()}
   <p class="muted" id="ev-count"></p><div id="ev-list"></div>`;
   ["f-q","f-src","f-rel","f-type","f-stage","f-cue","f-seg"].forEach(id=>$("#"+id).addEventListener("input", drawEvidence));
 }
@@ -796,7 +944,7 @@ function renderMethod(){
   <p class="muted">Model: ${esc((ENGINE.models||[]).map(m=>m[0]).join(", "))}. Data collected ${esc(META.collected||"")}. Code: ${META.repo?`<a href="${esc(META.repo)}" target="_blank" rel="noopener">${esc(META.repo)}</a>`:"repository link to follow"}.</p>`;
 }
 
-renderOverview(); renderSegments(); renderMap(); renderCues(); renderEvidenceShell(); drawEvidence(); renderAsk(); renderMethod();
+renderOverview(); renderSegments(); renderMap(); renderEvidenceShell(); drawEvidence(); renderAsk(); renderMethod();
 let start="overview"; try{ start = (location.hash.slice(1)) || localStorage.getItem("tab") || "overview" }catch(e){}
 show(TABS.some(t=>t[0]===start)?start:"overview");
 </script>

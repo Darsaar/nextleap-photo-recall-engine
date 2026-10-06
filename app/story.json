@@ -5,7 +5,7 @@
   {
    "tag": "strongest signal",
    "title": "The search is far thinner than the memory",
-   "body": "79% of the 235 searches people quoted were one or two words long, and the median was one word (\"Paul\", \"dog\", \"May 2025\"). Of 75 stories where someone remembered two or more things about the photo and quoted their search, 55 still typed two words or fewer. Rough time is the most remembered cue (22% of stories), yet only 19 quoted searches contain any time word."
+   "body": "79% of the 235 searches people quoted were one or two words long, and the median was one word (\"Paul\", \"dog\", \"May 2025\"). Of 76 stories where someone remembered two or more things about the photo and quoted their search, 56 still typed two words or fewer. Rough time is the most remembered cue (22% of stories), yet only 19 quoted searches contain any time word."
   },
   {
    "tag": "where it breaks",
@@ -20,7 +20,7 @@
   {
    "tag": "segment",
    "title": "Photos of people fail at indexing, not at memory",
-   "body": "604 posts are about finding a person or pet. In 257 of them the photo exists but is invisible to search: faces not grouped, names lost after a restore or a settings reset, or old backed-up photos never processed. 87% of index-gap stories end without the photo."
+   "body": "608 posts are about finding a person or pet. In 260 of them the photo exists but is invisible to search: faces not grouped, names lost after a restore or a settings reset, or old backed-up photos never processed. 89% of index-gap stories end without the photo."
   },
   {
    "tag": "loud vs relevant",
@@ -33,7 +33,7 @@
   {
    "id": "H1",
    "claim": "People hold two or more cues about a lost photo but type only one, because search can't combine them.",
-   "signal": "79% of quoted searches are 1–2 words; 55 of 75 multi-cue stories typed 2 words or fewer; 'can't combine or narrow' is the top opportunity (452 posts).",
+   "signal": "79% of quoted searches are 1–2 words; 56 of 76 multi-cue stories typed 2 words or fewer; 'can't combine or narrow' is the top opportunity (452 posts).",
    "validate": "Survey: 'What did you remember?' (cues remembered) vs. the exact words typed; interview live task: count cues said aloud vs. cues typed."
   },
   {
@@ -45,13 +45,13 @@
   {
    "id": "H3",
    "claim": "Photos of people are often unfindable because faces and names were never indexed, not because users forget.",
-   "signal": "257 of 604 people/pet posts are index gaps; 87% of index-gap stories end without the photo.",
+   "signal": "260 of 608 people/pet posts are index gaps; 89% of index-gap stories end without the photo.",
    "validate": "Survey: 'a person or pet' × 'Did you find it in the end?'; interviews: open People & pets and check how many of their key people are named."
   },
   {
    "id": "H4",
    "claim": "Information photos (screenshots, documents, bills, medicines) fail more often than memory photos and matter more when they fail.",
-   "signal": "122 stories about screenshots, documents, receipts, medical or text photos, 65% not found; 'words in the image' is remembered in 114 stories and typed in 73.",
+   "signal": "106 stories about screenshots, documents, receipts, medical or text photos, 70% not found; 'words in the image' is remembered in 114 stories and typed in 73.",
    "validate": "Survey: 'saving information' / 'documents' use × 'gave up / never found it'; interviews: retrieval task on a screenshot vs. a trip photo."
   },
   {
@@ -63,7 +63,7 @@
   {
    "id": "H6",
    "claim": "Recent search changes (Ask Photos, AI search) cost trust among heavy users who relied on precise name and date search.",
-   "signal": "520 'search got worse' posts, 134 naming Ask Photos, Gemini or AI; repeated requests to bring back name search and date ordering.",
+   "signal": "520 'search got worse' posts, 131 naming Ask Photos, Gemini or AI; repeated requests to bring back name search and date ordering.",
    "validate": "Survey: 'Ask Photos' ticked as a way they search × 'Did you find it in the end?'; interviews: compare classic search vs. Ask Photos on the same task."
   }
  ],
